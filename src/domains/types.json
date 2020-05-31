@@ -1,0 +1,385 @@
+{
+  "Normal": {
+    "attack": {
+      "imunity": [
+        "Ghost"
+      ]
+    },
+    "defense": {
+      "imunity": [
+        "Ghost"
+      ],
+      "doubleDamage": [
+        "Fighting"
+      ]
+    }
+  },
+  "Fire": {
+    "attack": {
+      "doubleDamage": [
+        "Grass",
+        "Ice",
+        "Bug"
+      ],
+      "halfDamage": [
+        "Fire",
+        "Water",
+        "Rock",
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Water",
+        "Ground",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Fire",
+        "Grass",
+        "Bug"
+      ]
+    }
+  },
+  "Water": {
+    "attack": {
+      "doubleDamage": [
+        "Fire",
+        "Ground",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Water",
+        "Grass",
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Electric",
+        "Grass"
+      ],
+      "halfDamage": [
+        "Fire",
+        "Water",
+        "Ice"
+      ]
+    }
+  },
+  "Electric": {
+    "attack": {
+      "imunity": [
+        "Ground"
+      ],
+      "doubleDamage": [
+        "Water",
+        "Flying"
+      ],
+      "halfDamage": [
+        "Electric",
+        "Grass",
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Ground"
+      ],
+      "halfDamage": [
+        "Electric",
+        "Flying"
+      ]
+    }
+  },
+  "Grass": {
+    "attack": {
+      "doubleDamage": [
+        "Water",
+        "Ground",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Fire",
+        "Grass",
+        "Poison",
+        "Flying",
+        "Bug",
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Fire",
+        "Ice",
+        "Poison",
+        "Flying",
+        "Bug"
+      ],
+      "halfDamage": [
+        "Water",
+        "Electric",
+        "Grass",
+        "Ground"
+      ]
+    }
+  },
+  "Ice": {
+    "attack": {
+      "doubleDamage": [
+        "Grass",
+        "Ground",
+        "Flying",
+        "Dragon"
+      ],
+      "halfDamage": [
+        "Water",
+        "Ice"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Fire",
+        "Fighting",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Ice"
+      ]
+    }
+  },
+  "Fighting": {
+    "attack": {
+      "imunity": [
+        "Ghost"
+      ],
+      "doubleDamage": [
+        "Normal",
+        "Ice",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Poison",
+        "Flying",
+        "Psychic",
+        "Bug"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Flying",
+        "Psychic"
+      ],
+      "halfDamage": [
+        "Bug",
+        "Rock"
+      ]
+    }
+  },
+  "Poison": {
+    "attack": {
+      "doubleDamage": [
+        "Grass",
+        "Bug"
+      ],
+      "halfDamage": [
+        "Poison",
+        "Ground",
+        "Rock",
+        "Ghost"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Ground",
+        "Psychic",
+        "Bug"
+      ],
+      "halfDamage": [
+        "Grass",
+        "Fighting",
+        "Poison"
+      ]
+    }
+  },
+  "Ground": {
+    "attack": {
+      "imunity": [
+        "Flying"
+      ],
+      "doubleDamage": [
+        "Fire",
+        "Electric",
+        "Poison",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Grass",
+        "Bug"
+      ]
+    },
+    "defense": {
+      "imunity": [
+        "Electric"
+      ],
+      "doubleDamage": [
+        "Water",
+        "Grass",
+        "Ice"
+      ],
+      "halfDamage": [
+        "Poison",
+        "Rock"
+      ]
+    }
+  },
+  "Flying": {
+    "attack": {
+      "doubleDamage": [
+        "Grass",
+        "Fighting",
+        "Bug"
+      ],
+      "halfDamage": [
+        "Electric",
+        "Rock"
+      ]
+    },
+    "defense": {
+      "imunity": [
+        "Ground"
+      ],
+      "doubleDamage": [
+        "Electric",
+        "Ice",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Grass",
+        "Fighting",
+        "Bug"
+      ]
+    }
+  },
+  "Psychic": {
+    "attack": {
+      "doubleDamage": [
+        "Fighting",
+        "Poison"
+      ],
+      "halfDamage": [
+        "Psychic"
+      ]
+    },
+    "defense": {
+      "imunity": [
+        "Ghost"
+      ],
+      "doubleDamage": [
+        "Bug"
+      ],
+      "halfDamage": [
+        "Fighting",
+        "Psychic"
+      ]
+    }
+  },
+  "Bug": {
+    "attack": {
+      "doubleDamage": [
+        "Grass",
+        "Poison",
+        "Psychic"
+      ],
+      "halfDamage": [
+        "Fire",
+        "Fighting",
+        "Flying",
+        "Ghost"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Fire",
+        "Poison",
+        "Flying",
+        "Rock"
+      ],
+      "halfDamage": [
+        "Grass",
+        "Fighting",
+        "Ground"
+      ]
+    }
+  },
+  "Rock": {
+    "attack": {
+      "doubleDamage": [
+        "Fire",
+        "Ice",
+        "Flying",
+        "Bug"
+      ],
+      "halfDamage": [
+        "Fighting",
+        "Ground"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Water",
+        "Grass",
+        "Fighting",
+        "Ground"
+      ],
+      "halfDamage": [
+        "Normal",
+        "Fire",
+        "Poison",
+        "Flying"
+      ]
+    }
+  },
+  "Ghost": {
+    "attack": {
+      "imunity": [
+        "Normal",
+        "Psychic"
+      ],
+      "doubleDamage": [
+        "Ghost"
+      ]
+    },
+    "defense": {
+      "imunity": [
+        "Normal",
+        "Fighting"
+      ],
+      "doubleDamage": [
+        "Ghost"
+      ],
+      "halfDamage": [
+        "Poison",
+        "Bug"
+      ]
+    }
+  },
+  "Dragon": {
+    "attack": {
+      "doubleDamage": [
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "doubleDamage": [
+        "Ice",
+        "Dragon"
+      ],
+      "halfDamage": [
+        "Fire",
+        "Water",
+        "Electric",
+        "Grass"
+      ]
+    }
+  }
+}

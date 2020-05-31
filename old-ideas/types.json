@@ -1,0 +1,397 @@
+{
+  "Normal": {
+    "imunity": {
+      "to": [
+        "Ghost"
+      ],
+      "from": [
+        "Ghost"
+      ]
+    },
+    "superEffective": {
+      "from": [
+        "Fighting"
+      ]
+    }
+  },
+  "Fire": {
+    "superEffective": {
+      "to": [
+        "Grass",
+        "Ice",
+        "Bug"
+      ],
+      "from": [
+        "Water",
+        "Ground",
+        "Rock"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Fire",
+        "Water",
+        "Rock",
+        "Dragon"
+      ],
+      "from": [
+        "Fire",
+        "Grass",
+        "Bug"
+      ]
+    }
+  },
+  "Water": {
+    "superEffective": {
+      "to": [
+        "Fire",
+        "Ground",
+        "Rock"
+      ],
+      "from": [
+        "Electric",
+        "Grass"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Water",
+        "Grass",
+        "Dragon"
+      ],
+      "from": [
+        "Fire",
+        "Water",
+        "Ice"
+      ]
+    }
+  },
+  "Electric": {
+    "imunity": {
+      "to": [
+        "Ground"
+      ]
+    },
+    "superEffective": {
+      "to": [
+        "Water",
+        "Flying"
+      ],
+      "from": [
+        "Ground"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Electric",
+        "Grass",
+        "Dragon"
+      ],
+      "from": [
+        "Electric",
+        "Flying"
+      ]
+    }
+  },
+  "Grass": {
+    "superEffective": {
+      "to": [
+        "Water",
+        "Ground",
+        "Rock"
+      ],
+      "from": [
+        "Fire",
+        "Ice",
+        "Poison",
+        "Flying",
+        "Bug"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Fire",
+        "Grass",
+        "Poison",
+        "Flying",
+        "Bug",
+        "Dragon"
+      ],
+      "from": [
+        "Water",
+        "Electric",
+        "Grass",
+        "Ground"
+      ]
+    }
+  },
+  "Ice": {
+    "superEffective": {
+      "to": [
+        "Grass",
+        "Ground",
+        "Flying",
+        "Dragon"
+      ],
+      "from": [
+        "Fire",
+        "Fighting",
+        "Rock"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Water",
+        "Ice"
+      ],
+      "from": [
+        "Ice"
+      ]
+    }
+  },
+  "Fighting": {
+    "imunity": {
+      "to": [
+        "Ghost"
+      ]
+    },
+    "superEffective": {
+      "to": [
+        "Normal",
+        "Ice",
+        "Rock"
+      ],
+      "from": [
+        "Flying",
+        "Psychic"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Poison",
+        "Flying",
+        "Psychic",
+        "Bug"
+      ],
+      "from": [
+        "Bug",
+        "Rock"
+      ]
+    }
+  },
+  "Poison": {
+    "superEffective": {
+      "to": [
+        "Grass",
+        "Bug"
+      ],
+      "from": [
+        "Ground",
+        "Psychic",
+        "Bug"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Poison",
+        "Ground",
+        "Rock",
+        "Ghost"
+      ],
+      "from": [
+        "Grass",
+        "Fighting",
+        "Poison"
+      ]
+    }
+  },
+  "Ground": {
+    "imunity": {
+      "to": [
+        "Flying"
+      ],
+      "from": [
+        "Electric"
+      ]
+    },
+    "superEffective": {
+      "to": [
+        "Fire",
+        "Electric",
+        "Poison",
+        "Rock"
+      ],
+      "from": [
+        "Water",
+        "Grass",
+        "Ice"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Grass",
+        "Bug"
+      ],
+      "from": [
+        "Poison",
+        "Rock"
+      ]
+    }
+  },
+  "Flying": {
+    "imunity": {
+      "from": [
+        "Ground"
+      ]
+    },
+    "superEffective": {
+      "to": [
+        "Grass",
+        "Fighting",
+        "Bug"
+      ],
+      "from": [
+        "Electric",
+        "Ice",
+        "Rock"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Electric",
+        "Rock"
+      ],
+      "from": [
+        "Grass",
+        "Fighting",
+        "Bug"
+      ]
+    }
+  },
+  "Psychic": {
+    "imunity": {
+      "from": [
+        "Ghost"
+      ]
+    },
+    "superEffective": {
+      "to": [
+        "Fighting",
+        "Poison"
+      ],
+      "from": [
+        "Bug"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Psychic"
+      ],
+      "from": [
+        "Fighting",
+        "Psychic"
+      ]
+    }
+  },
+  "Bug": {
+    "superEffective": {
+      "to": [
+        "Grass",
+        "Poison",
+        "Psychic"
+      ],
+      "from": [
+        "Fire",
+        "Poison",
+        "Flying",
+        "Rock"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Fire",
+        "Fighting",
+        "Flying",
+        "Ghost"
+      ],
+      "from": [
+        "Grass",
+        "Fighting",
+        "Ground"
+      ]
+    }
+  },
+  "Rock": {
+    "superEffective": {
+      "to": [
+        "Fire",
+        "Ice",
+        "Flying",
+        "Bug"
+      ],
+      "from": [
+        "Water",
+        "Grass",
+        "Fighting",
+        "Ground"
+      ]
+    },
+    "halfDamage": {
+      "to": [
+        "Fighting",
+        "Ground"
+      ],
+      "from": [
+        "Normal",
+        "Fire",
+        "Poison",
+        "Flying"
+      ]
+    }
+  },
+  "Ghost": {
+    "imunity": {
+      "to": [
+        "Normal",
+        "Psychic"
+      ],
+      "from": [
+        "Normal",
+        "Fighting"
+      ]
+    },
+    "superEffective": {
+      "to": [
+        "Ghost"
+      ],
+      "from": [
+        "Ghost"
+      ]
+    },
+    "halfDamage": {
+      "from": [
+        "Poison",
+        "Bug"
+      ]
+    }
+  },
+  "Dragon": {
+    "superEffective": {
+      "to": [
+        "Dragon"
+      ],
+      "from": [
+        "Ice",
+        "Dragon"
+      ]
+    },
+    "halfDamage": {
+      "from": [
+        "Fire",
+        "Water",
+        "Electric",
+        "Grass"
+      ]
+    }
+  }
+}
