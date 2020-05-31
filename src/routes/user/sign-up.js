@@ -1,5 +1,5 @@
 // ----------------- Import de dependências ----------------- //
-const { createCon } = require('../../controller/user');
+const { signUpCon } = require('../../controller/user');
 const userVal = require('../../validations/user/user.joi');
 const userRules = require('../../business-rules/user');
 const userRepo = require('../../repository/user');
@@ -35,7 +35,7 @@ const val = require('../../helpers/validator');
  *                type: object
  *                $ref: '#/definitions/message'
  */
-const create = (req, res, next) => createCon(req, res, next, userRules, val, userVal, userRepo);
+const create = (req, res, next) => signUpCon(req, res, next, userRules, val, userVal, userRepo);
 
 // --------------------- Module Exports --------------------- //
 module.exports = {

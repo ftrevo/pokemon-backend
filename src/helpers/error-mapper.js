@@ -4,7 +4,7 @@ const handleErrors = function (error, request, response, next) {
   const date = new Date();
   const { requestId } = request;
   console.log('------------------------------');
-  console.error(date.toISOString(), requestId, error.toString());
+  console.error(date.toISOString(), requestId, error);
   console.log('------------------------------');
 
   return response.status(500).send({ message: error.message, requestId, date });
