@@ -1,0 +1,25 @@
+{
+  // See https://go.microsoft.com/fwlink/?LinkId=733558
+  // for the documentation about the tasks.json format
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Start Containers",
+      "type": "shell",
+      "command": "docker-compose up -d mongo-4",
+      "presentation": {
+        "focus": true,
+        "panel": "shared",
+      }
+    },
+    {
+      "label": "Stop Containers",
+      "type": "shell",
+      "command": "make stop",
+      "presentation": {
+        "focus": true,
+        "panel": "shared",
+      }
+    }
+  ]
+}

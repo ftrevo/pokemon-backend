@@ -1,20 +1,19 @@
 // ------------------- Funções Exportadas ------------------- //
-const SECONDS_PER_HOUR = 3600;
-const MINUTES_PER_HOUR = 60;
-const SECONDS_PER_MINUTE = 60;
+const getDefaultResData = ({ inboundTime, requestId }) => ({
+  inboundTime: inboundTime.toISOString(),
+  requestId,
+  requestDuration: new Date().getTime() - inboundTime.getTime(),
+});
 
-const numberToTimeString = (n) => n.toString().padStart(2, '0');
+const routeReplacer = /\/[0-9a-fA-F]{24}/;
+const untestedRoutes = /^\/swagger(\/)?/;
 
-const getReadableUpTime = () => {
-  const uptimeSeconds = Math.round(process.uptime());
-  const hours = Math.floor(uptimeSeconds / SECONDS_PER_HOUR);
-  const minutes = Math.floor((uptimeSeconds - (hours * SECONDS_PER_HOUR)) / MINUTES_PER_HOUR);
-  const seconds = uptimeSeconds - (hours * SECONDS_PER_HOUR) - (minutes * SECONDS_PER_MINUTE);
-
-  return `${numberToTimeString(hours)}:${numberToTimeString(minutes)}:${numberToTimeString(seconds)}`;
-};
+const getReplacedRouteString = (path) => path.replace(routeReplacer, '/{id}');
+const isSwaggerRoute = (path) => untestedRoutes.test(path);
 
 // --------------------- Module Exports --------------------- //
 module.exports = {
-  getReadableUpTime,
+  getDefaultResData,
+  getReplacedRouteString,
+  isSwaggerRoute,
 };

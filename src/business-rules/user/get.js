@@ -1,69 +1,29 @@
-const bryptjs = require('bcryptjs');
-const { findOne } = require('../../repository/user');
+const userRepo = require('../../repository/user');
 
-/**
- * @param {Object} data Dados da query de existência.
- * @param {String} projection Dados a serem retornados do banco de dados.
- * @param {import('../../repository/user/find-one')} findOneRepo
- * @param {Object} throwIfNotExists Exception em caso de sucesso ou falha.
- * @param {Object} exceptionMsg Mensagem da exception.
- * @returns {Object} Existing user.
- * @throws {Error} Com o texto informado caso throwIfNotExists seja true e a query não retorne nada.
- */
-const getOne = async (data, projection, findOneRepo, throwIfNotExists, exceptionMsg) => {
-  const existingUser = await findOneRepo(data, projection);
+const { getUnauthorized } = require('../../domains/errors/exceptions');
 
-  if (exceptionMsg && (throwIfNotExists && !existingUser)) {
-    throw new Error(exceptionMsg);
+module.exports = class Get {
+  /**
+   * @param {import('../../repository/user')} repo repository do usuário
+   */
+  constructor(repo = userRepo) {
+    this.repo = repo;
   }
 
-  return existingUser;
-};
+  async getUserValidPwd({ email, password: rawPwd }) {
+    const existingUser = await this.repo.findOne({ email }, '-deviceToken -updatedAt');
 
-/**
- * @param {Object} data Dados da query de existência.
- * @param {String} projection Dados a serem retornados.
- * @returns {Boolean}
- * @throws {Error} Com o texto 'User already exits' caso os dados já existam.
- */
-const getUser = (data, projection) => getOne(data, projection, findOne, true, 'User does not exits');
+    if (!existingUser) {
+      throw getUnauthorized('Usuário e/ou senha invalido(a)');
+    }
 
-/**
- * @param {Object} data Dados da query de existência.
- * @param {import('bcrypt')} bcrypt Dados a serem retornados.
- * @returns {Object} Existing user
- * @throws {Error} Caso o usuário não exista ou a senha esteja incorreta.
- */
-const getUserPwd = async ({ email, password: rawPwd }, bcrypt) => {
-  const dbUser = await getOne(
-    { email },
-    '-deviceToken -updatedAt',
-    findOne,
-    true,
-    'User does not exits',
-  );
+    const matches = existingUser.comparePwd(rawPwd);
 
-  const { password: encryptedPwd, ...user } = await dbUser.toJSON();
+    if (!matches) {
+      throw getUnauthorized('Usuário e/ou senha invalido(a)');
+    }
+    const { password, ...user } = existingUser.toJSON();
 
-  const matches = bcrypt.compareSync(rawPwd, encryptedPwd);
-
-  if (!matches) {
-    throw new Error('Senha inválida.');
+    return user;
   }
-
-  return user;
-};
-
-/**
- * @param {Object} data Dados da query de existência.
- * @returns {Boolean}
- * @throws {Error} Caso o usuário não exista ou a senha esteja incorreta.
- */
-const getUserValidPwd = (data) => getUserPwd(data, bryptjs);
-
-module.exports = {
-  getOne,
-  getUser,
-  getUserPwd,
-  getUserValidPwd,
 };

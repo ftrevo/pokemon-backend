@@ -1,13 +1,35 @@
+const { getDefaultResData } = require('./utils');
+
 // ------------------- Funções Exportadas ------------------- //
 // eslint-disable-next-line no-unused-vars
-const handleErrors = function (error, request, response, next) {
-  const date = new Date();
-  const { requestId } = request;
-  console.log('------------------------------');
-  console.error(date.toISOString(), requestId, error);
-  console.log('------------------------------');
+const getMessage = (error) => {
+  if (Array.isArray(error.message)) {
+    return error.message;
+  }
 
-  return response.status(500).send({ message: error.message, requestId, date });
+  if (error.name === 'ValidationError' && Array.isArray(error.details)) {
+    return error.details.map((detail) => detail.message);
+  }
+
+  return [error.message];
+};
+
+// eslint-disable-next-line no-unused-vars
+const handleErrors = function (error, request, response, next) {
+  const errorTime = new Date();
+  const { requestId, inboundTime } = response.locals;
+
+  const message = getMessage(error);
+
+  if (!error.isBusiness) { // TODO Adicionar transporter de logger, winstonjs da vida...
+    console.log('------------------------------');
+    console.error(`${errorTime.toISOString()} - ${requestId} - ${inboundTime.toISOString()} - ${message}`);
+    console.log('------------------------------');
+  }
+
+  return response
+    .status(error.statusCode || 500)
+    .send({ message, ...getDefaultResData(response.locals) });
 };
 
 // --------------------- Module Exports --------------------- //

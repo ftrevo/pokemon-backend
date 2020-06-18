@@ -1,9 +1,13 @@
-const { exists, existsCreate } = require('./exists');
-const { getUser, getUserValidPwd } = require('./get');
+const sign = require('./sign');
+
+const Exists = require('./exists');
+const Get = require('./get');
+
+const exists = new Exists();
+const get = new Get();
 
 module.exports = {
   exists,
-  existsCreate,
-  getUser,
-  getUserValidPwd,
+  get,
+  sign,
 };

@@ -1,10 +1,5 @@
-// ----------------- Import de dependências ----------------- //
-
-// --------------- Import de arquivos do core --------------- //
 const { serverStatus } = require('./server-status');
-
-const { create } = require('./user/sign-up');
-const { signIn } = require('./user/sign-in');
+const { create, logIn } = require('./user');
 
 /**
  * TAG LIST
@@ -22,11 +17,13 @@ const { signIn } = require('./user/sign-in');
  *  definitions:
  *    general:
  *     properties:
- *      date:
+ *      inboundTime:
  *        type: string
  *        format: date-time
  *      requestId:
  *        type: string
+ *      requestDuration:
+ *        type: number
  *    message:
  *      allOf:
  *        - $ref: '#/definitions/general'
@@ -34,10 +31,16 @@ const { signIn } = require('./user/sign-in');
  *          properties:
  *            message:
  *              type: string
+ *    defaultResponse:
+ *      content:
+ *        application/json:
+ *          schema:
+ *            type: object
+ *            $ref: '#/definitions/message'
  */
 const routes = function (app) {
   app.route('/user/sign-up').post(create);
-  app.route('/user/sign-in').post(signIn);
+  app.route('/user/sign-in').post(logIn);
 
   app.route('/').get(serverStatus);
 };

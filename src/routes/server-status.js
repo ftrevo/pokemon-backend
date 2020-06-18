@@ -1,9 +1,6 @@
-// ----------------- Import de dependências ----------------- //
-const m = require('mongoose');
+const ServerController = require('../controller/server-status');
 
-// --------------- Import de arquivos do core --------------- //
-const helper = require('../helpers/utils');
-const { status } = require('../controller/server-status');
+const serverController = new ServerController();
 
 /**
  *@swagger
@@ -13,7 +10,7 @@ const { status } = require('../controller/server-status');
  *      tags: [General]
  *      responses:
  *        200:
- *          description: OK
+ *          description: Success
  *          content:
  *            application/json:
  *              schema:
@@ -21,19 +18,13 @@ const { status } = require('../controller/server-status');
  *                  - $ref: '#/definitions/message'
  *                  - type: object
  *                    properties:
- *                      upTime:
- *                        type: string
- *                      dbStatus:
- *                        type: string
+ *                      data:
+ *                        $ref: '#/joiComponents/status-out'
  *        500:
- *          description: Houve um erro inesperado
- *          content:
- *            application/json:
- *              schema:
- *                type: object
- *                $ref: '#/definitions/message'
+ *          description: Unknown internal server error
+ *          $ref: '#/definitions/defaultResponse'
  */
-const serverStatus = (req, res) => status(req, res, helper, m);
+const serverStatus = (req, res, next) => serverController.getStatus(req, res, next);
 
 // --------------------- Module Exports --------------------- //
 module.exports = {

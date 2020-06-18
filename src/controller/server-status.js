@@ -1,23 +1,18 @@
-/**
- * @param request {import('express').Request} Request object.
- * @param response {import('express').Response} Response object.
- * @param utils {import('../helpers/utils')} Utils file.
- * @param mongoose {import('mongoose')} Mongoose file.
- */
-const status = (request, response, { getReadableUpTime }, mongoose) => {
-  const { requestId, currentDate } = request;
+const utilRules = require('../business-rules/utils');
+const BaseController = require('./base-controller');
 
-  return response.status(200).send(
-    {
-      message: 'Server is up!',
-      date: currentDate.toISOString(),
-      requestId,
-      upTime: getReadableUpTime(),
-      dbState: mongoose.STATES[mongoose.connection.readyState],
-    },
-  );
-};
+module.exports = class ServerStatus extends BaseController {
+  /**
+   * @param {import('../business-rules/utils/server-status')} utilRules rules do server status
+   */
+  constructor(rules = utilRules) {
+    super();
+    this.rules = rules;
+  }
 
-module.exports = {
-  status,
+  getStatus(request, response, next) {
+    return this.rules.status.get()
+      .then((output) => this.finish(output, response))
+      .catch(next);
+  }
 };

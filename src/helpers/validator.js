@@ -1,21 +1,35 @@
+const language = require('./joi-pt-messages');
+
+const options = {
+  abortEarly: false,
+  dateFormat: 'iso',
+  stripUnknown: true,
+  messages: language,
+};
+
 /**
  * Valida o schema com base nos dados. Lança a exception do Joi em caso de problemas
  *
  * @param schema {import('@hapi/joi').Schema} Schema a ser validado.
  * @param {Object} data Objeto a ser validado.
+ * @param {Number} errorCode Código http do erro.
  */
-const validate = (schema, data) => {
+const execute = (schema, data, errorCode = 400) => {
   const { error, value } = schema.validate(
     data,
-    { abortEarly: false, dateFormat: 'iso', stripUnknown: true },
+    options,
   );
 
   if (error) {
-    console.log(error);
+    error.statusCode = errorCode;
+    error.isBusiness = errorCode === 400;
     throw error;
   }
 
   return value;
 };
 
-module.exports = validate;
+module.exports = {
+  execute,
+  options,
+};

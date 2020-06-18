@@ -4,8 +4,6 @@
  * @returns {Object} Created user sanitized.
  */
 const createUser = async (data, model) => {
-  console.log(data);
-
   const created = await model.create(data);
 
   const {

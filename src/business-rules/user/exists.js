@@ -1,39 +1,30 @@
-const { exists: repoExists } = require('../../repository/user');
+const userRepo = require('../../repository/user');
 
-/**
- * @param {Object} data Dados da query de existência.
- * @param {Object} thrownOnSucess Exception em caso de sucesso ou falha.
- * @param {import('../../repository/user/check-exists')} userExistsRepo
- * @param {Object} exceptionMsg Mensagem da exception.
- * @returns {Boolean}
- * @throws {Error} Com o texto informado caso thrownOnSucess seja igual ao resultado da query.
- */
-const exists = async (data, userExistsRepo, thrownOnSucess, exceptionMsg) => {
-  const userExists = await userExistsRepo(data);
+const { getUnprocessable } = require('../../domains/errors/exceptions');
 
-  if (exceptionMsg && ((thrownOnSucess && userExists) || (!thrownOnSucess && !userExists))) {
-    throw new Error(exceptionMsg);
+module.exports = class Exists {
+  /**
+   * @param {import('../../repository/user')} repo repository do usuário
+   */
+  constructor(repo = userRepo) {
+    this.repo = repo;
+
+    // Needs to bind due if used as a high order function
+    // this.exists = this.exists.bind(this);
+    // this.signUp = this.signUp.bind(this);
   }
 
-  return userExists;
-};
+  async exists(data, throwCondition, exception) {
+    const userExists = await this.repo.exists(data);
 
-/**
- * @param {Object} data Dados da query de existência.
- * @returns {Boolean}
- * @throws {Error} Com o texto 'User already exits' caso os dados já existam.
- */
-const existsCreate = (data) => exists(data, repoExists, true, 'User already exits');
+    if (userExists === throwCondition) {
+      throw exception;
+    }
 
-/**
- * @param {Object} data Dados da query de existência.
- * @returns {Boolean}
- * @throws {Error} Com o texto 'User does not exits' caso os dados não existam.
- */
-const existsSignIn = (data) => exists(data, repoExists, false, 'User does not exits');
+    return userExists;
+  }
 
-module.exports = {
-  existsCreate,
-  existsSignIn,
-  exists,
+  signUp(data) {
+    return this.exists(data, true, getUnprocessable('User already exits'));
+  }
 };

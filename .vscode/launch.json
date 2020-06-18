@@ -7,11 +7,52 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Program",
+      "name": "Launch",
       "skipFiles": [
         "<node_internals>/**"
       ],
-      "program": "${workspaceFolder}/index.js"
+      "program": "${workspaceFolder}/index.js",
+      "preLaunchTask": "Start Containers"
+    },
+    {
+      "name": "Unit Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "stopOnEntry": false,
+      "args": [
+        "--config",
+        "test/configs/.mocharc.unit.js"
+      ],
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": null,
+      "console": "internalConsole"
+    },
+    {
+      "name": "Integration Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "stopOnEntry": false,
+      "args": [
+        "--config",
+        "test/configs/.mocharc.integration.js"
+      ],
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": null
+    },
+    {
+      "name": "All Tests",
+      "type": "node",
+      "request": "launch",
+      "program": "${workspaceRoot}/node_modules/mocha/bin/_mocha",
+      "stopOnEntry": false,
+      "args": [
+        "--config",
+        "test/configs/.mocharc.js"
+      ],
+      "cwd": "${workspaceRoot}",
+      "runtimeExecutable": null
     }
   ]
 }
