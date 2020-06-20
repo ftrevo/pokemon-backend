@@ -27,11 +27,12 @@ const handleErrors = async (error, request, response, next) => {
     errorTime: errorTime.toISOString(),
     inboundTime: inboundTime.toISOString(),
   };
-  if (!error.isBusiness) {
+
+  if (error.isBusiness) {
+    logger.debug({ ...errorData, error });
+  } else {
     logger.error({ ...errorData, error });
     await slackNotification(errorData);
-  } else {
-    logger.debug({ ...errorData, error });
   }
 
   return response
