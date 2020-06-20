@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-// ----------------- Import de dependências ----------------- //
 const { Schema, model } = require('mongoose');
 const { genSaltSync, hashSync, compareSync } = require('bcryptjs');
 
@@ -53,5 +52,4 @@ UserSchema.methods.comparePwd = function (candidatePassword) {
   return compareSync(candidatePassword, this.password);
 };
 
-// --------------------- Module Exports --------------------- //
 module.exports = model('User', UserSchema);

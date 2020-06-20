@@ -1,4 +1,3 @@
-// ----------------- Import de dependências ----------------- //
 const UserController = require('../controller/user');
 
 const userCon = new UserController();
@@ -75,7 +74,6 @@ const create = (req, res, next) => userCon.signUp(req, res, next);
  */
 const logIn = (req, res, next) => userCon.signIn(req, res, next);
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   create,
   logIn,

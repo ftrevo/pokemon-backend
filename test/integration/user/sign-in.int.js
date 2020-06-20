@@ -57,7 +57,7 @@ describe('# Sign-in - Integration', () => {
 
       expect(body).toHaveProperty(
         'message',
-        ['Usuário e/ou senha invalido(a)'],
+        ['Usuário(a) e/ou senha invalido(a)'],
       );
     });
 
@@ -72,7 +72,7 @@ describe('# Sign-in - Integration', () => {
 
       expect(body).toHaveProperty(
         'message',
-        ['Usuário e/ou senha invalido(a)'],
+        ['Usuário(a) e/ou senha invalido(a)'],
       );
     });
   });

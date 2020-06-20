@@ -12,7 +12,8 @@
         "<node_internals>/**"
       ],
       "program": "${workspaceFolder}/index.js",
-      "preLaunchTask": "Start Containers"
+      "preLaunchTask": "Start Containers",
+      "outputCapture": "std"
     },
     {
       "name": "Unit Tests",

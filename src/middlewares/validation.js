@@ -40,7 +40,6 @@ const outbound = (data, response, status = 200) => response
     ...getDefaultResData(response.locals),
   });
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   inbound,
   outbound,

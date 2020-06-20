@@ -1,7 +1,7 @@
 const { getDefaultResData } = require('./utils');
+const slackNotification = require('./slack-notification');
+const logger = require('./logger');
 
-// ------------------- Funções Exportadas ------------------- //
-// eslint-disable-next-line no-unused-vars
 const getMessage = (error) => {
   if (Array.isArray(error.message)) {
     return error.message;
@@ -15,16 +15,23 @@ const getMessage = (error) => {
 };
 
 // eslint-disable-next-line no-unused-vars
-const handleErrors = function (error, request, response, next) {
+const handleErrors = async (error, request, response, next) => {
   const errorTime = new Date();
   const { requestId, inboundTime } = response.locals;
 
   const message = getMessage(error);
 
-  if (!error.isBusiness) { // TODO Adicionar transporter de logger, winstonjs da vida...
-    console.log('------------------------------');
-    console.error(`${errorTime.toISOString()} - ${requestId} - ${inboundTime.toISOString()} - ${message}`);
-    console.log('------------------------------');
+  const errorData = {
+    requestId,
+    errorMessage: message.reduce((msg, acc) => `${msg}-${acc}`),
+    errorTime: errorTime.toISOString(),
+    inboundTime: inboundTime.toISOString(),
+  };
+  if (!error.isBusiness) {
+    logger.error({ ...errorData, error });
+    await slackNotification(errorData);
+  } else {
+    logger.debug({ ...errorData, error });
   }
 
   return response
@@ -32,5 +39,4 @@ const handleErrors = function (error, request, response, next) {
     .send({ message, ...getDefaultResData(response.locals) });
 };
 
-// --------------------- Module Exports --------------------- //
 module.exports = handleErrors;

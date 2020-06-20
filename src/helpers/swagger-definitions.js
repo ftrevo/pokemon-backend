@@ -32,7 +32,6 @@ const options = {
   },
 };
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   swaggerSpecification,
   options,

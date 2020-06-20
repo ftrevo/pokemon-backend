@@ -1,4 +1,3 @@
-// ----------------- Import de dependências ----------------- //
 const { v1 } = require('uuid');
 
 /**
@@ -15,7 +14,6 @@ const internal = (response, next, v1Uuid) => {
 
 const genIdDate = (req, res, next) => internal(res, next, v1);
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   internal,
   genIdDate,

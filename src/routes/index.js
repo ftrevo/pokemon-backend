@@ -45,5 +45,4 @@ const routes = function (app) {
   app.route('/').get(serverStatus);
 };
 
-// --------------------- Module Exports --------------------- //
 module.exports = routes;

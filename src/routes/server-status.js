@@ -26,7 +26,6 @@ const serverController = new ServerController();
  */
 const serverStatus = (req, res, next) => serverController.getStatus(req, res, next);
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   serverStatus,
 };

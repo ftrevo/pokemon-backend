@@ -37,5 +37,4 @@ const joiCompiler = (originalSwagger, scanSourceDir = __dirname, joiFileSufix = 
   });
 };
 
-// --------------------- Module Exports --------------------- //
 module.exports = joiCompiler;

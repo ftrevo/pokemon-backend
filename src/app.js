@@ -28,6 +28,7 @@ app.use(inbound);
 // Definição de rotas
 routes(app);
 
+// Adição dos arquivos do JOI no contexto do SWAGGER
 joiFilesToSwagger(swaggerSpecification, __dirname);
 
 // Handling da Documentação da API

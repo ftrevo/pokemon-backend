@@ -1,4 +1,3 @@
-// ----------------- Import de dependências ----------------- //
 const Joi = require('@hapi/joi');
 
 const keys = {
@@ -15,5 +14,4 @@ const keys = {
   }).label('token'),
 };
 
-// --------------------- Module Exports --------------------- //
 module.exports = keys;

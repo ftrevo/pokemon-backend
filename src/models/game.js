@@ -1,4 +1,3 @@
-// ----------------- Import de dependências ----------------- //
 const { Schema, model, Types: { ObjectId } } = require('mongoose');
 
 const schemaObj = {
@@ -20,5 +19,4 @@ const schemaObj = {
 
 const GameSchema = new Schema(schemaObj, { versionKey: false, timestamps: true });
 
-// --------------------- Module Exports --------------------- //
 module.exports = model('Game', GameSchema);

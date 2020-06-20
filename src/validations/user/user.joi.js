@@ -1,7 +1,5 @@
-// ----------------- Import de dependências ----------------- //
 const Joi = require('@hapi/joi');
 
-// --------------- Import de arquivos do core --------------- //
 const keys = require('./keys');
 
 const signUpBody = Joi.object().required().keys({
@@ -35,7 +33,6 @@ const signInOut = Joi.object().required().keys({
   className: 'sign-in-out',
 });
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   signUpBody,
   signUpOut,

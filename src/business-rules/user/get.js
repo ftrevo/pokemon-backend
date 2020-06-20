@@ -14,13 +14,13 @@ module.exports = class Get {
     const existingUser = await this.repo.findOne({ email }, '-deviceToken -updatedAt');
 
     if (!existingUser) {
-      throw getUnauthorized('Usuário e/ou senha invalido(a)');
+      throw getUnauthorized('Usuário(a) e/ou senha invalido(a)');
     }
 
     const matches = existingUser.comparePwd(rawPwd);
 
     if (!matches) {
-      throw getUnauthorized('Usuário e/ou senha invalido(a)');
+      throw getUnauthorized('Usuário(a) e/ou senha invalido(a)');
     }
     const { password, ...user } = existingUser.toJSON();
 

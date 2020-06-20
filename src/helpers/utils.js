@@ -1,4 +1,3 @@
-// ------------------- Funções Exportadas ------------------- //
 const getDefaultResData = ({ inboundTime, requestId }) => ({
   inboundTime: inboundTime.toISOString(),
   requestId,
@@ -11,7 +10,6 @@ const untestedRoutes = /^\/swagger(\/)?/;
 const getReplacedRouteString = (path) => path.replace(routeReplacer, '/{id}');
 const isSwaggerRoute = (path) => untestedRoutes.test(path);
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   getDefaultResData,
   getReplacedRouteString,

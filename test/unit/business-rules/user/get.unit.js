@@ -49,7 +49,7 @@ describe('# Get - Rules', () => {
         await get.getUserValidPwd({ email: 0, password: 0 });
       } catch (err) {
         expect(err).toBeInstanceOf(Unauthorized);
-        expect(err).toHaveProperty('message', 'Usuário e/ou senha invalido(a)');
+        expect(err).toHaveProperty('message', 'Usuário(a) e/ou senha invalido(a)');
       }
     });
 
@@ -62,7 +62,7 @@ describe('# Get - Rules', () => {
         await get.getUserValidPwd({ email: 0, password: 0 });
       } catch (err) {
         expect(err).toBeInstanceOf(Unauthorized);
-        expect(err).toHaveProperty('message', 'Usuário e/ou senha invalido(a)');
+        expect(err).toHaveProperty('message', 'Usuário(a) e/ou senha invalido(a)');
       }
     });
   });

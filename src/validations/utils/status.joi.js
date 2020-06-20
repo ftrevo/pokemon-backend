@@ -1,4 +1,3 @@
-// ----------------- Import de dependências ----------------- //
 const Joi = require('@hapi/joi');
 
 const keys = {
@@ -15,7 +14,6 @@ const statusOut = Joi.object().required().keys({
   className: 'status-out',
 });
 
-// --------------------- Module Exports --------------------- //
 module.exports = {
   statusOut,
 };
