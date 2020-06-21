@@ -4,7 +4,7 @@ const expect = require('expect');
 const faker = require('faker');
 
 const { options } = require('../../../../src/helpers/validator');
-const { '/user/sign-up': signUp } = require('../../../../src/validations');
+const { validations: { '/user/sign-up': signUp } } = require('../../../../src/validations');
 
 describe('# Sign-up - Validation', () => {
   it('method type, input and output', async () => {

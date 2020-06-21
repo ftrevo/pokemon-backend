@@ -1,46 +1,49 @@
-const validations = require('../validations');
-const { execute } = require('../helpers/validator');
-const { getDefaultResData, getReplacedRouteString, isSwaggerRoute } = require('../helpers/utils');
+const validationData = require('../validations');
+const validationExecutor = require('../helpers/validator');
+const generalUtils = require('../helpers/utils');
 
-const inbound = (request, response, next) => {
-  if (!isSwaggerRoute(request.path)) {
-    const baseRule = validations[getReplacedRouteString(request.path)];
+module.exports = class Validation {
+  constructor(utils = generalUtils, validations = validationData, validator = validationExecutor) {
+    this.utils = utils;
+    this.validations = validations;
+    this.validator = validator;
 
-    const methodRule = baseRule[request.method.toLowerCase()];
-
-    if (!methodRule || !methodRule.out) {
-      return response.status(404).send({
-        message: 'Requested route was not found at the server',
-        ...getDefaultResData(response.locals),
-      });
-    }
-
-    if (methodRule.params) {
-      request.params = execute(methodRule.params, request.params);
-    }
-
-    if (methodRule.query) {
-      request.query = execute(methodRule.query, request.query);
-    }
-
-    if (methodRule.body) {
-      request.body = execute(methodRule.body, request.body);
-    }
-
-    response.locals.outputValidation = methodRule.out;
+    // Needs to bind due beeing used as a high order function
+    this.outbound = this.outbound.bind(this);
+    this.inbound = this.inbound.bind(this);
   }
 
-  return next();
-};
+  outbound(data, response, status = 200) {
+    return response
+      .status(status)
+      .json({
+        data: this.validator.execute(response.locals.outputValidation, data, 533),
+        ...this.utils.getDefaultResData(response.locals),
+      });
+  }
 
-const outbound = (data, response, status = 200) => response
-  .status(status)
-  .json({
-    data: execute(response.locals.outputValidation, data, 533),
-    ...getDefaultResData(response.locals),
-  });
+  inbound(request, response, next) {
+    try {
+      const methodRule = this.validations.getRule(request.path, request.method);
 
-module.exports = {
-  inbound,
-  outbound,
+      if (methodRule) {
+        if (methodRule.params) {
+          request.params = this.validator.execute(methodRule.params, request.params);
+        }
+
+        if (methodRule.query) {
+          request.query = this.validator.execute(methodRule.query, request.query);
+        }
+
+        if (methodRule.body) {
+          request.body = this.validator.execute(methodRule.body, request.body);
+        }
+
+        response.locals.outputValidation = methodRule.out;
+      }
+      next();
+    } catch (error) {
+      next(error);
+    }
+  }
 };

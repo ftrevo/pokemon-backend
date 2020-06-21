@@ -10,7 +10,7 @@ const joiFilesToSwagger = require('./helpers/swagger-joi-compiler');
 const errorMapper = require('./helpers/error-mapper');
 const { genIdDate } = require('./middlewares/req-id-date');
 const routes = require('./routes');
-const { inbound } = require('./middlewares/validation');
+const Validation = require('./middlewares/validation');
 
 // Inicialização e configuração do app
 const app = express();
@@ -23,7 +23,7 @@ app.use(express.json({ limit: '5mb' }));
 app.use(genIdDate);
 
 // Middleware para validação de entrada e resposta de paths não cadastrados
-app.use(inbound);
+app.use(new Validation().inbound);
 
 // Definição de rotas
 routes(app);

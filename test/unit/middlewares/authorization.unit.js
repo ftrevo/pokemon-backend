@@ -55,8 +55,8 @@ describe('# Authorization Middleware - Unit', () => {
 
       await auth(req, res, next);
 
-      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash[0]).toBeInstanceOf(Unauthorized);
+      expect(stash).toHaveProperty('0.message', 'Não autorizado');
     });
 
     it('token no prefix', async () => {
@@ -68,8 +68,8 @@ describe('# Authorization Middleware - Unit', () => {
 
       await auth(req, res, next);
 
-      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash[0]).toBeInstanceOf(Unauthorized);
+      expect(stash).toHaveProperty('0.message', 'Não autorizado');
     });
 
     it('token wrong prefix', async () => {
@@ -81,8 +81,8 @@ describe('# Authorization Middleware - Unit', () => {
 
       await auth(req, res, next);
 
-      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash[0]).toBeInstanceOf(Unauthorized);
+      expect(stash).toHaveProperty('0.message', 'Não autorizado');
     });
 
     it('token signed with different secret', async () => {
@@ -94,8 +94,8 @@ describe('# Authorization Middleware - Unit', () => {
 
       await auth(req, res, next);
 
-      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash[0]).toBeInstanceOf(Unauthorized);
+      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash).toHaveProperty('0.errorDecoding', 'invalid signature');
     });
 
@@ -108,8 +108,8 @@ describe('# Authorization Middleware - Unit', () => {
 
       await auth(req, res, next);
 
-      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash[0]).toBeInstanceOf(Unauthorized);
+      expect(stash).toHaveProperty('0.message', 'Não autorizado');
       expect(stash).toHaveProperty('0.errorDecoding', 'jwt malformed');
     });
   });
