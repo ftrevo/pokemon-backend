@@ -1,0 +1,11 @@
+{
+  "all": true,
+  "include": [
+    "index.js",
+    "src/**/*.js"
+  ],
+  "reporter": [
+    "html",
+    "text"
+  ]
+}

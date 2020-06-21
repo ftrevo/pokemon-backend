@@ -7,7 +7,7 @@
     "test": "mocha --config test/configs/.mocharc.js",
     "test:unit": "mocha --config test/configs/.mocharc.unit.js",
     "test:integration": "mocha --config test/configs/.mocharc.integration.js",
-    "test:coverage": "nyc --all --reporter=html --reporter=text mocha --config test/configs/.mocharc.js",
+    "test:coverage": "nyc npm run test",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "complexity-report": "./node_modules/.bin/es6-plato --recurse --eslint ./.eslintrc.json --dir ./plato-report src"
