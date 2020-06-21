@@ -5,7 +5,7 @@ const faker = require('faker');
 const { Types: { ObjectId } } = require('mongoose');
 
 const app = require('../../../src/app');
-const { validateIdData, validateDate, validateError } = require('../../test-util');
+const { validateDefaultResponse, validateDate, validateError } = require('../../test-util');
 
 describe('# Sign-up - Integration', () => {
   it('success', async () => {
@@ -20,7 +20,7 @@ describe('# Sign-up - Integration', () => {
       .send(toBeSend)
       .expect(200);
 
-    validateIdData(body);
+    validateDefaultResponse(body);
 
     expect(body).toHaveProperty('data');
     expect(body).toHaveProperty('data.name', toBeSend.name);
@@ -39,7 +39,7 @@ describe('# Sign-up - Integration', () => {
       .send(toBeSend)
       .expect(400);
 
-    validateIdData(body);
+    validateDefaultResponse(body);
     validateError(body);
 
     expect(body).toHaveProperty(

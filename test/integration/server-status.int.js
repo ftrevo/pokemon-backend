@@ -2,7 +2,7 @@ const supertest = require('supertest');
 const expect = require('expect');
 
 const app = require('../../src/app');
-const { validateIdData } = require('../test-util');
+const { validateDefaultResponse } = require('../test-util');
 
 describe('# Server Status - Integration', () => {
   it('success', async () => {
@@ -10,7 +10,7 @@ describe('# Server Status - Integration', () => {
       .get('/')
       .expect(200);
 
-    validateIdData(body);
+    validateDefaultResponse(body);
 
     expect(body).toHaveProperty('data');
     expect(body).toHaveProperty('data.message', 'Server is up!');

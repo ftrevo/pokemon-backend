@@ -3,7 +3,7 @@ const expect = require('expect');
 const faker = require('faker');
 
 const app = require('../../../src/app');
-const { validateIdData, validateError } = require('../../test-util');
+const { validateDefaultResponse, validateError } = require('../../test-util');
 const User = require('../../../src/models/user');
 
 describe('# Sign-in - Integration', () => {
@@ -21,7 +21,7 @@ describe('# Sign-in - Integration', () => {
       .send({ email, password })
       .expect(200);
 
-    validateIdData(body);
+    validateDefaultResponse(body);
 
     expect(body).toHaveProperty('data');
     expect(body).toHaveProperty('data.token');
@@ -36,7 +36,7 @@ describe('# Sign-in - Integration', () => {
         .send({})
         .expect(400);
 
-      validateIdData(body);
+      validateDefaultResponse(body);
       validateError(body);
 
       expect(body).toHaveProperty(
@@ -51,7 +51,7 @@ describe('# Sign-in - Integration', () => {
         .send({ email: faker.internet.email(), password: faker.internet.password() })
         .expect(401);
 
-      validateIdData(body);
+      validateDefaultResponse(body);
       validateError(body);
 
       expect(body).toHaveProperty(
@@ -66,7 +66,7 @@ describe('# Sign-in - Integration', () => {
         .send({ email, password: faker.internet.password() })
         .expect(401);
 
-      validateIdData(body);
+      validateDefaultResponse(body);
       validateError(body);
 
       expect(body).toHaveProperty(

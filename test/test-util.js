@@ -14,9 +14,13 @@ const validateIdUUIDV1 = (candidateId) => {
   );
 };
 
-const validateIdData = (data) => {
+const validateRequestId = (data) => {
   expect(data).toHaveProperty('requestId');
   validateIdUUIDV1(data.requestId);
+};
+
+const validateDefaultResponse = (data) => {
+  validateRequestId(data);
   expect(data).toHaveProperty('inboundTime');
   validateDate(data.inboundTime);
   expect(data).toHaveProperty('requestDuration');
@@ -29,8 +33,9 @@ const validateError = (data) => {
 };
 
 module.exports = {
-  validateIdData,
+  validateDefaultResponse,
   validateDate,
   validateIdUUIDV1,
   validateError,
+  validateRequestId,
 };
