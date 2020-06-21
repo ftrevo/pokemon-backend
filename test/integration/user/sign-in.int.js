@@ -1,4 +1,3 @@
-/* eslint-disable no-underscore-dangle */
 const supertest = require('supertest');
 const expect = require('expect');
 const faker = require('faker');

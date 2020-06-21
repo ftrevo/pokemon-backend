@@ -1,6 +1,8 @@
 const { getDefaultResData } = require('./utils');
-const slackNotification = require('./slack-notification');
+const SlackNotifier = require('./slack-notification');
 const logger = require('./logger');
+
+const slack = new SlackNotifier();
 
 const getMessage = (error) => {
   if (Array.isArray(error.message)) {
@@ -32,7 +34,7 @@ const handleErrors = async (error, request, response, next) => {
     logger.debug({ ...errorData, error });
   } else {
     logger.error({ ...errorData, error });
-    await slackNotification(errorData);
+    await slack.notify(errorData);
   }
 
   return response
