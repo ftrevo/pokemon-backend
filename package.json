@@ -9,7 +9,8 @@
     "test:integration": "mocha --config test/configs/.mocharc.integration.js",
     "test:coverage": "nyc --all --reporter=html --reporter=text mocha --config test/configs/.mocharc.js",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "complexity-report": "./node_modules/.bin/es6-plato --recurse --eslint ./.eslintrc.json --dir ./plato-report src"
   },
   "keywords": [
     "Pokémon",
@@ -44,6 +45,7 @@
     "winston-logsene": "^2.0.8"
   },
   "devDependencies": {
+    "es6-plato": "^1.2.3",
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.1.0",
     "eslint-plugin-import": "^2.20.1",
