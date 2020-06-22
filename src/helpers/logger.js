@@ -16,7 +16,6 @@ const logger = winston.createLogger({
       handleExceptions: true,
       level: process.env.LOG_CONSOLE_LEVEL,
       prettyPrint: true,
-      silent: false,
     }),
   ],
   silent: process.env.LOG_SILENT === 'true',
