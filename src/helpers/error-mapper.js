@@ -1,8 +1,6 @@
 const { getDefaultResData } = require('./utils');
 const SlackNotifier = require('./slack-notification');
-const logger = require('./logger');
-
-const slack = new SlackNotifier();
+const defaultLogger = require('./logger');
 
 const getMessage = (error) => {
   if (Array.isArray(error.message)) {
@@ -16,30 +14,36 @@ const getMessage = (error) => {
   return [error.message];
 };
 
-// eslint-disable-next-line no-unused-vars
-const handleErrors = async (error, request, response, next) => {
-  const errorTime = new Date();
-  const { requestId, inboundTime } = response.locals;
-
-  const message = getMessage(error);
-
-  const errorData = {
-    requestId,
-    errorMessage: message.reduce((msg, acc) => `${msg}-${acc}`),
-    errorTime: errorTime.toISOString(),
-    inboundTime: inboundTime.toISOString(),
-  };
-
-  if (error.isBusiness) {
-    logger.debug({ ...errorData, error });
-  } else {
-    logger.error({ ...errorData, error });
-    await slack.notify(errorData);
+module.exports = class ErrorMapper {
+  constructor(slack = new SlackNotifier(), logger = defaultLogger) {
+    this.slack = slack;
+    this.logger = logger;
+    this.handleErrors = this.handleErrors.bind(this);
   }
 
-  return response
-    .status(error.statusCode || 500)
-    .send({ message, ...getDefaultResData(response.locals) });
-};
+  // eslint-disable-next-line no-unused-vars
+  async handleErrors(error, request, response, next) {
+    const errorTime = new Date();
+    const { requestId, inboundTime } = response.locals;
 
-module.exports = handleErrors;
+    const message = getMessage(error);
+
+    const errorData = {
+      requestId,
+      errorMessage: message.reduce((msg, acc) => `${msg}-${acc}`),
+      errorTime: errorTime.toISOString(),
+      inboundTime: inboundTime.toISOString(),
+    };
+
+    if (error.isBusiness) {
+      this.logger.debug({ ...errorData, error });
+    } else {
+      this.logger.error({ ...errorData, error });
+      await this.slack.notify(errorData);
+    }
+
+    return response
+      .status(error.statusCode || 500)
+      .send({ message, ...getDefaultResData(response.locals) });
+  }
+};

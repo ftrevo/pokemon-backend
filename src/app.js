@@ -7,7 +7,7 @@ const { swaggerSpecification, options } = require('./helpers/swagger-definitions
 
 // --------------- Import de arquivos do core --------------- //
 const joiFilesToSwagger = require('./helpers/swagger-joi-compiler');
-const errorMapper = require('./helpers/error-mapper');
+const ErrorMapper = require('./helpers/error-mapper');
 const { genIdDate } = require('./middlewares/req-id-date');
 const routes = require('./routes');
 const Validation = require('./middlewares/validation');
@@ -35,7 +35,7 @@ joiFilesToSwagger(swaggerSpecification, __dirname);
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpecification, options));
 
 // Middeware de erros
-app.use(errorMapper);
+app.use(new ErrorMapper().handleErrors);
 
 // --------------------- Module Exports --------------------- //
 module.exports = app;

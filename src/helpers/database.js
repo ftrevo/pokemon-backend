@@ -12,7 +12,7 @@ const connect = async () => {
         useCreateIndex: true,
       },
     );
-    logger.info(`${new Date().toISOString()} - Database connected`);
+    logger.info('Database connected');
   } catch (error) {
     logger.error(error);
     process.exit(1);
@@ -21,7 +21,7 @@ const connect = async () => {
 
 const disconnect = async () => {
   await mongoose.disconnect(process.env.DB_URI);
-  logger.info(`${new Date().toISOString()} - Database disconnected`);
+  logger.info('Database disconnected');
 };
 
 module.exports = {
