@@ -21,7 +21,7 @@ class RouteNotFound extends HttpException {
 
 class ValidationNotFound extends HttpException {
   constructor(message) {
-    super(500, message, 'Not Found Validation', true);
+    super(500, message, 'Not Found Validation');
   }
 }
 
