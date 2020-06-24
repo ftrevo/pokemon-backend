@@ -1,7 +1,9 @@
 const Joi = require('@hapi/joi');
 
+const { idRegex } = require('../../helpers/utils');
+
 const keys = {
-  id: Joi.string().trim().regex(/^[0-9a-fA-F]{24}$/).label('id'),
+  id: Joi.string().trim().regex(idRegex).label('id'),
   name: Joi.string().trim().label('nome'),
   password: Joi.string().trim().min(4).label('senha'),
   email: Joi.string().trim().label('e-mail'),

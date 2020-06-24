@@ -16,14 +16,14 @@ module.exports = class UserController extends BaseController {
   async signUp({ body }, response, next) {
     this.rules.exists.signUp({ email: body.email })
       .then(() => this.repo.create(body))
-      .then((output) => this.finish(output, response))
+      .then((output) => this.finish(output, response, next))
       .catch(next);
   }
 
   async signIn({ body }, response, next) {
     this.rules.get.getUserValidPwd(body)
       .then(this.rules.sign)
-      .then((output) => this.finish(output, response))
+      .then((output) => this.finish(output, response, next))
       .catch(next);
   }
 };

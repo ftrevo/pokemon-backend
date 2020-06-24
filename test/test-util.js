@@ -7,6 +7,11 @@ const validateDate = (candidateDate) => {
   );
 };
 
+const validateCreatedAt = (data) => {
+  expect(data).toHaveProperty('createdAt');
+  validateDate(data.createdAt);
+};
+
 const validateIdUUIDV1 = (candidateId) => {
   expect.stringMatching(
     candidateId,
@@ -24,7 +29,7 @@ const validateDefaultResponse = (data) => {
   expect(data).toHaveProperty('inboundTime');
   validateDate(data.inboundTime);
   expect(data).toHaveProperty('requestDuration');
-  expect(data.requestDuration).toBeGreaterThan(0);
+  expect(data.requestDuration).toBeGreaterThanOrEqual(0);
 };
 
 const validateError = (data) => {
@@ -38,4 +43,5 @@ module.exports = {
   validateIdUUIDV1,
   validateError,
   validateRequestId,
+  validateCreatedAt,
 };

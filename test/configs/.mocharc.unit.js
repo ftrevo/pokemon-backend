@@ -1,6 +1,6 @@
 const path = require('path');
 
-const dotEnvPath = path.resolve(__dirname, 'unit.env');
+const dotEnvPath = path.resolve(__dirname, 'test.env');
 require('dotenv').config({ path: dotEnvPath });
 
 module.exports = {

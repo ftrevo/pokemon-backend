@@ -7,10 +7,11 @@
     "test": "mocha --config test/configs/.mocharc.js",
     "test:unit": "mocha --config test/configs/.mocharc.unit.js",
     "test:integration": "mocha --config test/configs/.mocharc.integration.js",
-    "test:coverage": "nyc npm run test",
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "complexity-report": "./node_modules/.bin/es6-plato --recurse --eslint ./.eslintrc.json --dir ./plato-report src"
+    "lint": "eslint . --ignore-pattern reports",
+    "lint:fix": "eslint . --fix --ignore-pattern reports",
+    "report:coverage": "nyc npm run test",
+    "report:complexity": "./node_modules/.bin/es6-plato --recurse --eslint ./.eslintrc.json --dir ./reports/complexity src",
+    "report": "npm run report:coverage && npm run report:complexity"
   },
   "keywords": [
     "Pokémon",
@@ -36,7 +37,6 @@
     "helmet": "^3.21.3",
     "joi-to-swagger": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
     "mongoose": "^5.9.3",
     "swagger-jsdoc": "^3.5.0",
     "swagger-ui-express": "^4.1.3",

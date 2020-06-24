@@ -3,13 +3,13 @@ const { getUnauthorized } = require('../domains/errors/exceptions');
 
 const authRequired = async (request, response, next) => {
   try {
-    const { headers: { Authorization } } = request;
+    const { headers: { authorization } } = request;
 
-    if (!Authorization || !Authorization.startsWith(process.env.TOKEN_TYPE)) {
+    if (!authorization || !authorization.startsWith(process.env.TOKEN_TYPE)) {
       throw getUnauthorized('Não autorizado');
     }
 
-    const [, token] = Authorization.split(' ');
+    const [, token] = authorization.split(' ');
 
     let decoded;
     try {

@@ -5,7 +5,7 @@ const auth = require('../../../src/middlewares/authorization');
 const { Unauthorized } = require('../../../src/domains/errors/exceptions');
 
 const getResMock = () => ({ locals: {} });
-const getReqMock = (authToken) => ({ headers: { Authorization: authToken } });
+const getReqMock = (authToken) => ({ headers: { authorization: authToken } });
 const getNextMock = (stash) => ((nextError) => {
   if (nextError) {
     stash.push(nextError);
@@ -22,7 +22,7 @@ const user = {
 };
 
 const runTests = () => {
-  describe('Authorization', () => {
+  describe('authorization', () => {
     before(async () => {
       validToken = await sign(user, process.env.SECRET);
       invalidSignToken = await sign(user, faker.random.alphaNumeric(5));

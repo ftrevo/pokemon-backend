@@ -2,11 +2,10 @@ const utils = require('../helpers/utils');
 const { RouteNotFound, ValidationNotFound } = require('../domains/errors/exceptions');
 
 const {
-  signUpBody,
-  signUpOut,
-  signInBody,
-  signInOut,
+  signUpBody, signUpOut, signInBody, signInOut,
 } = require('./user/user.joi');
+const { createOut } = require('./game/game.joi');
+
 const { statusOut } = require('./utils/status.joi');
 
 const validations = {
@@ -25,6 +24,11 @@ const validations = {
     post: {
       body: signInBody,
       out: signInOut,
+    },
+  },
+  '/game': {
+    post: {
+      out: createOut,
     },
   },
 };

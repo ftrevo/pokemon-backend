@@ -13,11 +13,18 @@ module.exports = class Validation {
     this.inbound = this.inbound.bind(this);
   }
 
-  outbound(data, response, status = 200) {
+  outbound(data, response, next, status = 200) {
+    let toBeReturned;
+    try {
+      toBeReturned = this.validator.execute(response.locals.outputValidation, data, 533);
+    } catch (error) {
+      return next(error);
+    }
+
     return response
       .status(status)
       .json({
-        data: this.validator.execute(response.locals.outputValidation, data, 533),
+        data: toBeReturned,
         ...this.utils.getDefaultResData(response.locals),
       });
   }

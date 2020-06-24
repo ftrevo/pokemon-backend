@@ -5,7 +5,7 @@
     "src/**/*.js"
   ],
   "reporter": [
-    "html",
-    "text"
-  ]
+    "html"
+  ],
+  "report-dir": "./reports/coverage"
 }

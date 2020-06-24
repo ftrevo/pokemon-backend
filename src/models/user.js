@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 const { Schema, model } = require('mongoose');
 const { genSaltSync, hashSync, compareSync } = require('bcryptjs');
 

@@ -1,6 +1,6 @@
 /**
- * @param {Object} data Dados a serem verificados.
- * @param {import('../../models/user')} model UserSchema object.
+ * @param {Object} data Dados a serem usados na query de verificação.
+ * @param {import('mongoose').Model} model Model a ser usado na verificação.
  * @returns {Boolean}
  */
 const checkExists = async (data, model) => {

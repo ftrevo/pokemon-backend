@@ -1,8 +1,8 @@
 const UserSchema = require('../../models/user');
 
 const createUser = require('./create');
-const existUser = require('./check-exists');
-const findOneUser = require('./find-one');
+const existUser = require('../check-exists');
+const findOneUser = require('../find-one');
 
 /**
  * @param {Object} data Dados do usuario.

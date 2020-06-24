@@ -1,9 +1,9 @@
 const sign = require('./sign');
 
-const Exists = require('./exists');
+const UserExists = require('./exists');
 const Get = require('./get');
 
-const exists = new Exists();
+const exists = new UserExists();
 const get = new Get();
 
 module.exports = {
