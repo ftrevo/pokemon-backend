@@ -1,7 +1,7 @@
 const serverStatus = require('./server-status.spec');
 
 const runTests = () => {
-  describe('Utils', () => {
+  describe('General', () => {
     serverStatus();
   });
 };

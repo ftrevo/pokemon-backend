@@ -1,5 +1,5 @@
 const expect = require('expect');
-const ServerStatus = require('../../../../src/business-rules/utils/server-status');
+const ServerStatus = require('../../../../src/business-rules/general/server-status');
 
 const getMockedDb = (readyState) => ({
   STATES: ['disconnected', 'connected'],

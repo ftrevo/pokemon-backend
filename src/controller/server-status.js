@@ -1,11 +1,11 @@
-const utilRules = require('../business-rules/utils');
+const generalRules = require('../business-rules/general');
 const BaseController = require('./base-controller');
 
 module.exports = class ServerStatus extends BaseController {
   /**
-   * @param {import('../business-rules/utils/server-status')} utilRules rules do server status
+   * @param {import('../business-rules/general')} generalRules rules gerais
    */
-  constructor(rules = utilRules) {
+  constructor(rules = generalRules) {
     super();
     this.rules = rules;
   }
