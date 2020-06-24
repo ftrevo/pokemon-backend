@@ -15,9 +15,9 @@ const getMessage = (error) => {
 };
 
 module.exports = class ErrorMapper {
-  constructor(slack = new SlackNotifier(), logger = defaultLogger) {
-    this.slack = slack;
+  constructor(logger = defaultLogger, slack = new SlackNotifier()) {
     this.logger = logger;
+    this.slack = slack;
     this.handleErrors = this.handleErrors.bind(this);
   }
 
