@@ -11,6 +11,8 @@ const { create: createGame } = require('./game');
  *      description: General endpoints such as server status.
  *    - name: User
  *      description: User endpoints.
+ *    - name: Game
+ *      description: Game endpoints.
  */
 
 /**

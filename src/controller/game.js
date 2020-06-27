@@ -16,7 +16,10 @@ module.exports = class GameController extends BaseController {
 
   async create(request, response, next) {
     this.rules.exists.create({ maker: response.locals.user._id })
-      .then(() => this.repo.create({ maker: response.locals.user._id }))
+      .then(() => this.repo.create({
+        maker: response.locals.user._id,
+        players: [response.locals.user._id],
+      }))
       .then((output) => this.finish(output, response, next))
       .catch(next);
   }
