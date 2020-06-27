@@ -12,6 +12,6 @@ module.exports = class UserExists extends BaseExists {
   }
 
   async signUp(data) {
-    return this.exists(data, true, getUnprocessable('User already exits'));
+    return this.exists(data, true, getUnprocessable('Usuário(a) já existente'));
   }
 };

@@ -14,7 +14,7 @@ const runTests = () => {
           await exists.signUp({ toBe: 'checked' });
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
-          expect(err).toHaveProperty('message', 'User already exits');
+          expect(err).toHaveProperty('message', 'Usuário(a) já existente');
         }
       });
 
