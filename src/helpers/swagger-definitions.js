@@ -1,5 +1,6 @@
 const swaggerJsdoc = require('swagger-jsdoc');
 
+/* istanbul ignore next */
 const caseInsensitive = () => ({
   fn: {
     opsFilter:
