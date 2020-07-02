@@ -29,28 +29,27 @@ module.exports = class Validation {
       });
   }
 
-  inbound(request, response, next) {
-    try {
+  inbound(request, response) {
+    return new Promise((resolve) => {
       const methodRule = this.validations.getRule(request.path, request.method);
 
+      const validData = {};
       if (methodRule) {
         if (methodRule.params) {
-          request.params = this.validator.execute(methodRule.params, request.params);
+          validData.params = this.validator.execute(methodRule.params, request.params);
         }
 
         if (methodRule.query) {
-          request.query = this.validator.execute(methodRule.query, request.query);
+          validData.query = this.validator.execute(methodRule.query, request.query);
         }
 
         if (methodRule.body) {
-          request.body = this.validator.execute(methodRule.body, request.body);
+          validData.body = this.validator.execute(methodRule.body, request.body);
         }
 
         response.locals.outputValidation = methodRule.out;
       }
-      next();
-    } catch (error) {
-      next(error);
-    }
+      return resolve(validData);
+    });
   }
 };

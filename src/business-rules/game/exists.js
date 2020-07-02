@@ -11,11 +11,25 @@ module.exports = class GameExists extends BaseExists {
     super(repo);
   }
 
-  create(data) {
-    return this.exists(
-      { ...data, winner: { $exists: false } },
+  async create(maker) {
+    await this.exists(
+      { maker, winner: { $exists: false } },
       true,
       getUnprocessable('O usuário já tem um jogo não finalizado'),
     );
+    return maker;
+  }
+
+  async join(data) {
+    await this.exists(
+      {
+        token: data.token,
+        winner: { $exists: false },
+        'players.5': { $exists: false },
+      },
+      false,
+      getUnprocessable('Jogo não encontrado, já finalizado ou com o máximo de jogadores permitido'),
+    );
+    return data;
   }
 };

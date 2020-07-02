@@ -37,39 +37,24 @@ const runTests = () => {
           expect(error).toHaveProperty('details',
             [
               {
-                message: '"e-mail" é obrigatório',
-                path: ['email'],
-                type: 'any.required',
-                context: { label: 'e-mail', key: 'email' },
+                message: '"e-mail" é obrigatório', path: ['email'], type: 'any.required', context: { label: 'e-mail', key: 'email' },
               },
               {
-                message: '"senha" é obrigatório',
-                path: ['password'],
-                type: 'any.required',
-                context: { label: 'senha', key: 'password' },
+                message: '"senha" é obrigatório', path: ['password'], type: 'any.required', context: { label: 'senha', key: 'password' },
               },
             ]);
         });
 
         it('empty fields', async () => {
-          const { error } = await signIn.post.body.validate({
-            email: '',
-            password: '',
-          }, options);
+          const { error } = await signIn.post.body.validate({ email: '', password: '' }, options);
 
           expect(error).toHaveProperty('message', '"e-mail" não pode estar vazio. "senha" não pode estar vazio');
           expect(error).toHaveProperty('details', [
             {
-              message: '"e-mail" não pode estar vazio',
-              path: ['email'],
-              type: 'string.empty',
-              context: { label: 'e-mail', value: '', key: 'email' },
+              message: '"e-mail" não pode estar vazio', path: ['email'], type: 'string.empty', context: { label: 'e-mail', value: '', key: 'email' },
             },
             {
-              message: '"senha" não pode estar vazio',
-              path: ['password'],
-              type: 'string.empty',
-              context: { label: 'senha', value: '', key: 'password' },
+              message: '"senha" não pode estar vazio', path: ['password'], type: 'string.empty', context: { label: 'senha', value: '', key: 'password' },
             },
           ]);
         });
@@ -83,16 +68,10 @@ const runTests = () => {
           expect(error).toHaveProperty('message', '"e-mail" deve ser uma string. "senha" deve ser uma string');
           expect(error).toHaveProperty('details', [
             {
-              message: '"e-mail" deve ser uma string',
-              path: ['email'],
-              type: 'string.base',
-              context: { label: 'e-mail', value: [], key: 'email' },
+              message: '"e-mail" deve ser uma string', path: ['email'], type: 'string.base', context: { label: 'e-mail', value: [], key: 'email' },
             },
             {
-              message: '"senha" deve ser uma string',
-              path: ['password'],
-              type: 'string.base',
-              context: { label: 'senha', value: {}, key: 'password' },
+              message: '"senha" deve ser uma string', path: ['password'], type: 'string.base', context: { label: 'senha', value: {}, key: 'password' },
             },
           ]);
         });
@@ -100,8 +79,7 @@ const runTests = () => {
         it('min password length', async () => {
           const { error } = await signIn.post.body.validate(
             {
-              password: 'a',
-              email: faker.internet.email(),
+              password: 'a', email: faker.internet.email(),
             },
             options,
           );
@@ -124,11 +102,7 @@ const runTests = () => {
     describe('output', () => {
       it('success', async () => {
         const baseInput = {
-          token: {
-            type: 'JWT',
-            value: faker.random.alphaNumeric(30),
-            additional: 'nested',
-          },
+          token: { type: 'JWT', value: faker.random.alphaNumeric(30), additional: 'nested' },
           additional: 'field',
         };
 
@@ -155,10 +129,7 @@ const runTests = () => {
             'details',
             [
               {
-                message: '"token" é obrigatório',
-                path: ['token'],
-                type: 'any.required',
-                context: { label: 'token', key: 'token' },
+                message: '"token" é obrigatório', path: ['token'], type: 'any.required', context: { label: 'token', key: 'token' },
               },
             ],
           );
@@ -172,16 +143,10 @@ const runTests = () => {
             'details',
             [
               {
-                message: '"tipo do token" é obrigatório',
-                path: ['token', 'type'],
-                type: 'any.required',
-                context: { label: 'tipo do token', key: 'type' },
+                message: '"tipo do token" é obrigatório', path: ['token', 'type'], type: 'any.required', context: { label: 'tipo do token', key: 'type' },
               },
               {
-                message: '"valor do token" é obrigatório',
-                path: ['token', 'value'],
-                type: 'any.required',
-                context: { label: 'valor do token', key: 'value' },
+                message: '"valor do token" é obrigatório', path: ['token', 'value'], type: 'any.required', context: { label: 'valor do token', key: 'value' },
               },
             ],
           );
@@ -195,16 +160,10 @@ const runTests = () => {
             'details',
             [
               {
-                message: '"tipo do token" não pode estar vazio',
-                path: ['token', 'type'],
-                type: 'string.empty',
-                context: { label: 'tipo do token', value: '', key: 'type' },
+                message: '"tipo do token" não pode estar vazio', path: ['token', 'type'], type: 'string.empty', context: { label: 'tipo do token', value: '', key: 'type' },
               },
               {
-                message: '"valor do token" não pode estar vazio',
-                path: ['token', 'value'],
-                type: 'string.empty',
-                context: { label: 'valor do token', value: '', key: 'value' },
+                message: '"valor do token" não pode estar vazio', path: ['token', 'value'], type: 'string.empty', context: { label: 'valor do token', value: '', key: 'value' },
               },
             ],
           );
@@ -234,16 +193,10 @@ const runTests = () => {
           expect(error).toHaveProperty('details',
             [
               {
-                message: '"tipo do token" deve ser uma string',
-                path: ['token', 'type'],
-                type: 'string.base',
-                context: { label: 'tipo do token', value: true, key: 'type' },
+                message: '"tipo do token" deve ser uma string', path: ['token', 'type'], type: 'string.base', context: { label: 'tipo do token', value: true, key: 'type' },
               },
               {
-                message: '"valor do token" deve ser uma string',
-                path: ['token', 'value'],
-                type: 'string.base',
-                context: { label: 'valor do token', value: 1, key: 'value' },
+                message: '"valor do token" deve ser uma string', path: ['token', 'value'], type: 'string.base', context: { label: 'valor do token', value: 1, key: 'value' },
               },
             ]);
         });

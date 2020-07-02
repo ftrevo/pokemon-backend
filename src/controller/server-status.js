@@ -11,7 +11,8 @@ module.exports = class ServerStatus extends BaseController {
   }
 
   getStatus(request, response, next) {
-    return this.rules.status.get()
+    return this.start(request, response)
+      .then(() => this.rules.status.get())
       .then((output) => this.finish(output, response, next))
       .catch(next);
   }

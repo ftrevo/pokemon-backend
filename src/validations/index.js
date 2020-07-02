@@ -4,7 +4,9 @@ const { RouteNotFound, ValidationNotFound } = require('../domains/errors/excepti
 const {
   signUpBody, signUpOut, signInBody, signInOut,
 } = require('./user/user.joi');
-const { createOut } = require('./game/game.joi');
+const {
+  createOut, joinOut, joinParams,
+} = require('./game/game.joi');
 
 const { statusOut } = require('./utils/status.joi');
 
@@ -31,12 +33,15 @@ const validations = {
       out: createOut,
     },
   },
+  '/game/{token}': {
+    patch: {
+      params: joinParams,
+      out: joinOut,
+    },
+  },
 };
 
 const getRule = (path, method) => {
-  if (utils.isSwaggerRoute(path)) {
-    return;
-  }
   const routePath = utils.getReplacedRouteString(path);
   const lowerMethod = method.toLowerCase();
 

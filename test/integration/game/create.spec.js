@@ -10,10 +10,11 @@ const { validateDefaultResponse, validateCreatedAt, validateError } = require('.
 const User = require('../../../src/models/user');
 const { tokenRegex } = require('../../../src/helpers/utils');
 
-let authorization;
-
 const runTests = () => {
   describe('Create', () => {
+    let authorization;
+
+    // TODO usar Promise.all para melhorar performance
     before(async () => {
       const registeredUser = new User({
         email: faker.internet.email(),
@@ -43,29 +44,31 @@ const runTests = () => {
       validateCreatedAt(body.data);
     });
 
-    it('maker already has a game', async () => {
-      const { body } = await supertest(app)
-        .post('/game')
-        .set({ authorization })
-        .send()
-        .expect(422);
+    describe('error', () => {
+      it('maker already has a game', async () => {
+        const { body } = await supertest(app)
+          .post('/game')
+          .set({ authorization })
+          .send()
+          .expect(422);
 
-      validateDefaultResponse(body);
-      validateError(body);
+        validateDefaultResponse(body);
+        validateError(body);
 
-      expect(body).toHaveProperty('message', ['O usuário já tem um jogo não finalizado']);
-    });
+        expect(body).toHaveProperty('message', ['O usuário já tem um jogo não finalizado']);
+      });
 
-    it('error header', async () => {
-      const { body } = await supertest(app)
-        .post('/game')
-        .send()
-        .expect(401);
+      it('no header', async () => {
+        const { body } = await supertest(app)
+          .post('/game')
+          .send()
+          .expect(401);
 
-      validateDefaultResponse(body);
-      validateError(body);
+        validateDefaultResponse(body);
+        validateError(body);
 
-      expect(body).toHaveProperty('message', ['Não autorizado']);
+        expect(body).toHaveProperty('message', ['Não autorizado']);
+      });
     });
   });
 };

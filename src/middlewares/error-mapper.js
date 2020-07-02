@@ -1,6 +1,6 @@
-const { getDefaultResData } = require('./utils');
-const SlackNotifier = require('./slack-notification');
-const defaultLogger = require('./logger');
+const { getDefaultResData } = require('../helpers/utils');
+const SlackNotifier = require('../helpers/slack-notification');
+const defaultLogger = require('../helpers/logger');
 
 const getMessage = (error) => {
   if (Array.isArray(error.message)) {

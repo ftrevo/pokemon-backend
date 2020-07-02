@@ -7,12 +7,12 @@ module.exports = class BaseExists {
   }
 
   async exists(data, throwCondition, exception) {
-    const userExists = await this.repo.exists(data);
+    const dataExists = await this.repo.exists(data);
 
-    if (userExists === throwCondition) {
+    if (dataExists === throwCondition) {
       throw exception;
     }
 
-    return userExists;
+    return dataExists;
   }
 };

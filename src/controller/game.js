@@ -15,11 +15,19 @@ module.exports = class GameController extends BaseController {
   }
 
   async create(request, response, next) {
-    this.rules.exists.create({ maker: response.locals.user._id })
-      .then(() => this.repo.create({
-        maker: response.locals.user._id,
-        players: [response.locals.user._id],
-      }))
+    return this.start(request, response)
+      .then(() => this.rules.exists.create(response.locals.user._id))
+      .then((maker) => this.repo.create({ maker, players: [maker] }))
+      .then((output) => this.finish(output, response, next))
+      .catch(next);
+  }
+
+  async join(request, response, next) {
+    return this.start(request, response)
+      .then(({ params: { token } }) => this.rules.exists.join(
+        { token, player: response.locals.user._id },
+      ))
+      .then((data) => this.repo.join(data))
       .then((output) => this.finish(output, response, next))
       .catch(next);
   }

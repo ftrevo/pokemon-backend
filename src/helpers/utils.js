@@ -4,18 +4,23 @@ const getDefaultResData = ({ inboundTime, requestId }) => ({
   requestDuration: new Date().getTime() - inboundTime.getTime(),
 });
 
-const routeReplacer = /\/[0-9a-fA-F]{24}/;
-const untestedRoutes = /^\/swagger(\/)?/;
-const idRegex = /^[0-9a-fA-F]{24}$/;
-const tokenRegex = /^[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}$/;
+const objectIdBaseString = '[0-9a-fA-F]{24}';
+const tokenBaseString = '[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}';
 
-const getReplacedRouteString = (path) => path.replace(routeReplacer, '/{id}');
-const isSwaggerRoute = (path) => untestedRoutes.test(path);
+// const routeReplacer = /\/[0-9a-fA-F]{24}/;
+const objectIdBaseRegex = new RegExp(objectIdBaseString); // /[0-9a-fA-F]{24}/;
+const tokenBaseRegex = new RegExp(tokenBaseString); // /[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}/;
+
+const idRegex = new RegExp(`^${objectIdBaseString}$`); // /^[0-9a-fA-F]{24}$/;
+const tokenRegex = new RegExp(`^${tokenBaseString}$`); // /^[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}$/;
+
+const getReplacedRouteString = (path) => path
+  .replace(objectIdBaseRegex, '{id}')
+  .replace(tokenBaseRegex, '{token}');
 
 module.exports = {
   getDefaultResData,
   getReplacedRouteString,
-  isSwaggerRoute,
   idRegex,
   tokenRegex,
 };

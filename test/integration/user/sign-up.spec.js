@@ -1,4 +1,4 @@
-/* eslint-disable no-underscore-dangle */
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 const supertest = require('supertest');
 const expect = require('expect');
 const faker = require('faker');

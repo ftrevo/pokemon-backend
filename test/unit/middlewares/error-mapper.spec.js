@@ -1,5 +1,5 @@
 const expect = require('expect');
-const ErrorMapper = require('../../../src/helpers/error-mapper');
+const ErrorMapper = require('../../../src/middlewares/error-mapper');
 const { validateDefaultResponse, validateDate } = require('../../test-util');
 
 const getResponseMock = (locals) => ({

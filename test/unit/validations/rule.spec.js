@@ -4,18 +4,10 @@ const { RouteNotFound, ValidationNotFound } = require('../../../src/domains/erro
 
 const runTests = () => {
   describe('Get Rule', () => {
-    describe('success', () => {
-      it('non swagger', async () => {
-        const rule = getRule('/', 'get');
+    it('success', async () => {
+      const rule = getRule('/', 'get');
 
-        expect(rule).toHaveProperty('out');
-      });
-
-      it('swagger', async () => {
-        const rule = getRule('/swagger', 'get');
-
-        expect(rule).toBeUndefined();
-      });
+      expect(rule).toHaveProperty('out');
     });
 
     describe('error', () => {

@@ -22,7 +22,7 @@ const execute = (schema, data, errorCode = 400) => {
 
   if (error) {
     error.statusCode = errorCode;
-    error.isBusiness = errorCode === 400;
+    error.isBusiness = errorCode >= 400 && errorCode <= 499;
     throw error;
   }
 

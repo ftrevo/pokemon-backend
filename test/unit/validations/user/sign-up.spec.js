@@ -40,22 +40,13 @@ const runTests = () => {
             'details',
             [
               {
-                message: '"nome" é obrigatório',
-                path: ['name'],
-                type: 'any.required',
-                context: { label: 'nome', key: 'name' },
+                message: '"nome" é obrigatório', path: ['name'], type: 'any.required', context: { label: 'nome', key: 'name' },
               },
               {
-                message: '"senha" é obrigatório',
-                path: ['password'],
-                type: 'any.required',
-                context: { label: 'senha', key: 'password' },
+                message: '"senha" é obrigatório', path: ['password'], type: 'any.required', context: { label: 'senha', key: 'password' },
               },
               {
-                message: '"e-mail" é obrigatório',
-                path: ['email'],
-                type: 'any.required',
-                context: { label: 'e-mail', key: 'email' },
+                message: '"e-mail" é obrigatório', path: ['email'], type: 'any.required', context: { label: 'e-mail', key: 'email' },
               },
             ],
           );
@@ -75,31 +66,20 @@ const runTests = () => {
           expect(error).toHaveProperty(
             'details',
             [{
-              message: '"nome" não pode estar vazio',
-              path: ['name'],
-              type: 'string.empty',
-              context: { label: 'nome', value: '', key: 'name' },
-            }, {
-              message: '"senha" não pode estar vazio',
-              path: ['password'],
-              type: 'string.empty',
-              context: { label: 'senha', value: '', key: 'password' },
-            }, {
-              message: '"e-mail" não pode estar vazio',
-              path: ['email'],
-              type: 'string.empty',
-              context: { label: 'e-mail', value: '', key: 'email' },
+              message: '"nome" não pode estar vazio', path: ['name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
+            },
+            {
+              message: '"senha" não pode estar vazio', path: ['password'], type: 'string.empty', context: { label: 'senha', value: '', key: 'password' },
+            },
+            {
+              message: '"e-mail" não pode estar vazio', path: ['email'], type: 'string.empty', context: { label: 'e-mail', value: '', key: 'email' },
             }],
           );
         });
 
         it('invalid type', async () => {
           const { error } = await signUp.post.body.validate(
-            {
-              name: 1,
-              password: true,
-              email: [],
-            },
+            { name: 1, password: true, email: [] },
             options,
           );
 
@@ -107,22 +87,13 @@ const runTests = () => {
           expect(error).toHaveProperty(
             'details',
             [{
-              message: '"nome" deve ser uma string',
-              path: ['name'],
-              type: 'string.base',
-              context: { label: 'nome', value: 1, key: 'name' },
+              message: '"nome" deve ser uma string', path: ['name'], type: 'string.base', context: { label: 'nome', value: 1, key: 'name' },
             },
             {
-              message: '"senha" deve ser uma string',
-              path: ['password'],
-              type: 'string.base',
-              context: { label: 'senha', value: true, key: 'password' },
+              message: '"senha" deve ser uma string', path: ['password'], type: 'string.base', context: { label: 'senha', value: true, key: 'password' },
             },
             {
-              message: '"e-mail" deve ser uma string',
-              path: ['email'],
-              type: 'string.base',
-              context: { label: 'e-mail', value: [], key: 'email' },
+              message: '"e-mail" deve ser uma string', path: ['email'], type: 'string.base', context: { label: 'e-mail', value: [], key: 'email' },
             }],
           );
         });
@@ -183,28 +154,16 @@ const runTests = () => {
           expect(error).toHaveProperty(
             'details',
             [{
-              message: '"id" é obrigatório',
-              path: ['_id'],
-              type: 'any.required',
-              context: { label: 'id', key: '_id' },
+              message: '"id" é obrigatório', path: ['_id'], type: 'any.required', context: { label: 'id', key: '_id' },
             },
             {
-              message: '"nome" é obrigatório',
-              path: ['name'],
-              type: 'any.required',
-              context: { label: 'nome', key: 'name' },
+              message: '"nome" é obrigatório', path: ['name'], type: 'any.required', context: { label: 'nome', key: 'name' },
             },
             {
-              message: '"e-mail" é obrigatório',
-              path: ['email'],
-              type: 'any.required',
-              context: { label: 'e-mail', key: 'email' },
+              message: '"e-mail" é obrigatório', path: ['email'], type: 'any.required', context: { label: 'e-mail', key: 'email' },
             },
             {
-              message: '"criado em" é obrigatório',
-              path: ['createdAt'],
-              type: 'any.required',
-              context: { label: 'criado em', key: 'createdAt' },
+              message: '"criado em" é obrigatório', path: ['createdAt'], type: 'any.required', context: { label: 'criado em', key: 'createdAt' },
             }],
           );
         });
@@ -212,10 +171,7 @@ const runTests = () => {
         it('empty fields', async () => {
           const { error } = await signUp.post.out.validate(
             {
-              name: '',
-              _id: '',
-              email: '',
-              createdAt: '',
+              name: '', _id: '', email: '', createdAt: '',
             },
             options,
           );
@@ -227,22 +183,13 @@ const runTests = () => {
             'details',
             [
               {
-                message: '"id" não pode estar vazio',
-                path: ['_id'],
-                type: 'string.empty',
-                context: { label: 'id', value: '', key: '_id' },
+                message: '"id" não pode estar vazio', path: ['_id'], type: 'string.empty', context: { label: 'id', value: '', key: '_id' },
               },
               {
-                message: '"nome" não pode estar vazio',
-                path: ['name'],
-                type: 'string.empty',
-                context: { label: 'nome', value: '', key: 'name' },
+                message: '"nome" não pode estar vazio', path: ['name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
               },
               {
-                message: '"e-mail" não pode estar vazio',
-                path: ['email'],
-                type: 'string.empty',
-                context: { label: 'e-mail', value: '', key: 'email' },
+                message: '"e-mail" não pode estar vazio', path: ['email'], type: 'string.empty', context: { label: 'e-mail', value: '', key: 'email' },
               },
               {
                 message: '"criado em" deve estar em formato data ISO 8601',
@@ -259,10 +206,7 @@ const runTests = () => {
         it('invalid type', async () => {
           const { error } = await signUp.post.out.validate(
             {
-              name: 1,
-              _id: true,
-              email: [],
-              createdAt: {},
+              name: 1, _id: true, email: [], createdAt: {},
             },
             options,
           );
@@ -275,28 +219,16 @@ const runTests = () => {
             'details',
             [
               {
-                message: '"id" deve ser uma string',
-                path: ['_id'],
-                type: 'string.base',
-                context: { label: 'id', value: true, key: '_id' },
+                message: '"id" deve ser uma string', path: ['_id'], type: 'string.base', context: { label: 'id', value: true, key: '_id' },
               },
               {
-                message: '"nome" deve ser uma string',
-                path: ['name'],
-                type: 'string.base',
-                context: { label: 'nome', value: 1, key: 'name' },
+                message: '"nome" deve ser uma string', path: ['name'], type: 'string.base', context: { label: 'nome', value: 1, key: 'name' },
               },
               {
-                message: '"e-mail" deve ser uma string',
-                path: ['email'],
-                type: 'string.base',
-                context: { label: 'e-mail', value: [], key: 'email' },
+                message: '"e-mail" deve ser uma string', path: ['email'], type: 'string.base', context: { label: 'e-mail', value: [], key: 'email' },
               },
               {
-                message: '"criado em" deve ser uma data válida',
-                path: ['createdAt'],
-                type: 'date.base',
-                context: { label: 'criado em', value: {}, key: 'createdAt' },
+                message: '"criado em" deve ser uma data válida', path: ['createdAt'], type: 'date.base', context: { label: 'criado em', value: {}, key: 'createdAt' },
               }],
           );
         });

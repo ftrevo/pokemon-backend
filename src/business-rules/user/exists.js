@@ -11,7 +11,8 @@ module.exports = class UserExists extends BaseExists {
     super(repo);
   }
 
-  async signUp(data) {
-    return this.exists(data, true, getUnprocessable('Usuário(a) já existente'));
+  async signUp(userData) {
+    await this.exists({ email: userData.email }, true, getUnprocessable('Usuário(a) já existente'));
+    return userData;
   }
 };

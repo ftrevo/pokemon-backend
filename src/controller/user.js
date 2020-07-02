@@ -13,17 +13,19 @@ module.exports = class UserController extends BaseController {
     this.rules = rules;
   }
 
-  async signUp({ body }, response, next) {
-    this.rules.exists.signUp({ email: body.email })
-      .then(() => this.repo.create(body))
+  async signUp(request, response, next) {
+    return this.start(request, response)
+      .then(({ body }) => this.rules.exists.signUp(body))
+      .then((userData) => this.repo.create(userData))
       .then((output) => this.finish(output, response, next))
       .catch(next);
   }
 
-  async signIn({ body }, response, next) {
-    this.rules.get.getUserValidPwd(body)
-      .then(this.rules.sign)
-      .then((output) => this.finish(output, response, next))
+  async signIn(request, response, next) {
+    return this.start(request, response)
+      .then((validData) => this.rules.get.getUserValidPwd(validData.body))
+      .then((user) => this.rules.sign(user))
+      .then((output) => this.finish(output, response))
       .catch(next);
   }
 };

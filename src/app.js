@@ -7,10 +7,10 @@ const { swaggerSpecification, options } = require('./helpers/swagger-definitions
 
 // --------------- Import de arquivos do core --------------- //
 const joiFilesToSwagger = require('./helpers/swagger-joi-compiler');
-const ErrorMapper = require('./helpers/error-mapper');
+const ErrorMapper = require('./middlewares/error-mapper');
 const { genIdDate } = require('./middlewares/req-id-date');
+const notFound = require('./middlewares/not-found');
 const routes = require('./routes');
-const Validation = require('./middlewares/validation');
 
 // Inicialização e configuração do app
 const app = express();
@@ -22,9 +22,6 @@ app.use(express.json({ limit: '5mb' }));
 // Middleware para definição de requestId
 app.use(genIdDate);
 
-// Middleware para validação de entrada e resposta de paths não cadastrados
-app.use(new Validation().inbound);
-
 // Definição de rotas
 routes(app);
 
@@ -33,6 +30,9 @@ joiFilesToSwagger(swaggerSpecification, __dirname);
 
 // Handling da Documentação da API
 app.use('/swagger', swaggerUi.serve, swaggerUi.setup(swaggerSpecification, options));
+
+// Not Found Middleware
+app.use(notFound);
 
 // Middeware de erros
 app.use(new ErrorMapper().handleErrors);
