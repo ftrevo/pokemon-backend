@@ -2,7 +2,7 @@ const expect = require('expect');
 const { Types: { ObjectId } } = require('mongoose');
 const Exists = require('../../../../src/business-rules/game/exists');
 const { Unprocessable } = require('../../../../src/domains/errors/exceptions');
-const { getToken } = require('../../../test-util');
+const { getToken } = require('../../../../src/helpers/utils');
 
 const getMockedRepo = (stash, expectedResult) => ({
   exists: (query) => {

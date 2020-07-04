@@ -1,13 +1,4 @@
 const expect = require('expect');
-const { randomBytes } = require('crypto');
-
-const getToken = () => ([
-  randomBytes(2).toString('hex'),
-  '-',
-  randomBytes(2).toString('hex'),
-  '-',
-  randomBytes(2).toString('hex'),
-].join(''));
 
 const validateDate = (candidateDate) => {
   expect.stringMatching(
@@ -53,5 +44,4 @@ module.exports = {
   validateError,
   validateRequestId,
   validateCreatedAt,
-  getToken,
 };

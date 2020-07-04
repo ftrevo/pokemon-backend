@@ -1,7 +1,7 @@
 const expect = require('expect');
 const { Types: { ObjectId } } = require('mongoose');
 const GameRepo = require('../../../src/repository/game');
-const { getToken } = require('../../test-util');
+const { getToken } = require('../../../src/helpers/utils');
 
 const runTests = () => {
   describe('Game', () => {

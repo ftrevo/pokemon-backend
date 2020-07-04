@@ -21,6 +21,10 @@ const schemaObj = {
     type: ObjectId,
     ref: 'User',
   },
+  game: {
+    type: ObjectId,
+    ref: 'Game',
+  },
   pokemons: {
     active: [
       pokeball,

@@ -5,7 +5,7 @@ const faker = require('faker');
 
 const { validations: { '/game/{token}': join } } = require('../../../../src/validations');
 const { options } = require('../../../../src/helpers/validator');
-const { getToken } = require('../../../test-util');
+const { getToken } = require('../../../../src/helpers/utils');
 
 const runTests = () => {
   describe('Join', () => {

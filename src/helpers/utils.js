@@ -1,3 +1,13 @@
+const { randomBytes } = require('crypto');
+
+const getToken = () => ([
+  randomBytes(2).toString('hex'),
+  '-',
+  randomBytes(2).toString('hex'),
+  '-',
+  randomBytes(2).toString('hex'),
+].join(''));
+
 const getDefaultResData = ({ inboundTime, requestId }) => ({
   inboundTime: inboundTime.toISOString(),
   requestId,
@@ -19,6 +29,7 @@ const getReplacedRouteString = (path) => path
   .replace(tokenBaseRegex, '{token}');
 
 module.exports = {
+  getToken,
   getDefaultResData,
   getReplacedRouteString,
   idRegex,
