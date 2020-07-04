@@ -3,26 +3,17 @@ const UserRepo = require('../../../src/repository/user');
 
 const runTests = () => {
   describe('User', () => {
-    const getBaseMock = (stash, toBeReturned) => ({
+    const getModelMock = (stash, toBeReturned) => ({
       create: (createData) => {
         stash.push(createData);
-        return toBeReturned;
-      },
-      exists: (existsData) => {
-        stash.push(existsData);
-        return toBeReturned;
-      },
-      findOne: (data, projectionData) => {
-        stash.push(data);
-        stash.push(projectionData);
-        return toBeReturned;
+        return { toJSON: () => toBeReturned };
       },
     });
 
     it('create', async () => {
       const stash = [];
       const baseUser = { name: 'toBeReturned' };
-      const baseMock = getBaseMock(
+      const modelMock = getModelMock(
         stash,
         {
           ...baseUser,
@@ -32,7 +23,7 @@ const runTests = () => {
         },
       );
 
-      const userRepo = new UserRepo(undefined, baseMock);
+      const userRepo = new UserRepo(modelMock);
 
       const toBeCreated = { random: 'data' };
 
@@ -40,37 +31,6 @@ const runTests = () => {
 
       expect(response).toEqual(baseUser);
       expect(stash).toEqual([toBeCreated]);
-    });
-
-    it('exists', async () => {
-      const stash = [];
-      const toBeReturned = { this: 'should be reurned' };
-      const baseMock = getBaseMock(stash, toBeReturned);
-
-      const userRepo = new UserRepo(undefined, baseMock);
-
-      const toBeChecked = { random: 'data' };
-
-      const response = await userRepo.exists(toBeChecked);
-
-      expect(response).toEqual(toBeReturned);
-      expect(stash).toEqual([toBeChecked]);
-    });
-
-    it('findOne', async () => {
-      const stash = [];
-      const toBeReturned = { this: 'should be reurned' };
-      const baseMock = getBaseMock(stash, toBeReturned);
-
-      const userRepo = new UserRepo(undefined, baseMock);
-
-      const toBeFound = { random: 'data' };
-      const toBeProjected = { random: 'projection' };
-
-      const response = await userRepo.findOne(toBeFound, toBeProjected);
-
-      expect(response).toEqual(toBeReturned);
-      expect(stash).toEqual([toBeFound, toBeProjected]);
     });
   });
 };

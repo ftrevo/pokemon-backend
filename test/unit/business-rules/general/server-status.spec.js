@@ -1,13 +1,13 @@
 const expect = require('expect');
 const ServerStatus = require('../../../../src/business-rules/general/server-status');
 
-const getMockedDb = (readyState) => ({
-  STATES: ['disconnected', 'connected'],
-  connection: { readyState },
-});
-
 const runTests = () => {
   describe('Server Status', () => {
+    const getMockedDb = (readyState) => ({
+      STATES: ['disconnected', 'connected'],
+      connection: { readyState },
+    });
+
     it('success', async () => {
       const ss = new ServerStatus(getMockedDb(1));
 

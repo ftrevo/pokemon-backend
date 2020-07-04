@@ -88,7 +88,7 @@ const runTests = () => {
         });
       });
 
-      describe('players', () => {
+      describe('Players', () => {
         const baseUsers = [];
         const baseUserIds = [];
 

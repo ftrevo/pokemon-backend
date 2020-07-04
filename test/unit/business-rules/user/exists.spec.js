@@ -3,18 +3,18 @@ const faker = require('faker');
 const Exists = require('../../../../src/business-rules/user/exists');
 const { Unprocessable } = require('../../../../src/domains/errors/exceptions');
 
-const getMockedRepo = (stash, existsResult) => (
-  {
-    exists: (data) => {
-      stash.push(data);
-      return existsResult;
-    },
-  }
-);
-
 const runTests = () => {
   describe('Exists', () => {
-    describe('signUp', () => {
+    const getMockedRepo = (stash, existsResult) => (
+      {
+        exists: (data) => {
+          stash.push(data);
+          return existsResult;
+        },
+      }
+    );
+
+    describe('SignUp', () => {
       it('user already exists', async () => {
         const stash = [];
         const exists = new Exists(getMockedRepo(stash, true));

@@ -1,29 +1,18 @@
-const GameSchema = require('../models/game');
-const baseMethods = require('./base');
+const BaseRepo = require('./base-repository');
+const gameModel = require('../models/game');
 
-module.exports = class GameRepo {
+module.exports = class GameRepo extends BaseRepo {
   /**
-   * @param {import('../models/game')} schema schema do usuário
-   * @param {import('./base')} base métodos base
+   * @param {import('../models/game')} model model do game
    */
-  constructor(schema = GameSchema, base = baseMethods) {
-    this.schema = schema;
-    this.base = base;
-  }
-
-  async create(data) {
-    return this.base.create(data, this.schema);
-  }
-
-  async exists(data) {
-    return this.base.exists(data, this.schema);
+  constructor(model = gameModel) {
+    super(model);
   }
 
   async join({ token, player }) {
-    return this.base.findOneAndUpdate(
+    return super.findOneAndUpdate(
       { token },
       { $addToSet: { players: [player] } },
-      this.schema,
       [{ path: 'maker', select: 'name' }, { path: 'players', select: 'name' }],
     );
   }

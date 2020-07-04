@@ -12,7 +12,7 @@ module.exports = class UserExists extends BaseExists {
   }
 
   async signUp(userData) {
-    await this.exists({ email: userData.email }, true, getUnprocessable('Usuário(a) já existente'));
+    await super.exists({ email: userData.email }, true, getUnprocessable('Usuário(a) já existente'));
     return userData;
   }
 };

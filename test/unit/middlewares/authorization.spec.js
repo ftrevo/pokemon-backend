@@ -22,7 +22,7 @@ const user = {
 };
 
 const runTests = () => {
-  describe('authorization', () => {
+  describe('Authorization', () => {
     before(async () => {
       validToken = await sign(user, process.env.SECRET);
       invalidSignToken = await sign(user, faker.random.alphaNumeric(5));

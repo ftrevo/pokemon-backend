@@ -1,14 +1,12 @@
-const UserSchema = require('../models/user');
-const baseMethods = require('./base');
+const BaseRepo = require('./base-repository');
+const userModel = require('../models/user');
 
-module.exports = class UserRepo {
+module.exports = class UserRepo extends BaseRepo {
   /**
-   * @param {import('../models/user')} schema schema do usuário
-   * @param {import('./base')} base métodos base
+   * @param {import('../models/user')} model model do usuário
    */
-  constructor(schema = UserSchema, base = baseMethods) {
-    this.schema = schema;
-    this.base = base;
+  constructor(model = userModel) {
+    super(model);
   }
 
   async create(data) {
@@ -17,16 +15,8 @@ module.exports = class UserRepo {
       deviceId,
       updatedAt,
       ...user
-    } = await this.base.create(data, this.schema);
+    } = await super.create(data, this.schema);
 
     return user;
-  }
-
-  exists(data) {
-    return this.base.exists(data, this.schema);
-  }
-
-  findOne(data, projection) {
-    return this.base.findOne(data, projection, this.schema);
   }
 };

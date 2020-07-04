@@ -12,7 +12,7 @@ module.exports = class GameExists extends BaseExists {
   }
 
   async create(maker) {
-    await this.exists(
+    await super.exists(
       { maker, winner: { $exists: false } },
       true,
       getUnprocessable('O usuário já tem um jogo não finalizado'),
@@ -21,7 +21,7 @@ module.exports = class GameExists extends BaseExists {
   }
 
   async join(data) {
-    await this.exists(
+    await super.exists(
       {
         token: data.token,
         winner: { $exists: false },

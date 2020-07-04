@@ -3,28 +3,21 @@ const faker = require('faker');
 const Get = require('../../../../src/business-rules/user/get');
 const { Unauthorized } = require('../../../../src/domains/errors/exceptions');
 
-const getMockedJson = (
-  name = faker.name.findName(),
-  email = faker.internet.email(),
-  password = faker.internet.password(),
-) => ({
-  name,
-  email,
-  password,
-});
-
-const getMockedUser = (
-  user,
-  comparePwdResult = true,
-) => ({
-  toJSON: () => user,
-  comparePwd: () => comparePwdResult,
-});
-
-const getMockedRepo = (findOneResult) => ({ findOne: () => findOneResult });
-
 const runTests = () => {
   describe('Get', () => {
+    const getMockedJson = (
+      name = faker.name.findName(),
+      email = faker.internet.email(),
+      password = faker.internet.password(),
+    ) => ({ name, email, password });
+
+    const getMockedUser = (user, comparePwdResult = true) => ({
+      toJSON: () => user,
+      comparePwd: () => comparePwdResult,
+    });
+
+    const getMockedRepo = (findOneResult) => ({ findOne: () => findOneResult });
+
     it('success', async () => {
       const mockedJsonUser = getMockedJson();
       const mockedRepo = getMockedRepo(getMockedUser(mockedJsonUser));

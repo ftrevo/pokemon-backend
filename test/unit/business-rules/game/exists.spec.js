@@ -4,16 +4,16 @@ const Exists = require('../../../../src/business-rules/game/exists');
 const { Unprocessable } = require('../../../../src/domains/errors/exceptions');
 const { getToken } = require('../../../../src/helpers/utils');
 
-const getMockedRepo = (stash, expectedResult) => ({
-  exists: (query) => {
-    stash.push(query);
-    return expectedResult;
-  },
-});
-
 const runTests = () => {
   describe('Exists', () => {
-    describe('create', () => {
+    const getMockedRepo = (stash, expectedResult) => ({
+      exists: (query) => {
+        stash.push(query);
+        return expectedResult;
+      },
+    });
+
+    describe('Create', () => {
       it('game creator does not have previous unfinished game', async () => {
         const stash = [];
         const exists = new Exists(getMockedRepo(stash, false));
@@ -43,7 +43,7 @@ const runTests = () => {
       });
     });
 
-    describe('join', () => {
+    describe('Join', () => {
       it('game found and available to join', async () => {
         const stash = [];
         const exists = new Exists(getMockedRepo(stash, true));
