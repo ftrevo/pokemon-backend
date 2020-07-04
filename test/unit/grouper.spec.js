@@ -3,6 +3,7 @@ const domains = require('./domains/grouper.spec');
 const helpers = require('./helpers/grouper.spec');
 const middlewares = require('./middlewares/grouper.spec');
 const models = require('./models/grouper.spec');
+const repository = require('./repository/grouper.spec');
 const validations = require('./validations/grouper.spec');
 
 describe('# Unit', () => {
@@ -11,5 +12,6 @@ describe('# Unit', () => {
   helpers();
   middlewares();
   models();
+  repository();
   validations();
 });
