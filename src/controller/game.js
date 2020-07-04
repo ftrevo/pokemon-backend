@@ -1,14 +1,14 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 const BaseController = require('./base-controller');
 const gameRules = require('../business-rules/game');
-const gameRepo = require('../repository/game');
+const GameRepo = require('../repository/game');
 
 module.exports = class GameController extends BaseController {
   /**
    * @param {import('../repository/game')} repo repository do jogo
    * @param {import('../business-rules/game')} rules rules do jogo
    */
-  constructor(repo = gameRepo, rules = gameRules) {
+  constructor(repo = new GameRepo(), rules = gameRules) {
     super();
     this.repo = repo;
     this.rules = rules;

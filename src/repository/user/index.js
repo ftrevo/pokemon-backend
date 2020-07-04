@@ -1,30 +1,33 @@
 const UserSchema = require('../../models/user');
 
-const createUser = require('./create');
-const existUser = require('../check-exists');
-const findOneUser = require('../find-one');
+const createBase = require('../create');
+const existsBase = require('../check-exists');
+const findOneBase = require('../find-one');
 
-/**
- * @param {Object} data Dados do usuario.
- * @returns {Object} Created user sanitized.
- */
-const create = (data) => createUser(data, UserSchema);
+module.exports = class UserRepo {
+  /**
+   * @param {import('../../models/user')} schema schema do usuário
+   */
+  constructor(schema = UserSchema) {
+    this.schema = schema;
+  }
 
-/**
- * @param {Object} data Dados da query de existência.
- * @returns {Boolean}
- */
-const exists = (data) => existUser(data, UserSchema);
+  async create(data) {
+    const {
+      password,
+      deviceId,
+      updatedAt,
+      ...user
+    } = await createBase(data, this.schema);
 
-/**
- * @param {Object} data Dados a serem comparados.
- * @param {Object} projectionFields Dados a serem retornados.
- * @returns {Object} Usuário encontrado.
- */
-const findOne = (data, projection) => findOneUser(data, projection, UserSchema);
+    return user;
+  }
 
-module.exports = {
-  create,
-  exists,
-  findOne,
+  exists(data) {
+    return existsBase(data, this.schema);
+  }
+
+  findOne(data, projection) {
+    return findOneBase(data, projection, this.schema);
+  }
 };

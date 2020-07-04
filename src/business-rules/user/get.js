@@ -1,4 +1,4 @@
-const userRepo = require('../../repository/user');
+const UserRepo = require('../../repository/user');
 
 const { getUnauthorized } = require('../../domains/errors/exceptions');
 
@@ -6,7 +6,7 @@ module.exports = class Get {
   /**
    * @param {import('../../repository/user')} repo repository do usuário
    */
-  constructor(repo = userRepo) {
+  constructor(repo = new UserRepo()) {
     this.repo = repo;
   }
 

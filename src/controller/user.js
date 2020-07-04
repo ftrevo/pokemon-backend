@@ -1,5 +1,5 @@
 const userRules = require('../business-rules/user');
-const userRepo = require('../repository/user');
+const UserRepo = require('../repository/user');
 const BaseController = require('./base-controller');
 
 module.exports = class UserController extends BaseController {
@@ -7,7 +7,7 @@ module.exports = class UserController extends BaseController {
    * @param {import('../repository/user')} repo repository do usuário
    * @param {import('../business-rules/user')} rules rules do usuário
    */
-  constructor(repo = userRepo, rules = userRules) {
+  constructor(repo = new UserRepo(), rules = userRules) {
     super();
     this.repo = repo;
     this.rules = rules;

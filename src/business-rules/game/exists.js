@@ -1,5 +1,5 @@
 const BaseExists = require('../exists');
-const gameRepo = require('../../repository/game');
+const GameRepo = require('../../repository/game');
 
 const { getUnprocessable } = require('../../domains/errors/exceptions');
 
@@ -7,7 +7,7 @@ module.exports = class GameExists extends BaseExists {
   /**
    * @param {import('../../repository/game')} repo repository do jogo
    */
-  constructor(repo = gameRepo) {
+  constructor(repo = new GameRepo()) {
     super(repo);
   }
 
