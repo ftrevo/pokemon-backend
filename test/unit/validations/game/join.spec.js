@@ -3,16 +3,16 @@ const { Types: { ObjectId } } = require('mongoose');
 const expect = require('expect');
 const faker = require('faker');
 
-const { validations: { '/game/{token}': join } } = require('../../../../src/validations');
+const { validations: { '/game': game } } = require('../../../../src/validations');
 const { options } = require('../../../../src/helpers/validator');
 const { getToken } = require('../../../../src/helpers/utils');
 
 const runTests = () => {
   describe('Join', () => {
     it('method type and output', async () => {
-      expect(join).toHaveProperty('patch');
-      expect(join).toHaveProperty('patch.out');
-      expect(join).toHaveProperty('patch.params');
+      expect(game).toHaveProperty('patch');
+      expect(game).toHaveProperty('patch.out');
+      expect(game).toHaveProperty('patch.body');
     });
 
     describe('params', () => {
@@ -22,7 +22,7 @@ const runTests = () => {
           additional: 'field',
         };
 
-        const { value, error } = await join.patch.params.validate(
+        const { value, error } = await game.patch.body.validate(
           baseInput,
           options,
         );
@@ -35,7 +35,7 @@ const runTests = () => {
 
       describe('error', () => {
         it('required fields', async () => {
-          const { error } = await join.patch.params.validate({}, options);
+          const { error } = await game.patch.body.validate({}, options);
 
           expect(error).toHaveProperty('message', '"token" é obrigatório');
           expect(error).toHaveProperty(
@@ -57,7 +57,7 @@ const runTests = () => {
         });
 
         it('empty fields', async () => {
-          const { error } = await join.patch.params.validate({ token: '' }, options);
+          const { error } = await game.patch.body.validate({ token: '' }, options);
 
           expect(error).toHaveProperty('message', '"token" não pode estar vazio');
           expect(error).toHaveProperty(
@@ -80,7 +80,7 @@ const runTests = () => {
         });
 
         it('invalid type', async () => {
-          const { error } = await join.patch.params.validate({ token: true }, options);
+          const { error } = await game.patch.body.validate({ token: true }, options);
 
           expect(error).toHaveProperty('message', '"token" deve ser uma string');
           expect(error).toHaveProperty('details', [
@@ -123,7 +123,7 @@ const runTests = () => {
           createdAt: new Date(),
         };
 
-        const { value, error } = await join.patch.out.validate(
+        const { value, error } = await game.patch.out.validate(
           { additional: 'field', ...baseInput },
           options,
         );
@@ -136,7 +136,7 @@ const runTests = () => {
 
       describe('error', () => {
         it('required fields', async () => {
-          const { error } = await join.patch.out.validate(
+          const { error } = await game.patch.out.validate(
             {},
             options,
           );
@@ -166,7 +166,7 @@ const runTests = () => {
       });
 
       it('empty fields', async () => {
-        const { error } = await join.patch.out.validate(
+        const { error } = await game.patch.out.validate(
           {
             _id: '', maker: { _id: '', name: '' }, players: [{ _id: '', name: '' }], token: '', createdAt: new Date(),
           },
@@ -201,7 +201,7 @@ const runTests = () => {
     });
 
     it('invalid type', async () => {
-      const { error } = await join.patch.out.validate(
+      const { error } = await game.patch.out.validate(
         {
           _id: true, maker: { _id: 1, name: [] }, players: [{ _id: {}, name: false }], token: [], createdAt: '',
         },

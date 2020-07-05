@@ -24,7 +24,7 @@ module.exports = class GameController extends BaseController {
 
   async join(request, response, next) {
     return this.start(request, response)
-      .then(({ params: { token } }) => this.rules.exists.join(
+      .then(({ body: { token } }) => this.rules.exists.join(
         { token, player: response.locals.user._id },
       ))
       .then((data) => this.repo.join(data))

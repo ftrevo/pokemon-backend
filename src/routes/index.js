@@ -59,7 +59,7 @@ const routes = function (app) {
   app.route('/user/sign-in').post(logIn);
 
   app.route('/game').post(authRule, createGame);
-  app.route('/game/:token').patch(authRule, join);
+  app.route('/game').patch(authRule, join);
 
   app.route('/').get(serverStatus);
 };

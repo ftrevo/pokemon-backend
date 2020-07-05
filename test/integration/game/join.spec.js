@@ -65,9 +65,9 @@ const runTests = () => {
     describe('Success', () => {
       it('joining game', async () => {
         const { body } = await supertest(app)
-          .patch(`/game/${game.data.token}`)
+          .patch('/game')
           .set({ authorization: joiner.auth })
-          .send()
+          .send({ token: game.data.token })
           .expect(200);
 
         validateDefaultResponse(body);
@@ -84,9 +84,9 @@ const runTests = () => {
 
       it('rejoining game', async () => {
         const { body } = await supertest(app)
-          .patch(`/game/${game.data.token}`)
+          .patch('/game')
           .set({ authorization: joiner.auth })
-          .send()
+          .send({ token: game.data.token })
           .expect(200);
 
         validateDefaultResponse(body);
@@ -103,9 +103,9 @@ const runTests = () => {
 
       it('owner joining game', async () => {
         const { body } = await supertest(app)
-          .patch(`/game/${game.data.token}`)
+          .patch('/game')
           .set({ authorization: game.maker.auth })
-          .send()
+          .send({ token: game.data.token })
           .expect(200);
 
         validateDefaultResponse(body);
@@ -122,10 +122,49 @@ const runTests = () => {
     });
 
     describe('error', () => {
+      it('no body', async () => {
+        const { body } = await supertest(app)
+          .patch('/game')
+          .set({ authorization: joiner.auth })
+          .send({})
+          .expect(400);
+
+        validateDefaultResponse(body);
+        validateError(body);
+
+        expect(body).toHaveProperty('message', ['"token" é obrigatório']);
+      });
+
+      it('no body', async () => {
+        const { body } = await supertest(app)
+          .patch('/game')
+          .set({ authorization: joiner.auth })
+          .send({})
+          .expect(400);
+
+        validateDefaultResponse(body);
+        validateError(body);
+
+        expect(body).toHaveProperty('message', ['"token" é obrigatório']);
+      });
+
+      it('invalid type', async () => {
+        const { body } = await supertest(app)
+          .patch('/game')
+          .set({ authorization: joiner.auth })
+          .send({ token: {} })
+          .expect(400);
+
+        validateDefaultResponse(body);
+        validateError(body);
+
+        expect(body).toHaveProperty('message', ['"token" deve ser uma string']);
+      });
+
       it('no header', async () => {
         const { body } = await supertest(app)
-          .patch(`/game/${game.data.token}`)
-          .send()
+          .patch('/game')
+          .send({ token: game.data.token })
           .expect(401);
 
         validateDefaultResponse(body);
@@ -138,9 +177,9 @@ const runTests = () => {
         const nonExistingGameToken = new Game().token;
 
         const { body } = await supertest(app)
-          .patch(`/game/${nonExistingGameToken}`)
+          .patch('/game')
           .set({ authorization: joiner.auth })
-          .send()
+          .send({ token: nonExistingGameToken })
           .expect(422);
 
         validateDefaultResponse(body);
@@ -151,9 +190,9 @@ const runTests = () => {
 
       it('already finished game', async () => {
         const { body } = await supertest(app)
-          .patch(`/game/${finishedGameToken}`)
+          .patch('/game')
           .set({ authorization: joiner.auth })
-          .send()
+          .send({ token: finishedGameToken })
           .expect(422);
 
         validateDefaultResponse(body);
@@ -164,9 +203,9 @@ const runTests = () => {
 
       it('max players', async () => {
         const { body } = await supertest(app)
-          .patch(`/game/${maxPlayersGameToken}`)
+          .patch('/game')
           .set({ authorization: joiner.auth })
-          .send()
+          .send({ token: maxPlayersGameToken })
           .expect(422);
 
         validateDefaultResponse(body);

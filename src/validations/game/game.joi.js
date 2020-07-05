@@ -21,7 +21,7 @@ const joinOut = Joi.object().required().keys({
 });
 
 const joinParams = Joi.object().required().keys({
-  token: keys.token.required().meta({ className: 'game-patch-params-token' }),
+  token: keys.token.required(),
 }).meta({
   className: 'game-patch-params',
 });

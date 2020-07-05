@@ -32,10 +32,8 @@ const validations = {
     post: {
       out: createOut,
     },
-  },
-  '/game/{token}': {
     patch: {
-      params: joinParams,
+      body: joinParams,
       out: joinOut,
     },
   },

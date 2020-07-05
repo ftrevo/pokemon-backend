@@ -17,7 +17,6 @@ const getDefaultResData = ({ inboundTime, requestId }) => ({
 const objectIdBaseString = '[0-9a-fA-F]{24}';
 const tokenBaseString = '[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}';
 
-// const routeReplacer = /\/[0-9a-fA-F]{24}/;
 const objectIdBaseRegex = new RegExp(objectIdBaseString); // /[0-9a-fA-F]{24}/;
 const tokenBaseRegex = new RegExp(tokenBaseString); // /[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}/;
 

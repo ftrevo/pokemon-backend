@@ -36,18 +36,18 @@ const create = (req, res, next) => gameCon.create(req, res, next);
 
 /**
  *@swagger
- *  /game/{token}:
+ *  /game:
  *    patch:
  *      summary: Join game route
  *      tags: [Game]
  *      security:
  *        - authenticationUser: []
- *      parameters:
- *        - in: path
- *          name: token
- *          description: Token do jogo
- *          schema:
- *            $ref: '#/joiComponents/game-patch-params-token'
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              $ref: '#/joiComponents/game-patch-params'
  *      responses:
  *        200:
  *          description: Success
