@@ -20,14 +20,14 @@ const joinOut = Joi.object().required().keys({
   className: 'game-patch-out',
 });
 
-const joinParams = Joi.object().required().keys({
+const joinBody = Joi.object().required().keys({
   token: keys.token.required(),
 }).meta({
-  className: 'game-patch-params',
+  className: 'game-patch-body',
 });
 
 module.exports = {
   createOut,
   joinOut,
-  joinParams,
+  joinBody,
 };

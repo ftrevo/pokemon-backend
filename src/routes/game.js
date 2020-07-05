@@ -47,7 +47,7 @@ const create = (req, res, next) => gameCon.create(req, res, next);
  *        content:
  *          application/json:
  *            schema:
- *              $ref: '#/joiComponents/game-patch-params'
+ *              $ref: '#/joiComponents/game-patch-body'
  *      responses:
  *        200:
  *          description: Success
@@ -60,6 +60,9 @@ const create = (req, res, next) => gameCon.create(req, res, next);
  *                    properties:
  *                      data:
  *                        $ref: '#/joiComponents/game-patch-out'
+ *        401:
+ *          description: Unauthorized
+ *          $ref: '#/definitions/defaultResponse'
  *        422:
  *          description: Business exception
  *          $ref: '#/definitions/defaultResponse'

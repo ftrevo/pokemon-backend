@@ -5,7 +5,7 @@ const {
   signUpBody, signUpOut, signInBody, signInOut,
 } = require('./user/user.joi');
 const {
-  createOut, joinOut, joinParams,
+  createOut, joinOut, joinBody,
 } = require('./game/game.joi');
 
 const { statusOut } = require('./utils/status.joi');
@@ -33,7 +33,7 @@ const validations = {
       out: createOut,
     },
     patch: {
-      body: joinParams,
+      body: joinBody,
       out: joinOut,
     },
   },
