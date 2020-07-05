@@ -135,19 +135,6 @@ const runTests = () => {
         expect(body).toHaveProperty('message', ['"token" é obrigatório']);
       });
 
-      it('no body', async () => {
-        const { body } = await supertest(app)
-          .patch('/game')
-          .set({ authorization: joiner.auth })
-          .send({})
-          .expect(400);
-
-        validateDefaultResponse(body);
-        validateError(body);
-
-        expect(body).toHaveProperty('message', ['"token" é obrigatório']);
-      });
-
       it('invalid type', async () => {
         const { body } = await supertest(app)
           .patch('/game')
