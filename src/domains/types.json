@@ -9,19 +9,19 @@
       "imunity": [
         "Ghost"
       ],
-      "doubleDamage": [
+      "extra": [
         "Fighting"
       ]
     }
   },
   "Fire": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Grass",
         "Ice",
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fire",
         "Water",
         "Rock",
@@ -29,12 +29,12 @@
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Water",
         "Ground",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fire",
         "Grass",
         "Bug"
@@ -43,23 +43,23 @@
   },
   "Water": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Fire",
         "Ground",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Water",
         "Grass",
         "Dragon"
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Electric",
         "Grass"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fire",
         "Water",
         "Ice"
@@ -71,21 +71,21 @@
       "imunity": [
         "Ground"
       ],
-      "doubleDamage": [
+      "extra": [
         "Water",
         "Flying"
       ],
-      "halfDamage": [
+      "reduced": [
         "Electric",
         "Grass",
         "Dragon"
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Ground"
       ],
-      "halfDamage": [
+      "reduced": [
         "Electric",
         "Flying"
       ]
@@ -93,12 +93,12 @@
   },
   "Grass": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Water",
         "Ground",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fire",
         "Grass",
         "Poison",
@@ -108,14 +108,14 @@
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Fire",
         "Ice",
         "Poison",
         "Flying",
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Water",
         "Electric",
         "Grass",
@@ -125,24 +125,24 @@
   },
   "Ice": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Grass",
         "Ground",
         "Flying",
         "Dragon"
       ],
-      "halfDamage": [
+      "reduced": [
         "Water",
         "Ice"
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Fire",
         "Fighting",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Ice"
       ]
     }
@@ -152,12 +152,12 @@
       "imunity": [
         "Ghost"
       ],
-      "doubleDamage": [
+      "extra": [
         "Normal",
         "Ice",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Poison",
         "Flying",
         "Psychic",
@@ -165,11 +165,11 @@
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Flying",
         "Psychic"
       ],
-      "halfDamage": [
+      "reduced": [
         "Bug",
         "Rock"
       ]
@@ -177,11 +177,11 @@
   },
   "Poison": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Grass",
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Poison",
         "Ground",
         "Rock",
@@ -189,12 +189,12 @@
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Ground",
         "Psychic",
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Grass",
         "Fighting",
         "Poison"
@@ -206,13 +206,13 @@
       "imunity": [
         "Flying"
       ],
-      "doubleDamage": [
+      "extra": [
         "Fire",
         "Electric",
         "Poison",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Grass",
         "Bug"
       ]
@@ -221,12 +221,12 @@
       "imunity": [
         "Electric"
       ],
-      "doubleDamage": [
+      "extra": [
         "Water",
         "Grass",
         "Ice"
       ],
-      "halfDamage": [
+      "reduced": [
         "Poison",
         "Rock"
       ]
@@ -234,12 +234,12 @@
   },
   "Flying": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Grass",
         "Fighting",
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Electric",
         "Rock"
       ]
@@ -248,12 +248,12 @@
       "imunity": [
         "Ground"
       ],
-      "doubleDamage": [
+      "extra": [
         "Electric",
         "Ice",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Grass",
         "Fighting",
         "Bug"
@@ -262,11 +262,11 @@
   },
   "Psychic": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Fighting",
         "Poison"
       ],
-      "halfDamage": [
+      "reduced": [
         "Psychic"
       ]
     },
@@ -274,10 +274,10 @@
       "imunity": [
         "Ghost"
       ],
-      "doubleDamage": [
+      "extra": [
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fighting",
         "Psychic"
       ]
@@ -285,12 +285,12 @@
   },
   "Bug": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Grass",
         "Poison",
         "Psychic"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fire",
         "Fighting",
         "Flying",
@@ -298,13 +298,13 @@
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Fire",
         "Poison",
         "Flying",
         "Rock"
       ],
-      "halfDamage": [
+      "reduced": [
         "Grass",
         "Fighting",
         "Ground"
@@ -313,25 +313,25 @@
   },
   "Rock": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Fire",
         "Ice",
         "Flying",
         "Bug"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fighting",
         "Ground"
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Water",
         "Grass",
         "Fighting",
         "Ground"
       ],
-      "halfDamage": [
+      "reduced": [
         "Normal",
         "Fire",
         "Poison",
@@ -345,7 +345,7 @@
         "Normal",
         "Psychic"
       ],
-      "doubleDamage": [
+      "extra": [
         "Ghost"
       ]
     },
@@ -354,10 +354,10 @@
         "Normal",
         "Fighting"
       ],
-      "doubleDamage": [
+      "extra": [
         "Ghost"
       ],
-      "halfDamage": [
+      "reduced": [
         "Poison",
         "Bug"
       ]
@@ -365,16 +365,16 @@
   },
   "Dragon": {
     "attack": {
-      "doubleDamage": [
+      "extra": [
         "Dragon"
       ]
     },
     "defense": {
-      "doubleDamage": [
+      "extra": [
         "Ice",
         "Dragon"
       ],
-      "halfDamage": [
+      "reduced": [
         "Fire",
         "Water",
         "Electric",
