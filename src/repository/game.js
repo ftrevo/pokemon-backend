@@ -9,11 +9,11 @@ module.exports = class GameRepo extends BaseRepo {
     super(model);
   }
 
-  async join({ token, player }) {
+  async join({ token, user }) {
     return super.findOneAndUpdate(
       { token },
-      { $addToSet: { players: [player] } },
-      [{ path: 'maker', select: 'name' }, { path: 'players', select: 'name' }],
+      { $addToSet: { users: [user] } },
+      [{ path: 'maker', select: 'name' }, { path: 'users', select: 'name' }],
     );
   }
 };

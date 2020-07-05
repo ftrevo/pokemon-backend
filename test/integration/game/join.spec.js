@@ -15,7 +15,7 @@ const runTests = () => {
     const joiner = {};
     const game = {};
     let finishedGameToken;
-    let maxPlayersGameToken;
+    let maxUsersGameToken;
 
     // TODO usar Promise.all para melhorar performance
     before(async () => {
@@ -27,7 +27,7 @@ const runTests = () => {
 
       game.maker = { data: { _id: makerId, name: makerName } };
       game.data = (
-        await new Game({ maker: makerId, players: [makerId] }).save()
+        await new Game({ maker: makerId, users: [makerId] }).save()
       ).toJSON();
       game.maker.auth = `${process.env.TOKEN_TYPE} ${await sign(game.maker.data, process.env.SECRET)}`;
 
@@ -41,14 +41,14 @@ const runTests = () => {
       joiner.auth = `${process.env.TOKEN_TYPE} ${await sign(joiner.data, process.env.SECRET)}`;
 
       const finishedGame = (
-        await new Game({ maker: makerId, players: [makerId], winner: makerId }).save()
+        await new Game({ maker: makerId, users: [makerId], winner: makerId }).save()
       ).toJSON();
       finishedGameToken = finishedGame.token;
 
-      const maxPlayersGame = (
+      const maxUsersGame = (
         await new Game({
           maker: makerId,
-          players: [
+          users: [
             makerId,
             new ObjectId().toString(),
             new ObjectId().toString(),
@@ -59,7 +59,7 @@ const runTests = () => {
           winner: makerId,
         }).save()
       ).toJSON();
-      maxPlayersGameToken = maxPlayersGame.token;
+      maxUsersGameToken = maxUsersGame.token;
     });
 
     describe('Success', () => {
@@ -73,8 +73,8 @@ const runTests = () => {
         validateDefaultResponse(body);
 
         expect(body).toHaveProperty('data');
-        expect(body).toHaveProperty('data.players.length', 2);
-        expect(body).toHaveProperty('data.players', [game.maker.data, joiner.data]);
+        expect(body).toHaveProperty('data.users.length', 2);
+        expect(body).toHaveProperty('data.users', [game.maker.data, joiner.data]);
         expect(body).toHaveProperty('data.maker', game.maker.data);
         expect(body).toHaveProperty('data.token', game.data.token);
         expect(body).toHaveProperty('data._id');
@@ -92,8 +92,8 @@ const runTests = () => {
         validateDefaultResponse(body);
 
         expect(body).toHaveProperty('data');
-        expect(body).toHaveProperty('data.players.length', 2);
-        expect(body).toHaveProperty('data.players', [game.maker.data, joiner.data]);
+        expect(body).toHaveProperty('data.users.length', 2);
+        expect(body).toHaveProperty('data.users', [game.maker.data, joiner.data]);
         expect(body).toHaveProperty('data.maker', game.maker.data);
         expect(body).toHaveProperty('data.token', game.data.token);
         expect(body).toHaveProperty('data._id');
@@ -111,8 +111,8 @@ const runTests = () => {
         validateDefaultResponse(body);
 
         expect(body).toHaveProperty('data');
-        expect(body).toHaveProperty('data.players.length', 2);
-        expect(body).toHaveProperty('data.players', [game.maker.data, joiner.data]);
+        expect(body).toHaveProperty('data.users.length', 2);
+        expect(body).toHaveProperty('data.users', [game.maker.data, joiner.data]);
         expect(body).toHaveProperty('data.maker', game.maker.data);
         expect(body).toHaveProperty('data.token', game.data.token);
         expect(body).toHaveProperty('data._id');
@@ -188,11 +188,11 @@ const runTests = () => {
         expect(body).toHaveProperty('message', ['Jogo não encontrado, já finalizado ou com o máximo de jogadores permitido']);
       });
 
-      it('max players', async () => {
+      it('max users', async () => {
         const { body } = await supertest(app)
           .patch('/game')
           .set({ authorization: joiner.auth })
-          .send({ token: maxPlayersGameToken })
+          .send({ token: maxUsersGameToken })
           .expect(422);
 
         validateDefaultResponse(body);

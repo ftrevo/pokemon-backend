@@ -30,15 +30,15 @@ const runTests = () => {
       const gameRepo = new GameRepo(getModelMock(stash, toBeReturned));
 
       const token = getToken();
-      const player = new ObjectId().toString();
+      const user = new ObjectId().toString();
 
-      const response = await gameRepo.join({ token, player });
+      const response = await gameRepo.join({ token, user });
 
       expect(response).toEqual(toBeReturned);
       expect(stash).toEqual([
         { token },
-        { $addToSet: { players: [player] } },
-        [{ path: 'maker', select: 'name' }, { path: 'players', select: 'name' }],
+        { $addToSet: { users: [user] } },
+        [{ path: 'maker', select: 'name' }, { path: 'users', select: 'name' }],
       ]);
     });
   });

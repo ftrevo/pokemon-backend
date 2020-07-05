@@ -109,7 +109,7 @@ const runTests = () => {
             _id: new ObjectId().toString(),
             name: faker.name.findName(),
           },
-          players: [
+          users: [
             {
               _id: new ObjectId().toString(),
               name: faker.name.findName(),
@@ -141,7 +141,7 @@ const runTests = () => {
             options,
           );
 
-          expect(error).toHaveProperty('message', '"id" é obrigatório. "maker" é obrigatório. "players" é obrigatório. "token" é obrigatório. "criado em" é obrigatório');
+          expect(error).toHaveProperty('message', '"id" é obrigatório. "maker" é obrigatório. "users" é obrigatório. "token" é obrigatório. "criado em" é obrigatório');
           expect(error).toHaveProperty(
             'details',
             [
@@ -152,7 +152,7 @@ const runTests = () => {
                 message: '"maker" é obrigatório', path: ['maker'], type: 'any.required', context: { label: 'maker', key: 'maker' },
               },
               {
-                message: '"players" é obrigatório', path: ['players'], type: 'any.required', context: { label: 'players', key: 'players' },
+                message: '"users" é obrigatório', path: ['users'], type: 'any.required', context: { label: 'users', key: 'users' },
               },
               {
                 message: '"token" é obrigatório', path: ['token'], type: 'any.required', context: { label: 'token', key: 'token' },
@@ -168,7 +168,7 @@ const runTests = () => {
       it('empty fields', async () => {
         const { error } = await game.patch.out.validate(
           {
-            _id: '', maker: { _id: '', name: '' }, players: [{ _id: '', name: '' }], token: '', createdAt: new Date(),
+            _id: '', maker: { _id: '', name: '' }, users: [{ _id: '', name: '' }], token: '', createdAt: new Date(),
           },
           options,
         );
@@ -187,10 +187,10 @@ const runTests = () => {
               message: '"nome" não pode estar vazio', path: ['maker', 'name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
             },
             {
-              message: '"id do jogador" não pode estar vazio', path: ['players', 0, '_id'], type: 'string.empty', context: { label: 'id do jogador', value: '', key: '_id' },
+              message: '"id do jogador" não pode estar vazio', path: ['users', 0, '_id'], type: 'string.empty', context: { label: 'id do jogador', value: '', key: '_id' },
             },
             {
-              message: '"nome" não pode estar vazio', path: ['players', 0, 'name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
+              message: '"nome" não pode estar vazio', path: ['users', 0, 'name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
             },
             {
               message: '"token" não pode estar vazio', path: ['token'], type: 'string.empty', context: { label: 'token', value: '', key: 'token' },
@@ -203,7 +203,7 @@ const runTests = () => {
     it('invalid type', async () => {
       const { error } = await game.patch.out.validate(
         {
-          _id: true, maker: { _id: 1, name: [] }, players: [{ _id: {}, name: false }], token: [], createdAt: '',
+          _id: true, maker: { _id: 1, name: [] }, users: [{ _id: {}, name: false }], token: [], createdAt: '',
         },
         options,
       );
@@ -222,10 +222,10 @@ const runTests = () => {
             message: '"nome" deve ser uma string', path: ['maker', 'name'], type: 'string.base', context: { label: 'nome', value: [], key: 'name' },
           },
           {
-            message: '"id do jogador" deve ser uma string', path: ['players', 0, '_id'], type: 'string.base', context: { label: 'id do jogador', value: {}, key: '_id' },
+            message: '"id do jogador" deve ser uma string', path: ['users', 0, '_id'], type: 'string.base', context: { label: 'id do jogador', value: {}, key: '_id' },
           },
           {
-            message: '"nome" deve ser uma string', path: ['players', 0, 'name'], type: 'string.base', context: { label: 'nome', value: false, key: 'name' },
+            message: '"nome" deve ser uma string', path: ['users', 0, 'name'], type: 'string.base', context: { label: 'nome', value: false, key: 'name' },
           },
           {
             message: '"token" deve ser uma string', path: ['token'], type: 'string.base', context: { label: 'token', value: [], key: 'token' },

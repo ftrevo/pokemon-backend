@@ -3,7 +3,7 @@ const { Schema, model, Types: { ObjectId } } = require('mongoose');
 const { getToken } = require('../helpers/utils');
 
 const schemaObj = {
-  players: [
+  users: [
     {
       type: ObjectId,
       ref: 'User',
@@ -29,8 +29,8 @@ const GameSchema = new Schema(
 
 const doTransformation = (isPopulated, field) => {
   if (isPopulated) {
-    const { password, ...playerToBeSet } = field;
-    return playerToBeSet;
+    const { password, ...userToBeSet } = field;
+    return userToBeSet;
   }
   return field.toString();
 };
@@ -50,11 +50,11 @@ GameSchema.options.toJSON.transform = (document, toBeTransformed) => {
     toBeReturned.maker = transformUser(document, toBeReturned, 'maker');
   }
 
-  if (toBeTransformed.players && toBeTransformed.players.length > 0) {
-    const populated = document.populated('players');
+  if (toBeTransformed.users && toBeTransformed.users.length > 0) {
+    const populated = document.populated('users');
 
-    toBeReturned.players = toBeTransformed.players.map(
-      (player) => (doTransformation(populated, player)),
+    toBeReturned.users = toBeTransformed.users.map(
+      (user) => (doTransformation(populated, user)),
     );
   }
 

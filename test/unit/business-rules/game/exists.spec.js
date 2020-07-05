@@ -53,7 +53,7 @@ const runTests = () => {
         const existsResult = await exists.join(inputData);
 
         expect(existsResult).toEqual(inputData);
-        expect(stash).toHaveProperty('0', { token: inputData.token, winner: { $exists: false }, 'players.5': { $exists: false } });
+        expect(stash).toHaveProperty('0', { token: inputData.token, winner: { $exists: false }, 'users.5': { $exists: false } });
       });
 
       it('game not found, already finished or with max capacity', async () => {
@@ -66,7 +66,7 @@ const runTests = () => {
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
           expect(err).toHaveProperty('message', 'Jogo não encontrado, já finalizado ou com o máximo de jogadores permitido');
-          expect(stash).toHaveProperty('0', { token: inputData.token, winner: { $exists: false }, 'players.5': { $exists: false } });
+          expect(stash).toHaveProperty('0', { token: inputData.token, winner: { $exists: false }, 'users.5': { $exists: false } });
         }
       });
     });

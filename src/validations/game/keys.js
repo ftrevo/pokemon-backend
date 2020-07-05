@@ -5,8 +5,8 @@ const { idRegex, tokenRegex } = require('../../helpers/utils');
 
 const keys = {
   id: Joi.string().trim().regex(idRegex).label('id'),
-  playerIds: Joi.array().items(userKeys.id.label('id do jogador')),
-  playerDetails: Joi.array().items(
+  userIds: Joi.array().items(userKeys.id.label('id do jogador')),
+  userDetails: Joi.array().items(
     Joi.object().keys({
       _id: userKeys.id.label('id do jogador').required(),
       name: userKeys.name.required(),

@@ -13,7 +13,7 @@ const createOut = Joi.object().required().keys({
 const joinOut = Joi.object().required().keys({
   _id: keys.id.required(),
   maker: keys.makerDetails.required(),
-  players: keys.playerDetails.required(),
+  users: keys.userDetails.required(),
   token: keys.token.required(),
   createdAt: keys.createdAt.required(),
 }).meta({

@@ -88,7 +88,7 @@ const runTests = () => {
         });
       });
 
-      describe('Players', () => {
+      describe('Users', () => {
         const baseUsers = [];
         const baseUserIds = [];
 
@@ -113,31 +113,31 @@ const runTests = () => {
         });
 
         it('not populated', async () => {
-          const game = new Game({ players: baseUserIds });
+          const game = new Game({ users: baseUserIds });
           await game.save();
           const gameJson = game.toJSON();
 
-          expect(gameJson).toHaveProperty('players');
-          expect(gameJson.players).toBeInstanceOf(Array);
-          gameJson.players.forEach((singlePlayer, index) => {
-            expect(singlePlayer).toMatch(baseUserIds[index]._id.toString());
+          expect(gameJson).toHaveProperty('users');
+          expect(gameJson.users).toBeInstanceOf(Array);
+          gameJson.users.forEach((singleUser, index) => {
+            expect(singleUser).toMatch(baseUserIds[index]._id.toString());
           });
         });
 
         it('populated', async () => {
-          const game = new Game({ players: baseUserIds });
+          const game = new Game({ users: baseUserIds });
           await game.save();
-          await game.populate('players').execPopulate();
+          await game.populate('users').execPopulate();
 
           const gameJson = game.toJSON();
 
-          expect(gameJson).toHaveProperty('players');
-          expect(gameJson.players).toBeInstanceOf(Array);
+          expect(gameJson).toHaveProperty('users');
+          expect(gameJson.users).toBeInstanceOf(Array);
 
-          gameJson.players.forEach((singlePlayer, index) => {
-            expect(singlePlayer).toHaveProperty('_id', baseUsers[index]._id.toString());
-            expect(singlePlayer).toHaveProperty('name', baseUsers[index].name);
-            expect(singlePlayer).not.toHaveProperty('password');
+          gameJson.users.forEach((singleUser, index) => {
+            expect(singleUser).toHaveProperty('_id', baseUsers[index]._id.toString());
+            expect(singleUser).toHaveProperty('name', baseUsers[index].name);
+            expect(singleUser).not.toHaveProperty('password');
           });
         });
       });

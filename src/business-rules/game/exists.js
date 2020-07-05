@@ -25,7 +25,7 @@ module.exports = class GameExists extends BaseExists {
       {
         token: data.token,
         winner: { $exists: false },
-        'players.5': { $exists: false },
+        'users.5': { $exists: false },
       },
       false,
       getUnprocessable('Jogo não encontrado, já finalizado ou com o máximo de jogadores permitido'),
