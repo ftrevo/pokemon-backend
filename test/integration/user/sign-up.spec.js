@@ -32,12 +32,10 @@ const runTests = () => {
       validateDate(body.data.createdAt);
     });
 
-    it('error payload', async () => {
-      const toBeSend = {};
-
+    it('no body', async () => {
       const { body } = await supertest(app)
         .post('/user/sign-up')
-        .send(toBeSend)
+        .send({})
         .expect(400);
 
       validateDefaultResponse(body);
@@ -46,6 +44,21 @@ const runTests = () => {
       expect(body).toHaveProperty(
         'message',
         ['"nome" é obrigatório', '"senha" é obrigatório', '"e-mail" é obrigatório'],
+      );
+    });
+
+    it('invalid type', async () => {
+      const { body } = await supertest(app)
+        .post('/user/sign-up')
+        .send({ name: 1, password: false, email: [] })
+        .expect(400);
+
+      validateDefaultResponse(body);
+      validateError(body);
+
+      expect(body).toHaveProperty(
+        'message',
+        ['"nome" deve ser uma string', '"senha" deve ser uma string', '"e-mail" deve ser uma string'],
       );
     });
   });
