@@ -23,6 +23,10 @@ module.exports = class SlackNotifier {
    * @param {Object} data message that will be send to Slack
    */
   async notify(data) {
+    if (process.env.ENABLE_SLACK !== 'true') {
+      return;
+    }
+
     const text = `REQUEST-ID:${data.requestId}, MESSAGE:${data.errorMessage}, ERROR-TIME:${data.errorTime}, INBOUND-TIME:${data.inboundTime}`;
 
     try {
