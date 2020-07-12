@@ -1,16 +1,101 @@
 {
-  "Normal": {
+  "Bug": {
     "attack": {
-      "imunity": [
+      "extra": [
+        "Grass",
+        "Poison",
+        "Psychic"
+      ],
+      "reduced": [
+        "Fire",
+        "Fighting",
+        "Flying",
         "Ghost"
       ]
     },
     "defense": {
+      "extra": [
+        "Fire",
+        "Poison",
+        "Flying",
+        "Rock"
+      ],
+      "reduced": [
+        "Grass",
+        "Fighting",
+        "Ground"
+      ]
+    }
+  },
+  "Dragon": {
+    "attack": {
+      "extra": [
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "extra": [
+        "Ice",
+        "Dragon"
+      ],
+      "reduced": [
+        "Fire",
+        "Water",
+        "Electric",
+        "Grass"
+      ]
+    }
+  },
+  "Electric": {
+    "attack": {
+      "imunity": [
+        "Ground"
+      ],
+      "extra": [
+        "Water",
+        "Flying"
+      ],
+      "reduced": [
+        "Electric",
+        "Grass",
+        "Dragon"
+      ]
+    },
+    "defense": {
+      "extra": [
+        "Ground"
+      ],
+      "reduced": [
+        "Electric",
+        "Flying"
+      ]
+    }
+  },
+  "Fighting": {
+    "attack": {
       "imunity": [
         "Ghost"
       ],
       "extra": [
-        "Fighting"
+        "Normal",
+        "Ice",
+        "Rock"
+      ],
+      "reduced": [
+        "Poison",
+        "Flying",
+        "Psychic",
+        "Bug"
+      ]
+    },
+    "defense": {
+      "extra": [
+        "Flying",
+        "Psychic"
+      ],
+      "reduced": [
+        "Bug",
+        "Rock"
       ]
     }
   },
@@ -41,53 +126,55 @@
       ]
     }
   },
-  "Water": {
+  "Flying": {
     "attack": {
       "extra": [
-        "Fire",
-        "Ground",
-        "Rock"
+        "Grass",
+        "Fighting",
+        "Bug"
       ],
       "reduced": [
-        "Water",
-        "Grass",
-        "Dragon"
+        "Electric",
+        "Rock"
       ]
     },
     "defense": {
-      "extra": [
-        "Electric",
-        "Grass"
-      ],
-      "reduced": [
-        "Fire",
-        "Water",
-        "Ice"
-      ]
-    }
-  },
-  "Electric": {
-    "attack": {
       "imunity": [
         "Ground"
       ],
       "extra": [
-        "Water",
-        "Flying"
+        "Electric",
+        "Ice",
+        "Rock"
       ],
       "reduced": [
-        "Electric",
         "Grass",
-        "Dragon"
+        "Fighting",
+        "Bug"
+      ]
+    }
+  },
+  "Ghost": {
+    "attack": {
+      "imunity": [
+        "Normal",
+        "Psychic"
+      ],
+      "extra": [
+        "Ghost"
       ]
     },
     "defense": {
+      "imunity": [
+        "Normal",
+        "Fighting"
+      ],
       "extra": [
-        "Ground"
+        "Ghost"
       ],
       "reduced": [
-        "Electric",
-        "Flying"
+        "Poison",
+        "Bug"
       ]
     }
   },
@@ -123,84 +210,6 @@
       ]
     }
   },
-  "Ice": {
-    "attack": {
-      "extra": [
-        "Grass",
-        "Ground",
-        "Flying",
-        "Dragon"
-      ],
-      "reduced": [
-        "Water",
-        "Ice"
-      ]
-    },
-    "defense": {
-      "extra": [
-        "Fire",
-        "Fighting",
-        "Rock"
-      ],
-      "reduced": [
-        "Ice"
-      ]
-    }
-  },
-  "Fighting": {
-    "attack": {
-      "imunity": [
-        "Ghost"
-      ],
-      "extra": [
-        "Normal",
-        "Ice",
-        "Rock"
-      ],
-      "reduced": [
-        "Poison",
-        "Flying",
-        "Psychic",
-        "Bug"
-      ]
-    },
-    "defense": {
-      "extra": [
-        "Flying",
-        "Psychic"
-      ],
-      "reduced": [
-        "Bug",
-        "Rock"
-      ]
-    }
-  },
-  "Poison": {
-    "attack": {
-      "extra": [
-        "Grass",
-        "Bug"
-      ],
-      "reduced": [
-        "Poison",
-        "Ground",
-        "Rock",
-        "Ghost"
-      ]
-    },
-    "defense": {
-      "extra": [
-        "Ground",
-        "Psychic",
-        "Bug"
-      ],
-      "reduced": [
-        "Grass",
-        "Fighting",
-        "Poison"
-      ]
-    }
-  },
   "Ground": {
     "attack": {
       "imunity": [
@@ -232,31 +241,68 @@
       ]
     }
   },
-  "Flying": {
+  "Ice": {
     "attack": {
       "extra": [
         "Grass",
-        "Fighting",
-        "Bug"
+        "Ground",
+        "Flying",
+        "Dragon"
       ],
       "reduced": [
-        "Electric",
+        "Water",
+        "Ice"
+      ]
+    },
+    "defense": {
+      "extra": [
+        "Fire",
+        "Fighting",
         "Rock"
+      ],
+      "reduced": [
+        "Ice"
+      ]
+    }
+  },
+  "Normal": {
+    "attack": {
+      "imunity": [
+        "Ghost"
       ]
     },
     "defense": {
       "imunity": [
-        "Ground"
+        "Ghost"
       ],
       "extra": [
-        "Electric",
-        "Ice",
-        "Rock"
+        "Fighting"
+      ]
+    }
+  },
+  "Poison": {
+    "attack": {
+      "extra": [
+        "Grass",
+        "Bug"
+      ],
+      "reduced": [
+        "Poison",
+        "Ground",
+        "Rock",
+        "Ghost"
+      ]
+    },
+    "defense": {
+      "extra": [
+        "Ground",
+        "Psychic",
+        "Bug"
       ],
       "reduced": [
         "Grass",
         "Fighting",
-        "Bug"
+        "Poison"
       ]
     }
   },
@@ -280,34 +326,6 @@
       "reduced": [
         "Fighting",
         "Psychic"
-      ]
-    }
-  },
-  "Bug": {
-    "attack": {
-      "extra": [
-        "Grass",
-        "Poison",
-        "Psychic"
-      ],
-      "reduced": [
-        "Fire",
-        "Fighting",
-        "Flying",
-        "Ghost"
-      ]
-    },
-    "defense": {
-      "extra": [
-        "Fire",
-        "Poison",
-        "Flying",
-        "Rock"
-      ],
-      "reduced": [
-        "Grass",
-        "Fighting",
-        "Ground"
       ]
     }
   },
@@ -339,46 +357,28 @@
       ]
     }
   },
-  "Ghost": {
+  "Water": {
     "attack": {
-      "imunity": [
-        "Normal",
-        "Psychic"
-      ],
       "extra": [
-        "Ghost"
-      ]
-    },
-    "defense": {
-      "imunity": [
-        "Normal",
-        "Fighting"
-      ],
-      "extra": [
-        "Ghost"
+        "Fire",
+        "Ground",
+        "Rock"
       ],
       "reduced": [
-        "Poison",
-        "Bug"
-      ]
-    }
-  },
-  "Dragon": {
-    "attack": {
-      "extra": [
+        "Water",
+        "Grass",
         "Dragon"
       ]
     },
     "defense": {
       "extra": [
-        "Ice",
-        "Dragon"
+        "Electric",
+        "Grass"
       ],
       "reduced": [
         "Fire",
         "Water",
-        "Electric",
-        "Grass"
+        "Ice"
       ]
     }
   }
