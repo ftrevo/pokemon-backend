@@ -32,7 +32,7 @@ const runTests = () => {
       validateDate(body.data.createdAt);
     });
 
-    it('no body', async () => {
+    it('empty body', async () => {
       const { body } = await supertest(app)
         .post('/user/sign-up')
         .send({})

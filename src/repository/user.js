@@ -15,7 +15,7 @@ module.exports = class UserRepo extends BaseRepo {
       deviceId,
       updatedAt,
       ...user
-    } = await super.create(data, this.schema);
+    } = await super.create(data);
 
     return user;
   }

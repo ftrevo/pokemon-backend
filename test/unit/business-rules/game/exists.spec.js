@@ -70,6 +70,34 @@ const runTests = () => {
         }
       });
     });
+
+    describe('ById', () => {
+      it('game found', async () => {
+        const stash = [];
+        const exists = new Exists(getMockedRepo(stash, true));
+
+        const inputData = { game: new ObjectId().toString(), something: 'else' };
+
+        const existsResult = await exists.byId(inputData);
+
+        expect(existsResult).toEqual(inputData);
+        expect(stash).toHaveProperty('0', { _id: inputData.game });
+      });
+
+      it('game not found', async () => {
+        const stash = [];
+        const exists = new Exists(getMockedRepo(stash, false));
+
+        const inputData = { game: new ObjectId().toString(), something: 'else' };
+        try {
+          await exists.byId(inputData);
+        } catch (err) {
+          expect(err).toBeInstanceOf(Unprocessable);
+          expect(err).toHaveProperty('message', 'Jogo não encontrado');
+          expect(stash).toHaveProperty('0', { _id: inputData.game });
+        }
+      });
+    });
   });
 };
 

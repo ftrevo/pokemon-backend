@@ -1,6 +1,6 @@
 /* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
 const { Schema, model, Types: { ObjectId } } = require('mongoose');
-const { getToken } = require('../helpers/utils');
+const { getToken, transformUser, doUserTransformation } = require('../helpers/utils');
 
 const schemaObj = {
   users: [
@@ -27,17 +27,6 @@ const GameSchema = new Schema(
   { versionKey: false, timestamps: true, toJSON: { transform: true } },
 );
 
-const doTransformation = (isPopulated, field) => {
-  if (isPopulated) {
-    const { password, ...userToBeSet } = field;
-    return userToBeSet;
-  }
-  return field.toString();
-};
-
-const transformUser = (document, toBeTransformed, fieldName) => (
-  doTransformation(document.populated(fieldName), toBeTransformed[fieldName]));
-
 GameSchema.options.toJSON.transform = (document, toBeTransformed) => {
   const { ...toBeReturned } = toBeTransformed;
   toBeReturned._id = toBeTransformed._id.toString();
@@ -54,12 +43,11 @@ GameSchema.options.toJSON.transform = (document, toBeTransformed) => {
     const populated = document.populated('users');
 
     toBeReturned.users = toBeTransformed.users.map(
-      (user) => (doTransformation(populated, user)),
+      (user) => (doUserTransformation(populated, user)),
     );
   }
 
   return toBeReturned;
 };
-
 
 module.exports = model('Game', GameSchema);

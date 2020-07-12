@@ -25,6 +25,14 @@ const getLoggerMock = (stash) => ({
 
 const runTests = () => {
   describe('Slack Notifications', () => {
+    before(() => {
+      process.env.ENABLE_SLACK = 'true';
+    });
+
+    after(() => {
+      process.env.ENABLE_SLACK = 'false';
+    });
+
     it('success', async () => {
       const stash = [];
       const gotMock = getGotMock(false, stash);

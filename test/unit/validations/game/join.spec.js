@@ -173,7 +173,7 @@ const runTests = () => {
           options,
         );
 
-        expect(error).toHaveProperty('message', '"id" não pode estar vazio. "id do criador" não pode estar vazio. "nome" não pode estar vazio. "id do jogador" não pode estar vazio. "token" não pode estar vazio');
+        expect(error).toHaveProperty('message', '"id" não pode estar vazio. "id do criador" não pode estar vazio. "nome" não pode estar vazio. "id do usuário" não pode estar vazio. "token" não pode estar vazio');
         expect(error).toHaveProperty(
           'details',
           [
@@ -187,7 +187,7 @@ const runTests = () => {
               message: '"nome" não pode estar vazio', path: ['maker', 'name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
             },
             {
-              message: '"id do jogador" não pode estar vazio', path: ['users', 0, '_id'], type: 'string.empty', context: { label: 'id do jogador', value: '', key: '_id' },
+              message: '"id do usuário" não pode estar vazio', path: ['users', 0, '_id'], type: 'string.empty', context: { label: 'id do usuário', value: '', key: '_id' },
             },
             {
               message: '"nome" não pode estar vazio', path: ['users', 0, 'name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
@@ -208,7 +208,7 @@ const runTests = () => {
         options,
       );
 
-      expect(error).toHaveProperty('message', '"id" deve ser uma string. "id do criador" deve ser uma string. "nome" deve ser uma string. "id do jogador" deve ser uma string. "token" deve ser uma string. "criado em" deve estar em formato data ISO 8601');
+      expect(error).toHaveProperty('message', '"id" deve ser uma string. "id do criador" deve ser uma string. "nome" deve ser uma string. "id do usuário" deve ser uma string. "token" deve ser uma string. "criado em" deve estar em formato data ISO 8601');
       expect(error).toHaveProperty(
         'details',
         [
@@ -222,7 +222,7 @@ const runTests = () => {
             message: '"nome" deve ser uma string', path: ['maker', 'name'], type: 'string.base', context: { label: 'nome', value: [], key: 'name' },
           },
           {
-            message: '"id do jogador" deve ser uma string', path: ['users', 0, '_id'], type: 'string.base', context: { label: 'id do jogador', value: {}, key: '_id' },
+            message: '"id do usuário" deve ser uma string', path: ['users', 0, '_id'], type: 'string.base', context: { label: 'id do usuário', value: {}, key: '_id' },
           },
           {
             message: '"nome" deve ser uma string', path: ['users', 0, 'name'], type: 'string.base', context: { label: 'nome', value: false, key: 'name' },

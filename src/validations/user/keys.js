@@ -1,7 +1,7 @@
 const Joi = require('@hapi/joi');
 
 const { idRegex } = require('../../helpers/utils');
-
+// TODO colocar tudo em um só arquivo
 const keys = {
   id: Joi.string().trim().regex(idRegex).label('id'),
   name: Joi.string().trim().label('nome'),

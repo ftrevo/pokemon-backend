@@ -32,4 +32,13 @@ module.exports = class GameExists extends BaseExists {
     );
     return data;
   }
+
+  async byId(data) {
+    await super.exists(
+      { _id: data.game },
+      false,
+      getUnprocessable('Jogo não encontrado'),
+    );
+    return data;
+  }
 };

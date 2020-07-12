@@ -8,7 +8,7 @@ const { tokenRegex, idRegex } = require('../../../src/helpers/utils');
 
 const runTests = () => {
   describe('Game', () => {
-    describe('Default population', () => {
+    describe('Default values', () => {
       it('token', async () => {
         const game = new Game();
 
@@ -32,6 +32,7 @@ const runTests = () => {
 
         it('not populated', async () => {
           const game = new Game({ maker: baseUser._id });
+          await game.save();
 
           const gameJson = game.toJSON();
 
@@ -67,6 +68,7 @@ const runTests = () => {
 
         it('not populated', async () => {
           const game = new Game({ winner: baseUser._id });
+          await game.save();
 
           const gameJson = game.toJSON();
 

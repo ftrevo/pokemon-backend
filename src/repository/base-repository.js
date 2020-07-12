@@ -9,8 +9,12 @@ module.exports = class BaseRepo {
     return exists;
   }
 
-  async create(data) {
+  async create(data, populateData) {
     const created = await this.model.create(data);
+
+    if (populateData) {
+      await created.populate(populateData).execPopulate();
+    }
 
     return created.toJSON();
   }

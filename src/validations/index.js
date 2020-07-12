@@ -7,6 +7,7 @@ const {
 const {
   createOut, joinOut, joinBody,
 } = require('./game/game.joi');
+const { setupBody, setupOut } = require('./player/player.joi');
 
 const { statusOut } = require('./utils/status.joi');
 
@@ -35,6 +36,12 @@ const validations = {
     patch: {
       body: joinBody,
       out: joinOut,
+    },
+  },
+  '/player': {
+    post: {
+      body: setupBody,
+      out: setupOut,
     },
   },
 };

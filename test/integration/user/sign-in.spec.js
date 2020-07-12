@@ -31,7 +31,7 @@ const runTests = () => {
     });
 
     describe('error', () => {
-      it('payload', async () => {
+      it('empty body', async () => {
         const { body } = await supertest(app)
           .post('/user/sign-in')
           .send({})

@@ -2,13 +2,13 @@ const Joi = require('@hapi/joi');
 
 const userKeys = require('../user/keys');
 const { idRegex, tokenRegex } = require('../../helpers/utils');
-
+// TODO colocar tudo em um só arquivo
 const keys = {
   id: Joi.string().trim().regex(idRegex).label('id'),
-  userIds: Joi.array().items(userKeys.id.label('id do jogador')),
+  userIds: Joi.array().items(userKeys.id.label('id do usuário')),
   userDetails: Joi.array().items(
     Joi.object().keys({
-      _id: userKeys.id.label('id do jogador').required(),
+      _id: userKeys.id.label('id do usuário').required(),
       name: userKeys.name.required(),
     }),
   ),

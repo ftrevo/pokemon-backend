@@ -2,19 +2,17 @@
 const supertest = require('supertest');
 const expect = require('expect');
 const faker = require('faker');
-const { Types: { ObjectId } } = require('mongoose');
 const { sign } = require('jsonwebtoken');
 
 const app = require('../../../src/app');
 const { validateDefaultResponse, validateCreatedAt, validateError } = require('../../test-util');
 const User = require('../../../src/models/user');
-const { tokenRegex } = require('../../../src/helpers/utils');
+const { tokenRegex, idRegex } = require('../../../src/helpers/utils');
 
 const runTests = () => {
   describe('Create', () => {
     let authorization;
 
-    // TODO usar Promise.all para melhorar performance
     before(async () => {
       const registeredUser = new User({
         email: faker.internet.email(),
@@ -25,7 +23,6 @@ const runTests = () => {
 
       authorization = `${process.env.TOKEN_TYPE} ${await sign(user, process.env.SECRET)}`;
     });
-
 
     it('success', async () => {
       const { body } = await supertest(app)
@@ -40,7 +37,7 @@ const runTests = () => {
       expect(body).toHaveProperty('data.token');
       expect(body.data.token).toMatch(tokenRegex);
       expect(body).toHaveProperty('data._id');
-      expect(ObjectId.isValid(body.data._id)).toBeTruthy();
+      expect(body.data._id).toMatch(idRegex);
       validateCreatedAt(body.data);
     });
 
