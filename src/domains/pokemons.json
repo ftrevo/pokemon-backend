@@ -20,7 +20,8 @@
     ],
     "evolution": [
       3
-    ]
+    ],
+    "previous": 1
   },
   "3": {
     "number": 3,
@@ -28,7 +29,8 @@
     "type": [
       "Grass",
       "Poison"
-    ]
+    ],
+    "previous": 2
   },
   "4": {
     "number": 4,
@@ -49,7 +51,8 @@
     ],
     "evolution": [
       5
-    ]
+    ],
+    "previous": 4
   },
   "6": {
     "number": 6,
@@ -57,7 +60,8 @@
     "type": [
       "Fire",
       "Flying"
-    ]
+    ],
+    "previous": 5
   },
   "7": {
     "number": 7,
@@ -78,14 +82,16 @@
     ],
     "evolution": [
       9
-    ]
+    ],
+    "previous": 7
   },
   "9": {
     "number": 9,
     "name": "Blastoise",
     "type": [
       "Water"
-    ]
+    ],
+    "previous": 8
   },
   "10": {
     "number": 10,
@@ -106,7 +112,8 @@
     ],
     "evolution": [
       12
-    ]
+    ],
+    "previous": 10
   },
   "12": {
     "number": 12,
@@ -114,7 +121,8 @@
     "type": [
       "Bug",
       "Flying"
-    ]
+    ],
+    "previous": 11
   },
   "13": {
     "number": 13,
@@ -137,7 +145,8 @@
     ],
     "evolution": [
       15
-    ]
+    ],
+    "previous": 13
   },
   "15": {
     "number": 15,
@@ -145,7 +154,8 @@
     "type": [
       "Bug",
       "Poison"
-    ]
+    ],
+    "previous": 14
   },
   "16": {
     "number": 16,
@@ -168,7 +178,8 @@
     ],
     "evolution": [
       18
-    ]
+    ],
+    "previous": 16
   },
   "18": {
     "number": 18,
@@ -176,7 +187,8 @@
     "type": [
       "Normal",
       "Flying"
-    ]
+    ],
+    "previous": 17
   },
   "19": {
     "number": 19,
@@ -193,7 +205,8 @@
     "name": "Raticate",
     "type": [
       "Normal"
-    ]
+    ],
+    "previous": 19
   },
   "21": {
     "number": 21,
@@ -212,7 +225,8 @@
     "type": [
       "Normal",
       "Flying"
-    ]
+    ],
+    "previous": 21
   },
   "23": {
     "number": 23,
@@ -229,7 +243,8 @@
     "name": "Arbok",
     "type": [
       "Poison"
-    ]
+    ],
+    "previous": 23
   },
   "25": {
     "number": 25,
@@ -246,7 +261,8 @@
     "name": "Raichu",
     "type": [
       "Electric"
-    ]
+    ],
+    "previous": 25
   },
   "27": {
     "number": 27,
@@ -263,7 +279,8 @@
     "name": "Sandslash",
     "type": [
       "Ground"
-    ]
+    ],
+    "previous": 27
   },
   "29": {
     "number": 29,
@@ -284,7 +301,8 @@
     ],
     "evolution": [
       31
-    ]
+    ],
+    "previous": 29
   },
   "31": {
     "number": 31,
@@ -292,7 +310,8 @@
     "type": [
       "Poison",
       "Ground"
-    ]
+    ],
+    "previous": 30
   },
   "32": {
     "number": 32,
@@ -313,7 +332,8 @@
     ],
     "evolution": [
       34
-    ]
+    ],
+    "previous": 32
   },
   "34": {
     "number": 34,
@@ -321,7 +341,8 @@
     "type": [
       "Poison",
       "Ground"
-    ]
+    ],
+    "previous": 33
   },
   "35": {
     "number": 35,
@@ -338,7 +359,8 @@
     "name": "Clefable",
     "type": [
       "Fairy"
-    ]
+    ],
+    "previous": 35
   },
   "37": {
     "number": 37,
@@ -355,7 +377,8 @@
     "name": "Ninetales",
     "type": [
       "Fire"
-    ]
+    ],
+    "previous": 37
   },
   "39": {
     "number": 39,
@@ -374,7 +397,8 @@
     "type": [
       "Normal",
       "Fairy"
-    ]
+    ],
+    "previous": 39
   },
   "41": {
     "number": 41,
@@ -393,7 +417,8 @@
     "type": [
       "Poison",
       "Flying"
-    ]
+    ],
+    "previous": 41
   },
   "43": {
     "number": 43,
@@ -416,7 +441,8 @@
     ],
     "evolution": [
       45
-    ]
+    ],
+    "previous": 43
   },
   "45": {
     "number": 45,
@@ -424,7 +450,8 @@
     "type": [
       "Grass",
       "Poison"
-    ]
+    ],
+    "previous": 44
   },
   "46": {
     "number": 46,
@@ -443,7 +470,8 @@
     "type": [
       "Bug",
       "Grass"
-    ]
+    ],
+    "previous": 46
   },
   "48": {
     "number": 48,
@@ -462,7 +490,8 @@
     "type": [
       "Bug",
       "Poison"
-    ]
+    ],
+    "previous": 48
   },
   "50": {
     "number": 50,
@@ -479,7 +508,8 @@
     "name": "Dugtrio",
     "type": [
       "Ground"
-    ]
+    ],
+    "previous": 50
   },
   "52": {
     "number": 52,
@@ -496,7 +526,8 @@
     "name": "Persian",
     "type": [
       "Normal"
-    ]
+    ],
+    "previous": 52
   },
   "54": {
     "number": 54,
@@ -513,7 +544,8 @@
     "name": "Golduck",
     "type": [
       "Water"
-    ]
+    ],
+    "previous": 54
   },
   "56": {
     "number": 56,
@@ -530,7 +562,8 @@
     "name": "Primeape",
     "type": [
       "Fighting"
-    ]
+    ],
+    "previous": 56
   },
   "58": {
     "number": 58,
@@ -547,7 +580,8 @@
     "name": "Arcanine",
     "type": [
       "Fire"
-    ]
+    ],
+    "previous": 58
   },
   "60": {
     "number": 60,
@@ -568,7 +602,8 @@
     ],
     "evolution": [
       62
-    ]
+    ],
+    "previous": 60
   },
   "62": {
     "number": 62,
@@ -576,7 +611,8 @@
     "type": [
       "Water",
       "Fighting"
-    ]
+    ],
+    "previous": 61
   },
   "63": {
     "number": 63,
@@ -597,14 +633,16 @@
     ],
     "evolution": [
       65
-    ]
+    ],
+    "previous": 63
   },
   "65": {
     "number": 65,
     "name": "Alakazam",
     "type": [
       "Psychic"
-    ]
+    ],
+    "previous": 64
   },
   "66": {
     "number": 66,
@@ -625,14 +663,16 @@
     ],
     "evolution": [
       68
-    ]
+    ],
+    "previous": 66
   },
   "68": {
     "number": 68,
     "name": "Machamp",
     "type": [
       "Fighting"
-    ]
+    ],
+    "previous": 67
   },
   "69": {
     "number": 69,
@@ -655,7 +695,8 @@
     ],
     "evolution": [
       71
-    ]
+    ],
+    "previous": 69
   },
   "71": {
     "number": 71,
@@ -663,7 +704,8 @@
     "type": [
       "Grass",
       "Poison"
-    ]
+    ],
+    "previous": 70
   },
   "72": {
     "number": 72,
@@ -682,7 +724,8 @@
     "type": [
       "Water",
       "Poison"
-    ]
+    ],
+    "previous": 72
   },
   "74": {
     "number": 74,
@@ -705,7 +748,8 @@
     ],
     "evolution": [
       76
-    ]
+    ],
+    "previous": 74
   },
   "76": {
     "number": 76,
@@ -713,7 +757,8 @@
     "type": [
       "Rock",
       "Ground"
-    ]
+    ],
+    "previous": 75
   },
   "77": {
     "number": 77,
@@ -730,7 +775,8 @@
     "name": "Rapidash",
     "type": [
       "Fire"
-    ]
+    ],
+    "previous": 77
   },
   "79": {
     "number": 79,
@@ -749,7 +795,8 @@
     "type": [
       "Water",
       "Psychic"
-    ]
+    ],
+    "previous": 79
   },
   "81": {
     "number": 81,
@@ -768,7 +815,8 @@
     "type": [
       "Electric",
       "Steel"
-    ]
+    ],
+    "previous": 81
   },
   "83": {
     "number": 83,
@@ -795,7 +843,8 @@
     "type": [
       "Normal",
       "Flying"
-    ]
+    ],
+    "previous": 84
   },
   "86": {
     "number": 86,
@@ -813,7 +862,8 @@
     "type": [
       "Water",
       "Ice"
-    ]
+    ],
+    "previous": 86
   },
   "88": {
     "number": 88,
@@ -830,7 +880,8 @@
     "name": "Muk",
     "type": [
       "Poison"
-    ]
+    ],
+    "previous": 88
   },
   "90": {
     "number": 90,
@@ -848,7 +899,8 @@
     "type": [
       "Water",
       "Ice"
-    ]
+    ],
+    "previous": 90
   },
   "92": {
     "number": 92,
@@ -871,7 +923,8 @@
     ],
     "evolution": [
       94
-    ]
+    ],
+    "previous": 92
   },
   "94": {
     "number": 94,
@@ -879,7 +932,8 @@
     "type": [
       "Ghost",
       "Poison"
-    ]
+    ],
+    "previous": 93
   },
   "95": {
     "number": 95,
@@ -904,7 +958,8 @@
     "name": "Hypno",
     "type": [
       "Psychic"
-    ]
+    ],
+    "previous": 96
   },
   "98": {
     "number": 98,
@@ -921,7 +976,8 @@
     "name": "Kingler",
     "type": [
       "Water"
-    ]
+    ],
+    "previous": 98
   },
   "100": {
     "number": 100,
@@ -938,7 +994,8 @@
     "name": "Electrode",
     "type": [
       "Electric"
-    ]
+    ],
+    "previous": 100
   },
   "102": {
     "number": 102,
@@ -957,7 +1014,8 @@
     "type": [
       "Grass",
       "Psychic"
-    ]
+    ],
+    "previous": 102
   },
   "104": {
     "number": 104,
@@ -974,7 +1032,8 @@
     "name": "Marowak",
     "type": [
       "Ground"
-    ]
+    ],
+    "previous": 104
   },
   "106": {
     "number": 106,
@@ -1012,7 +1071,8 @@
     "name": "Weezing",
     "type": [
       "Poison"
-    ]
+    ],
+    "previous": 109
   },
   "111": {
     "number": 111,
@@ -1031,7 +1091,8 @@
     "type": [
       "Ground",
       "Rock"
-    ]
+    ],
+    "previous": 111
   },
   "113": {
     "number": 113,
@@ -1069,7 +1130,8 @@
     "name": "Seadra",
     "type": [
       "Water"
-    ]
+    ],
+    "previous": 116
   },
   "118": {
     "number": 118,
@@ -1086,7 +1148,8 @@
     "name": "Seaking",
     "type": [
       "Water"
-    ]
+    ],
+    "previous": 118
   },
   "120": {
     "number": 120,
@@ -1104,7 +1167,8 @@
     "type": [
       "Water",
       "Psychic"
-    ]
+    ],
+    "previous": 120
   },
   "122": {
     "number": 122,
@@ -1174,7 +1238,8 @@
     "type": [
       "Water",
       "Flying"
-    ]
+    ],
+    "previous": 129
   },
   "131": {
     "number": 131,
@@ -1208,21 +1273,24 @@
     "name": "Vaporeon",
     "type": [
       "Water"
-    ]
+    ],
+    "previous": 133
   },
   "135": {
     "number": 135,
     "name": "Jolteon",
     "type": [
       "Electric"
-    ]
+    ],
+    "previous": 133
   },
   "136": {
     "number": 136,
     "name": "Flareon",
     "type": [
       "Fire"
-    ]
+    ],
+    "previous": 133
   },
   "137": {
     "number": 137,
@@ -1248,7 +1316,8 @@
     "type": [
       "Rock",
       "Water"
-    ]
+    ],
+    "previous": 138
   },
   "140": {
     "number": 140,
@@ -1267,7 +1336,8 @@
     "type": [
       "Rock",
       "Water"
-    ]
+    ],
+    "previous": 140
   },
   "142": {
     "number": 142,
@@ -1327,7 +1397,8 @@
     ],
     "evolution": [
       149
-    ]
+    ],
+    "previous": 147
   },
   "149": {
     "number": 149,
@@ -1335,7 +1406,8 @@
     "type": [
       "Dragon",
       "Flying"
-    ]
+    ],
+    "previous": 148
   },
   "150": {
     "number": 150,
