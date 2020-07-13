@@ -1,6 +1,6 @@
-const GameExists = require('./exists');
+const PlayerExists = require('./exists');
 
-const exists = new GameExists();
+const exists = new PlayerExists();
 
 module.exports = {
   exists,
