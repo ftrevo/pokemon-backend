@@ -12,15 +12,19 @@ module.exports = class BaseRepo {
   async create(data, populateData) {
     const created = await this.model.create(data);
 
-    if (populateData) {
+    if (created && populateData) {
       await created.populate(populateData).execPopulate();
     }
 
     return created.toJSON();
   }
 
-  async findOne(data, projectionFields) {
+  async findOne(data, projectionFields, populateData) {
     const found = await this.model.findOne(data, projectionFields);
+
+    if (found && populateData) {
+      await found.populate(populateData).execPopulate();
+    }
 
     return found;
   }
@@ -29,7 +33,7 @@ module.exports = class BaseRepo {
     const found = await this.model
       .findOneAndUpdate(queryData, updateData, { new: true, useFindAndModify: false }).exec();
 
-    if (populateData) {
+    if (found && populateData) {
       await found.populate(populateData).execPopulate();
     }
 
