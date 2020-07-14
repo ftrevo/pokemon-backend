@@ -12,7 +12,7 @@ module.exports = class BaseRepo {
   async create(data, populateData) {
     const created = await this.model.create(data);
 
-    if (created && populateData) {
+    if (populateData) {
       await created.populate(populateData).execPopulate();
     }
 
@@ -33,7 +33,11 @@ module.exports = class BaseRepo {
     const found = await this.model
       .findOneAndUpdate(queryData, updateData, { new: true, useFindAndModify: false }).exec();
 
-    if (found && populateData) {
+    if (!found) {
+      return found;
+    }
+
+    if (populateData) {
       await found.populate(populateData).execPopulate();
     }
 
