@@ -64,7 +64,7 @@ const runTests = () => {
       expect(body).toHaveProperty('data._id');
       expect(body.data._id).toMatch(idRegex);
       expect(body).toHaveProperty('data.starterPokemon', starterPokemon);
-      expect(body).toHaveProperty('data.pokemons', { active: [starterPokemon], bag: [] });
+      expect(body).toHaveProperty('data.pokemons', [{ hasEvolved: false, isActive: true, number: starterPokemon }]);
       expect(body).toHaveProperty('data.user', userId);
       expect(body).toHaveProperty('data.game', { _id: gameId, maker: makerData });
     });

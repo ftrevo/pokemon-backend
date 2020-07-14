@@ -11,7 +11,7 @@ module.exports = class UserRepo extends BaseRepo {
 
   async setUp(player) {
     return super.create(
-      { ...player, pokemons: { active: [player.starterPokemon] } },
+      { ...player, pokemons: [{ number: player.starterPokemon }] },
       [{ path: 'game', select: 'maker', populate: { path: 'maker', select: 'name' } }],
     );
   }

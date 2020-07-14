@@ -4,7 +4,7 @@ const player = require('./player.spec');
 const user = require('./user.spec');
 
 const runTests = () => {
-  describe('Validations', () => {
+  describe('Repository', () => {
     base();
     game();
     player();

@@ -34,7 +34,7 @@ const runTests = () => {
 
       expect(response).toEqual(toBeReturned);
       expect(stash).toEqual([
-        { ...player, pokemons: { active: [player.starterPokemon] } },
+        { ...player, pokemons: [{ number: player.starterPokemon }] },
         [{ path: 'game', select: 'maker', populate: { path: 'maker', select: 'name' } }],
       ]);
     });

@@ -4,6 +4,14 @@ const gameKeys = require('../game/keys');
 const { idRegex } = require('../../helpers/utils');
 
 const pokemonSchema = Joi.number().min(1).max(151);
+const pokemonList = Joi.array().items(
+  Joi.object().keys({
+    number: pokemonSchema.label('número do pokémon').required(),
+    hasEvolved: Joi.boolean().label('pokémon evoluido').required(),
+    isActive: Joi.boolean().label('pokémon ativo').required(),
+  }),
+).label('lista de pokémons');
+
 // TODO colocar tudo em um só arquivo
 const keys = {
   id: Joi.string().trim().regex(idRegex).label('id'),
@@ -31,16 +39,8 @@ const keys = {
   }).label('jogo'),
   starterPokemon: pokemonSchema.label('pokémon inicial'),
   starterChanged: Joi.boolean().label('pokémon inicial alterado'),
-  pokemons: Joi.object().keys({
-    active: Joi.array().items(pokemonSchema).max(6).label('lista de pokémons ativos'),
-    bag: Joi.array().items(pokemonSchema).max(4).label('lista de pokémons reservas'),
-  }).label('pokémons'),
-  pokemonsStart: Joi.object().keys({
-    active: Joi.array().length(1).items(pokemonSchema).required()
-      .label('lista de pokémons ativos'),
-    bag: Joi.array().length(0).items(pokemonSchema).required()
-      .label('lista de pokémons reservas'),
-  }).label('pokémons'),
+  pokemons: pokemonList.max(10),
+  pokemonsStart: pokemonList.length(1),
   pokemon: pokemonSchema.label('pokémon'),
 };
 

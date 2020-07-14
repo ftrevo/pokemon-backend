@@ -132,8 +132,9 @@ const runTests = () => {
         const starterPokemon = faker.random.number({ min: 1, max: 151 });
 
         const basePokemons = {
-          active: [starterPokemon],
-          bag: [],
+          number: starterPokemon,
+          isActive: faker.random.boolean(),
+          hasEvolved: faker.random.boolean(),
         };
 
         const baseMaker = {
@@ -153,10 +154,10 @@ const runTests = () => {
           _id: new ObjectId().toString(),
           user: new ObjectId().toString(),
           starterPokemon,
-          pokemons: {
+          pokemons: [{
             ...basePokemons,
             pokemonsAdditional: 'field',
-          },
+          }],
           game: {
             ...baseGame,
             gameAdditional: 'field',
@@ -168,7 +169,7 @@ const runTests = () => {
         expect(value).toHaveProperty('_id', baseInput._id);
         expect(value).toHaveProperty('user', baseInput.user);
         expect(value).toHaveProperty('starterPokemon', starterPokemon);
-        expect(value).toHaveProperty('pokemons', basePokemons);
+        expect(value).toHaveProperty('pokemons', [basePokemons]);
         expect(value).toHaveProperty('game._id', baseGame._id);
         expect(value).toHaveProperty('game.maker', baseMaker);
 
@@ -185,38 +186,22 @@ const runTests = () => {
           it('base fields', async () => {
             const { error } = await setUp.post.out.validate({}, options);
 
-            expect(error).toHaveProperty('message', '"id" é obrigatório. "pokémon inicial" é obrigatório. "jogo" é obrigatório. "id do usuário" é obrigatório. "pokémons" é obrigatório');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"id" é obrigatório',
-                path: ['_id'],
-                type: 'any.required',
-                context: { label: 'id', key: '_id' },
-              },
-              {
-                message: '"pokémon inicial" é obrigatório',
-                path: ['starterPokemon'],
-                type: 'any.required',
-                context: { label: 'pokémon inicial', key: 'starterPokemon' },
-              },
-              {
-                message: '"jogo" é obrigatório',
-                path: ['game'],
-                type: 'any.required',
-                context: { label: 'jogo', key: 'game' },
-              },
-              {
-                message: '"id do usuário" é obrigatório',
-                path: ['user'],
-                type: 'any.required',
-                context: { label: 'id do usuário', key: 'user' },
-              },
-              {
-                message: '"pokémons" é obrigatório',
-                path: ['pokemons'],
-                type: 'any.required',
-                context: { label: 'pokémons', key: 'pokemons' },
-              }]);
+            expect(error).toHaveProperty('message', '"id" é obrigatório. "pokémon inicial" é obrigatório. "jogo" é obrigatório. "id do usuário" é obrigatório. "lista de pokémons" é obrigatório');
+            expect(error).toHaveProperty('details', [{
+              message: '"id" é obrigatório', path: ['_id'], type: 'any.required', context: { label: 'id', key: '_id' },
+            },
+            {
+              message: '"pokémon inicial" é obrigatório', path: ['starterPokemon'], type: 'any.required', context: { label: 'pokémon inicial', key: 'starterPokemon' },
+            },
+            {
+              message: '"jogo" é obrigatório', path: ['game'], type: 'any.required', context: { label: 'jogo', key: 'game' },
+            },
+            {
+              message: '"id do usuário" é obrigatório', path: ['user'], type: 'any.required', context: { label: 'id do usuário', key: 'user' },
+            },
+            {
+              message: '"lista de pokémons" é obrigatório', path: ['pokemons'], type: 'any.required', context: { label: 'lista de pokémons', key: 'pokemons' },
+            }]);
           });
 
           it('inner', async () => {
@@ -227,50 +212,37 @@ const runTests = () => {
               user: new ObjectId().toString(),
               starterPokemon,
               game: {},
-              pokemons: {},
+              pokemons: [{}],
             };
             const { error } = await setUp.post.out.validate(baseInput, options);
 
-            expect(error).toHaveProperty('message', '"id do jogo" é obrigatório. "criador" é obrigatório. "lista de pokémons ativos" é obrigatório. "lista de pokémons reservas" é obrigatório');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"id do jogo" é obrigatório',
-                path: ['game', '_id'],
-                type: 'any.required',
-                context: { label: 'id do jogo', key: '_id' },
-              },
-              {
-                message: '"criador" é obrigatório',
-                path: ['game', 'maker'],
-                type: 'any.required',
-                context: { label: 'criador', key: 'maker' },
-              },
-              {
-                message: '"lista de pokémons ativos" é obrigatório',
-                path: ['pokemons', 'active'],
-                type: 'any.required',
-                context: { label: 'lista de pokémons ativos', key: 'active' },
-              },
-              {
-                message: '"lista de pokémons reservas" é obrigatório',
-                path: ['pokemons', 'bag'],
-                type: 'any.required',
-                context: { label: 'lista de pokémons reservas', key: 'bag' },
-              }]);
+            expect(error).toHaveProperty('message', '"id do jogo" é obrigatório. "criador" é obrigatório. "número do pokémon" é obrigatório. "pokémon evoluido" é obrigatório. "pokémon ativo" é obrigatório');
+            expect(error).toHaveProperty('details', [{
+              message: '"id do jogo" é obrigatório', path: ['game', '_id'], type: 'any.required', context: { label: 'id do jogo', key: '_id' },
+            },
+            {
+              message: '"criador" é obrigatório', path: ['game', 'maker'], type: 'any.required', context: { label: 'criador', key: 'maker' },
+            },
+            {
+              message: '"número do pokémon" é obrigatório', path: ['pokemons', 0, 'number'], type: 'any.required', context: { label: 'número do pokémon', key: 'number' },
+            },
+            {
+              message: '"pokémon evoluido" é obrigatório', path: ['pokemons', 0, 'hasEvolved'], type: 'any.required', context: { label: 'pokémon evoluido', key: 'hasEvolved' },
+            },
+            {
+              message: '"pokémon ativo" é obrigatório', path: ['pokemons', 0, 'isActive'], type: 'any.required', context: { label: 'pokémon ativo', key: 'isActive' },
+            }]);
           });
         });
 
-        it('empty fields and filled bag', async () => {
+        it('empty fields', async () => {
           const starterPokemon = faker.random.number({ min: 1, max: 151 });
 
           const baseInput = {
             _id: '',
             user: '',
             starterPokemon,
-            pokemons: {
-              active: [],
-              bag: [starterPokemon],
-            },
+            pokemons: [],
             game: {
               _id: '',
               maker: {
@@ -282,61 +254,31 @@ const runTests = () => {
 
           const { error } = await setUp.post.out.validate(baseInput, options);
 
-          expect(error).toHaveProperty('message', '"id" não pode estar vazio. "id do jogo" não pode estar vazio. "id do criador" não pode estar vazio. "nome" não pode estar vazio. "id do usuário" não pode estar vazio. "lista de pokémons ativos" deve conter 1 itens. "lista de pokémons reservas" deve conter 0 itens');
-          expect(error).toHaveProperty('details', [
-            {
-              message: '"id" não pode estar vazio',
-              path: ['_id'],
-              type: 'string.empty',
-              context: { label: 'id', value: '', key: '_id' },
+          expect(error).toHaveProperty('message', '"id" não pode estar vazio. "id do jogo" não pode estar vazio. "id do criador" não pode estar vazio. "nome" não pode estar vazio. "id do usuário" não pode estar vazio. "lista de pokémons" deve conter 1 itens');
+          expect(error).toHaveProperty('details', [{
+            message: '"id" não pode estar vazio', path: ['_id'], type: 'string.empty', context: { label: 'id', value: '', key: '_id' },
+          },
+          {
+            message: '"id do jogo" não pode estar vazio', path: ['game', '_id'], type: 'string.empty', context: { label: 'id do jogo', value: '', key: '_id' },
+          }, {
+            message: '"id do criador" não pode estar vazio', path: ['game', 'maker', '_id'], type: 'string.empty', context: { label: 'id do criador', value: '', key: '_id' },
+          },
+          {
+            message: '"nome" não pode estar vazio', path: ['game', 'maker', 'name'], type: 'string.empty', context: { label: 'nome', value: '', key: 'name' },
+          },
+          {
+            message: '"id do usuário" não pode estar vazio', path: ['user'], type: 'string.empty', context: { label: 'id do usuário', value: '', key: 'user' },
+          },
+          {
+            message: '"lista de pokémons" deve conter 1 itens',
+            path: ['pokemons'],
+            type: 'array.length',
+            context: {
+              limit: 1, value: [], label: 'lista de pokémons', key: 'pokemons',
             },
-            {
-              message: '"id do jogo" não pode estar vazio',
-              path: ['game', '_id'],
-              type: 'string.empty',
-              context: { label: 'id do jogo', value: '', key: '_id' },
-            },
-            {
-              message: '"id do criador" não pode estar vazio',
-              path: ['game', 'maker', '_id'],
-              type: 'string.empty',
-              context: { label: 'id do criador', value: '', key: '_id' },
-            },
-            {
-              message: '"nome" não pode estar vazio',
-              path: ['game', 'maker', 'name'],
-              type: 'string.empty',
-              context: { label: 'nome', value: '', key: 'name' },
-            },
-            {
-              message: '"id do usuário" não pode estar vazio',
-              path: ['user'],
-              type: 'string.empty',
-              context: { label: 'id do usuário', value: '', key: 'user' },
-            },
-            {
-              message: '"lista de pokémons ativos" deve conter 1 itens',
-              path: ['pokemons', 'active'],
-              type: 'array.length',
-              context: {
-                limit: 1,
-                value: [],
-                label: 'lista de pokémons ativos',
-                key: 'active',
-              },
-            },
-            {
-              message: '"lista de pokémons reservas" deve conter 0 itens',
-              path: ['pokemons', 'bag'],
-              type: 'array.length',
-              context: {
-                limit: 0,
-                value: [starterPokemon],
-                label: 'lista de pokémons reservas',
-                key: 'bag',
-              },
-            }]);
+          }]);
         });
+
         describe('wrong type', () => {
           it('base fields', async () => {
             const now = new Date().toISOString();
@@ -351,42 +293,27 @@ const runTests = () => {
 
             const { error } = await setUp.post.out.validate(baseInput, options);
 
-            expect(error).toHaveProperty('message', '"id" deve ser uma string. "pokémon inicial" deve ser um número. "jogo" deve ser do tipo object. "id do usuário" deve ser uma string. "pokémons" deve ser do tipo object');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"id" deve ser uma string',
-                path: ['_id'],
-                type: 'string.base',
-                context: { label: 'id', value: true, key: '_id' },
+            expect(error).toHaveProperty('message', '"id" deve ser uma string. "pokémon inicial" deve ser um número. "jogo" deve ser do tipo object. "id do usuário" deve ser uma string. "lista de pokémons" deve ser uma lista');
+            expect(error).toHaveProperty('details', [{
+              message: '"id" deve ser uma string', path: ['_id'], type: 'string.base', context: { label: 'id', value: true, key: '_id' },
+            },
+            {
+              message: '"pokémon inicial" deve ser um número', path: ['starterPokemon'], type: 'number.base', context: { label: 'pokémon inicial', value: {}, key: 'starterPokemon' },
+            },
+            {
+              message: '"jogo" deve ser do tipo object',
+              path: ['game'],
+              type: 'object.base',
+              context: {
+                type: 'object', label: 'jogo', value: 0, key: 'game',
               },
-              {
-                message: '"pokémon inicial" deve ser um número',
-                path: ['starterPokemon'],
-                type: 'number.base',
-                context: { label: 'pokémon inicial', value: {}, key: 'starterPokemon' },
-              },
-              {
-                message: '"jogo" deve ser do tipo object',
-                path: ['game'],
-                type: 'object.base',
-                context: {
-                  type: 'object', label: 'jogo', value: 0, key: 'game',
-                },
-              },
-              {
-                message: '"id do usuário" deve ser uma string',
-                path: ['user'],
-                type: 'string.base',
-                context: { label: 'id do usuário', value: [], key: 'user' },
-              },
-              {
-                message: '"pokémons" deve ser do tipo object',
-                path: ['pokemons'],
-                type: 'object.base',
-                context: {
-                  type: 'object', label: 'pokémons', value: now, key: 'pokemons',
-                },
-              }]);
+            },
+            {
+              message: '"id do usuário" deve ser uma string', path: ['user'], type: 'string.base', context: { label: 'id do usuário', value: [], key: 'user' },
+            },
+            {
+              message: '"lista de pokémons" deve ser uma lista', path: ['pokemons'], type: 'array.base', context: { label: 'lista de pokémons', value: now, key: 'pokemons' },
+            }]);
           });
 
           it('inner', async () => {
@@ -396,10 +323,11 @@ const runTests = () => {
               _id: new ObjectId().toString(),
               user: new ObjectId().toString(),
               starterPokemon,
-              pokemons: {
-                active: {},
-                bag: false,
-              },
+              pokemons: [{
+                number: {},
+                isActive: 1,
+                hasEvolved: 'random',
+              }],
               game: {
                 _id: 0,
                 maker: {
@@ -410,38 +338,25 @@ const runTests = () => {
             };
             const { error } = await setUp.post.out.validate(baseInput, options);
 
-            expect(error).toHaveProperty('message', '"id do jogo" deve ser uma string. "id do criador" deve ser uma string. "nome" deve ser uma string. "lista de pokémons ativos" deve ser uma lista. "lista de pokémons reservas" deve ser uma lista');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"id do jogo" deve ser uma string',
-                path: ['game', '_id'],
-                type: 'string.base',
-                context: { label: 'id do jogo', value: 0, key: '_id' },
-              },
-              {
-                message: '"id do criador" deve ser uma string',
-                path: ['game', 'maker', '_id'],
-                type: 'string.base',
-                context: { label: 'id do criador', value: true, key: '_id' },
-              },
-              {
-                message: '"nome" deve ser uma string',
-                path: ['game', 'maker', 'name'],
-                type: 'string.base',
-                context: { label: 'nome', value: false, key: 'name' },
-              },
-              {
-                message: '"lista de pokémons ativos" deve ser uma lista',
-                path: ['pokemons', 'active'],
-                type: 'array.base',
-                context: { label: 'lista de pokémons ativos', value: {}, key: 'active' },
-              },
-              {
-                message: '"lista de pokémons reservas" deve ser uma lista',
-                path: ['pokemons', 'bag'],
-                type: 'array.base',
-                context: { label: 'lista de pokémons reservas', value: false, key: 'bag' },
-              }]);
+            expect(error).toHaveProperty('message', '"id do jogo" deve ser uma string. "id do criador" deve ser uma string. "nome" deve ser uma string. "número do pokémon" deve ser um número. "pokémon evoluido" deve ser um booleano. "pokémon ativo" deve ser um booleano');
+            expect(error).toHaveProperty('details', [{
+              message: '"id do jogo" deve ser uma string', path: ['game', '_id'], type: 'string.base', context: { label: 'id do jogo', value: 0, key: '_id' },
+            },
+            {
+              message: '"id do criador" deve ser uma string', path: ['game', 'maker', '_id'], type: 'string.base', context: { label: 'id do criador', value: true, key: '_id' },
+            },
+            {
+              message: '"nome" deve ser uma string', path: ['game', 'maker', 'name'], type: 'string.base', context: { label: 'nome', value: false, key: 'name' },
+            },
+            {
+              message: '"número do pokémon" deve ser um número', path: ['pokemons', 0, 'number'], type: 'number.base', context: { label: 'número do pokémon', value: {}, key: 'number' },
+            },
+            {
+              message: '"pokémon evoluido" deve ser um booleano', path: ['pokemons', 0, 'hasEvolved'], type: 'boolean.base', context: { label: 'pokémon evoluido', value: 'random', key: 'hasEvolved' },
+            },
+            {
+              message: '"pokémon ativo" deve ser um booleano', path: ['pokemons', 0, 'isActive'], type: 'boolean.base', context: { label: 'pokémon ativo', value: 1, key: 'isActive' },
+            }]);
           });
         });
       });

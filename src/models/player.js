@@ -2,6 +2,20 @@
 const { Schema, model, Types: { ObjectId } } = require('mongoose');
 const { transformUser } = require('../helpers/utils');
 
+const pokemonSchema = {
+  number: {
+    type: Number,
+  },
+  hasEvolved: {
+    type: Boolean,
+    default: false,
+  },
+  isActive: {
+    type: Boolean,
+    default: true,
+  },
+};
+
 const schemaObj = {
   user: {
     type: ObjectId,
@@ -11,10 +25,7 @@ const schemaObj = {
     type: ObjectId,
     ref: 'Game',
   },
-  pokemons: {
-    active: [Number],
-    bag: [Number],
-  },
+  pokemons: [pokemonSchema],
   starterPokemon: Number,
   starterChanged: {
     type: Boolean,
