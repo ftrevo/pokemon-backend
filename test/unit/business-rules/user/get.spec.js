@@ -41,6 +41,7 @@ const runTests = () => {
 
         try {
           await get.getUserValidPwd({ email: 0, password: 0 });
+          throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unauthorized);
           expect(err).toHaveProperty('message', 'Usuário(a) e/ou senha invalido(a)');
@@ -54,6 +55,7 @@ const runTests = () => {
 
         try {
           await get.getUserValidPwd({ email: 0, password: 0 });
+          throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unauthorized);
           expect(err).toHaveProperty('message', 'Usuário(a) e/ou senha invalido(a)');

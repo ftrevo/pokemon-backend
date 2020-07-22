@@ -6,13 +6,23 @@ module.exports = class BaseExists {
     this.repo = repo;
   }
 
-  async exists(data, throwCondition, exception) {
-    const dataExists = await this.repo.exists(data);
+  async exists(query, throwCondition, exception) {
+    const dataExists = await this.repo.exists(query);
 
     if (dataExists === throwCondition) {
       throw exception;
     }
 
     return dataExists;
+  }
+
+  async findOne(query, shouldThrow, exception, projection, populateData) {
+    const returned = await this.repo.findOne(query, projection, populateData);
+
+    if (shouldThrow && !returned) {
+      throw exception;
+    }
+
+    return returned;
   }
 };

@@ -17,6 +17,7 @@ const runTests = () => {
     it('error', async () => {
       try {
         await sign();
+        throw new Error('Fail');
       } catch (err) {
         expect(err).toHaveProperty('message', 'payload is required');
       }

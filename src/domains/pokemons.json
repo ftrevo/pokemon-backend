@@ -39,8 +39,8 @@
       "Fire"
     ],
     "evolution": [
-      4,
-      5
+      5,
+      6
     ]
   },
   "5": {
@@ -50,7 +50,7 @@
       "Fire"
     ],
     "evolution": [
-      5
+      6
     ],
     "previous": 4
   },
@@ -500,7 +500,7 @@
       "Ground"
     ],
     "evolution": [
-      52
+      51
     ]
   },
   "51": {
@@ -687,7 +687,7 @@
     ]
   },
   "70": {
-    "number": 7,
+    "number": 70,
     "name": "Weepinbell",
     "type": [
       "Grass",

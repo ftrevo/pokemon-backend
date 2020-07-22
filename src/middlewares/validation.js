@@ -32,23 +32,20 @@ module.exports = class Validation {
   inbound(request, response) {
     return new Promise((resolve) => {
       const methodRule = this.validations.getRule(request.path, request.method);
+      response.locals.outputValidation = methodRule.out;
 
       const validData = {};
-      if (methodRule) {
-        if (methodRule.params) {
-          validData.params = this.validator.execute(methodRule.params, request.params);
-        }
 
-        if (methodRule.query) {
-          validData.query = this.validator.execute(methodRule.query, request.query);
-        }
-
-        if (methodRule.body) {
-          validData.body = this.validator.execute(methodRule.body, request.body);
-        }
-
-        response.locals.outputValidation = methodRule.out;
+      if (methodRule.params) {
+        validData.params = this.validator.execute(methodRule.params, request.params);
       }
+      if (methodRule.query) {
+        validData.query = this.validator.execute(methodRule.query, request.query);
+      }
+      if (methodRule.body) {
+        validData.body = this.validator.execute(methodRule.body, request.body);
+      }
+
       return resolve(validData);
     });
   }

@@ -3,10 +3,15 @@ const { Schema, model, Types: { ObjectId } } = require('mongoose');
 const { transformUser } = require('../helpers/utils');
 
 const pokemonSchema = {
+  _id: false,
   number: {
     type: Number,
   },
-  hasEvolved: {
+  hasBase: {
+    type: Boolean,
+    default: true,
+  },
+  fullyEvolved: {
     type: Boolean,
     default: false,
   },
@@ -14,6 +19,7 @@ const pokemonSchema = {
     type: Boolean,
     default: true,
   },
+  merged: [Number],
 };
 
 const schemaObj = {

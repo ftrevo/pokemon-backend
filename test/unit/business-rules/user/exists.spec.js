@@ -26,6 +26,7 @@ const runTests = () => {
 
         try {
           await exists.signUp(userData);
+          throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
           expect(err).toHaveProperty('message', 'Usuário(a) já existente');

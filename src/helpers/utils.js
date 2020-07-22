@@ -1,5 +1,7 @@
 const { randomBytes } = require('crypto');
 
+const sortAsc = (a, b) => a - b;
+
 const getDefaultResData = ({ inboundTime, requestId }) => ({
   inboundTime: inboundTime.toISOString(),
   requestId,
@@ -46,4 +48,5 @@ module.exports = {
   tokenRegex,
   transformUser,
   doUserTransformation,
+  sortAsc,
 };

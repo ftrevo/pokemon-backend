@@ -13,7 +13,10 @@
       ],
       "program": "${workspaceFolder}/index.js",
       "preLaunchTask": "Start Containers",
-      "outputCapture": "std"
+      "outputCapture": "std",
+      "args": [
+        "--trace-warnings"
+      ]
     },
     {
       "name": "Unit Tests",

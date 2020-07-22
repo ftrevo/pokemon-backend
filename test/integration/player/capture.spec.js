@@ -8,14 +8,14 @@ const app = require('../../../src/app');
 const { validateDefaultResponse, validateError } = require('../../test-util');
 const User = require('../../../src/models/user');
 const Game = require('../../../src/models/game');
+const Player = require('../../../src/models/player');
 const { idRegex } = require('../../../src/helpers/utils');
 
 const runTests = () => {
-  describe('Create', () => {
+  describe('Capture', () => {
     let authorization;
-    let gameId;
-    let userId;
-    const makerData = {};
+    let playerId;
+    const starterPokemon = 4;
 
     before(async () => {
       const createdUser = new User({
@@ -24,38 +24,36 @@ const runTests = () => {
         name: faker.name.findName(),
       });
 
-      const maker = new User({
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        name: faker.name.findName(),
-      });
+      const createdGame = new Game({ maker: createdUser._id, players: [createdUser._id] });
 
-      const createdGame = new Game({ maker: maker._id, players: [maker._id, createdUser._id] });
+      const playerCreated = new Player({
+        user: createdUser._id,
+        game: createdGame._id,
+        pokemons: [{ number: 4, merged: [4] }],
+        starterPokemon,
+      });
 
       await Promise.all([
         createdUser.save(),
         createdGame.save(),
-        maker.save(),
+        playerCreated.save(),
       ]);
 
-      const { password, ...user } = await createdUser.toJSON();
+      playerId = playerCreated._id.toString();
 
-      userId = user._id;
-      gameId = createdGame._id.toString();
-      makerData._id = maker._id.toString();
-      makerData.name = maker.name;
+      const { password, ...user } = await createdUser.toJSON();
 
       authorization = `${process.env.TOKEN_TYPE} ${await sign(user, process.env.SECRET)}`;
     });
 
 
     it('success', async () => {
-      const starterPokemon = 1;
+      const captured = 1;
 
       const { body } = await supertest(app)
-        .post('/player')
+        .patch(`/player/${playerId}/capture`)
         .set({ authorization })
-        .send({ starterPokemon, game: gameId })
+        .send({ pokemon: captured })
         .expect(200);
 
       validateDefaultResponse(body);
@@ -66,15 +64,16 @@ const runTests = () => {
       expect(body).toHaveProperty('data.starterPokemon', starterPokemon);
       expect(body).toHaveProperty('data.pokemons', [{
         hasBase: true, isActive: true, fullyEvolved: false, number: starterPokemon,
+      },
+      {
+        hasBase: true, isActive: true, fullyEvolved: false, number: captured,
       }]);
-      expect(body).toHaveProperty('data.user', userId);
-      expect(body).toHaveProperty('data.game', { _id: gameId, maker: makerData });
     });
 
     describe('error', () => {
       it('no header', async () => {
         const { body } = await supertest(app)
-          .post('/player')
+          .patch(`/player/${playerId}/capture`)
           .send({})
           .expect(401);
 
@@ -86,7 +85,7 @@ const runTests = () => {
 
       it('empty body', async () => {
         const { body } = await supertest(app)
-          .post('/player')
+          .patch(`/player/${playerId}/capture`)
           .set({ authorization })
           .send({})
           .expect(400);
@@ -96,15 +95,15 @@ const runTests = () => {
 
         expect(body).toHaveProperty(
           'message',
-          ['"pokémon inicial" é obrigatório', '"id do jogo" é obrigatório'],
+          ['"pokémon" é obrigatório'],
         );
       });
 
       it('invalid type', async () => {
         const { body } = await supertest(app)
-          .post('/player')
+          .patch(`/player/${playerId}/capture`)
           .set({ authorization })
-          .send({ starterPokemon: [], game: false })
+          .send({ pokemon: false })
           .expect(400);
 
         validateDefaultResponse(body);
@@ -112,7 +111,23 @@ const runTests = () => {
 
         expect(body).toHaveProperty(
           'message',
-          ['"pokémon inicial" deve ser um número', '"id do jogo" deve ser uma string'],
+          ['"pokémon" deve ser um número'],
+        );
+      });
+
+      it('already captured', async () => {
+        const { body } = await supertest(app)
+          .patch(`/player/${playerId}/capture`)
+          .set({ authorization })
+          .send({ pokemon: 4 })
+          .expect(422);
+
+        validateDefaultResponse(body);
+        validateError(body);
+
+        expect(body).toHaveProperty(
+          'message',
+          ['O pokémon já foi capturado neste jogo'],
         );
       });
     });

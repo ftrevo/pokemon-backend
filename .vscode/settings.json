@@ -17,5 +17,12 @@
     "statusBar.border": "#e36251",
     "titleBar.border": "#e36251"
   },
-  "peacock.color": "#e36251"
+  "peacock.color": "#e36251",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "eslint.validate": [
+    "javascript"
+  ],
+  "typescript.disableAutomaticTypeAcquisition": true
 }

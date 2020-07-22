@@ -7,7 +7,7 @@ const { options } = require('../../../../src/helpers/validator');
 const { validations: { '/player': setUp } } = require('../../../../src/validations');
 
 const runTests = () => {
-  describe('Setup Rule', () => {
+  describe('Setup', () => {
     it('method type, input and output', async () => {
       expect(setUp).toHaveProperty('post');
       expect(setUp).toHaveProperty('post.body');
@@ -134,7 +134,8 @@ const runTests = () => {
         const basePokemons = {
           number: starterPokemon,
           isActive: faker.random.boolean(),
-          hasEvolved: faker.random.boolean(),
+          hasBase: faker.random.boolean(),
+          fullyEvolved: faker.random.boolean(),
         };
 
         const baseMaker = {
@@ -216,7 +217,7 @@ const runTests = () => {
             };
             const { error } = await setUp.post.out.validate(baseInput, options);
 
-            expect(error).toHaveProperty('message', '"id do jogo" é obrigatório. "criador" é obrigatório. "número do pokémon" é obrigatório. "pokémon evoluido" é obrigatório. "pokémon ativo" é obrigatório');
+            expect(error).toHaveProperty('message', '"id do jogo" é obrigatório. "criador" é obrigatório. "número do pokémon" é obrigatório. "contém pokémon base" é obrigatório. "pokémon completamente evoluido" é obrigatório. "pokémon ativo" é obrigatório');
             expect(error).toHaveProperty('details', [{
               message: '"id do jogo" é obrigatório', path: ['game', '_id'], type: 'any.required', context: { label: 'id do jogo', key: '_id' },
             },
@@ -227,7 +228,10 @@ const runTests = () => {
               message: '"número do pokémon" é obrigatório', path: ['pokemons', 0, 'number'], type: 'any.required', context: { label: 'número do pokémon', key: 'number' },
             },
             {
-              message: '"pokémon evoluido" é obrigatório', path: ['pokemons', 0, 'hasEvolved'], type: 'any.required', context: { label: 'pokémon evoluido', key: 'hasEvolved' },
+              message: '"contém pokémon base" é obrigatório', path: ['pokemons', 0, 'hasBase'], type: 'any.required', context: { label: 'contém pokémon base', key: 'hasBase' },
+            },
+            {
+              message: '"pokémon completamente evoluido" é obrigatório', path: ['pokemons', 0, 'fullyEvolved'], type: 'any.required', context: { label: 'pokémon completamente evoluido', key: 'fullyEvolved' },
             },
             {
               message: '"pokémon ativo" é obrigatório', path: ['pokemons', 0, 'isActive'], type: 'any.required', context: { label: 'pokémon ativo', key: 'isActive' },
@@ -319,6 +323,8 @@ const runTests = () => {
           it('inner', async () => {
             const starterPokemon = faker.random.number({ min: 1, max: 151 });
 
+            const now = new Date().toISOString();
+
             const baseInput = {
               _id: new ObjectId().toString(),
               user: new ObjectId().toString(),
@@ -326,7 +332,8 @@ const runTests = () => {
               pokemons: [{
                 number: {},
                 isActive: 1,
-                hasEvolved: 'random',
+                hasBase: [],
+                fullyEvolved: now,
               }],
               game: {
                 _id: 0,
@@ -338,7 +345,7 @@ const runTests = () => {
             };
             const { error } = await setUp.post.out.validate(baseInput, options);
 
-            expect(error).toHaveProperty('message', '"id do jogo" deve ser uma string. "id do criador" deve ser uma string. "nome" deve ser uma string. "número do pokémon" deve ser um número. "pokémon evoluido" deve ser um booleano. "pokémon ativo" deve ser um booleano');
+            expect(error).toHaveProperty('message', '"id do jogo" deve ser uma string. "id do criador" deve ser uma string. "nome" deve ser uma string. "número do pokémon" deve ser um número. "contém pokémon base" deve ser um booleano. "pokémon completamente evoluido" deve ser um booleano. "pokémon ativo" deve ser um booleano');
             expect(error).toHaveProperty('details', [{
               message: '"id do jogo" deve ser uma string', path: ['game', '_id'], type: 'string.base', context: { label: 'id do jogo', value: 0, key: '_id' },
             },
@@ -352,7 +359,10 @@ const runTests = () => {
               message: '"número do pokémon" deve ser um número', path: ['pokemons', 0, 'number'], type: 'number.base', context: { label: 'número do pokémon', value: {}, key: 'number' },
             },
             {
-              message: '"pokémon evoluido" deve ser um booleano', path: ['pokemons', 0, 'hasEvolved'], type: 'boolean.base', context: { label: 'pokémon evoluido', value: 'random', key: 'hasEvolved' },
+              message: '"contém pokémon base" deve ser um booleano', path: ['pokemons', 0, 'hasBase'], type: 'boolean.base', context: { label: 'contém pokémon base', value: [], key: 'hasBase' },
+            },
+            {
+              message: '"pokémon completamente evoluido" deve ser um booleano', path: ['pokemons', 0, 'fullyEvolved'], type: 'boolean.base', context: { label: 'pokémon completamente evoluido', value: now, key: 'fullyEvolved' },
             },
             {
               message: '"pokémon ativo" deve ser um booleano', path: ['pokemons', 0, 'isActive'], type: 'boolean.base', context: { label: 'pokémon ativo', value: 1, key: 'isActive' },

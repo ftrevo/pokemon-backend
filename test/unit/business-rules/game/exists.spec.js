@@ -35,6 +35,7 @@ const runTests = () => {
 
         try {
           await exists.create(id);
+          throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
           expect(err).toHaveProperty('message', 'O usuário já tem um jogo não finalizado');
@@ -63,6 +64,7 @@ const runTests = () => {
         const inputData = { token: getToken() };
         try {
           await exists.join(inputData);
+          throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
           expect(err).toHaveProperty('message', 'Jogo não encontrado, já finalizado ou com o máximo de jogadores permitido');
@@ -91,6 +93,7 @@ const runTests = () => {
         const inputData = { game: new ObjectId().toString(), something: 'else' };
         try {
           await exists.byId(inputData);
+          throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
           expect(err).toHaveProperty('message', 'Jogo não encontrado');

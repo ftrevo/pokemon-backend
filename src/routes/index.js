@@ -2,7 +2,7 @@ const authRule = require('../middlewares/authorization');
 const { serverStatus } = require('./server-status');
 const { create: createUser, logIn } = require('./user');
 const { create: createGame, join } = require('./game');
-const { setUp } = require('./player');
+const { setUp, capture } = require('./player');
 
 /**
  * TAG LIST
@@ -65,6 +65,7 @@ const routes = function (app) {
   app.route('/game').patch(authRule, join);
 
   app.route('/player').post(authRule, setUp);
+  app.route('/player/:_id/capture').patch(authRule, capture);
 
   app.route('/').get(serverStatus);
 };
