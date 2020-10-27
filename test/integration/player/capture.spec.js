@@ -51,7 +51,7 @@ const runTests = () => {
       const captured = 1;
 
       const { body } = await supertest(app)
-        .patch(`/player/${playerId}/capture`)
+        .patch(`/player/${playerId}/pokemon`)
         .set({ authorization })
         .send({ pokemon: captured })
         .expect(200);
@@ -63,17 +63,21 @@ const runTests = () => {
       expect(body.data._id).toMatch(idRegex);
       expect(body).toHaveProperty('data.starterPokemon', starterPokemon);
       expect(body).toHaveProperty('data.pokemons', [{
-        hasBase: true, isActive: true, fullyEvolved: false, number: starterPokemon,
+        hasBase: true,
+        isActive: true,
+        fullyEvolved: false,
+        number: starterPokemon,
+        merged: [starterPokemon],
       },
       {
-        hasBase: true, isActive: true, fullyEvolved: false, number: captured,
+        hasBase: true, isActive: true, fullyEvolved: false, number: captured, merged: [captured],
       }]);
     });
 
     describe('error', () => {
       it('no header', async () => {
         const { body } = await supertest(app)
-          .patch(`/player/${playerId}/capture`)
+          .patch(`/player/${playerId}/pokemon`)
           .send({})
           .expect(401);
 
@@ -85,7 +89,7 @@ const runTests = () => {
 
       it('empty body', async () => {
         const { body } = await supertest(app)
-          .patch(`/player/${playerId}/capture`)
+          .patch(`/player/${playerId}/pokemon`)
           .set({ authorization })
           .send({})
           .expect(400);
@@ -101,7 +105,7 @@ const runTests = () => {
 
       it('invalid type', async () => {
         const { body } = await supertest(app)
-          .patch(`/player/${playerId}/capture`)
+          .patch(`/player/${playerId}/pokemon`)
           .set({ authorization })
           .send({ pokemon: false })
           .expect(400);
@@ -117,7 +121,7 @@ const runTests = () => {
 
       it('already captured', async () => {
         const { body } = await supertest(app)
-          .patch(`/player/${playerId}/capture`)
+          .patch(`/player/${playerId}/pokemon`)
           .set({ authorization })
           .send({ pokemon: 4 })
           .expect(422);

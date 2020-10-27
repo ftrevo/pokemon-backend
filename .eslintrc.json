@@ -17,5 +17,6 @@
       2
     ],
     "no-console": 1
+    // , "require-await": 2
   }
 }

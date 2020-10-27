@@ -38,4 +38,22 @@ module.exports = class GameExists extends BaseExists {
     );
     return data;
   }
+
+  async andOwnsPokemon(data) {
+    await super.exists(
+      { _id: { $ne: data._id }, user: { $ne: data.user }, 'pokemons.number': data.number },
+      true,
+      getUnprocessable('O pokémon que você está removendo foi capturado por outro jogador'),
+    );
+    return data;
+  }
+
+  async isBase(data) {
+    await super.exists(
+      { _id: data._id, starterPokemon: data.number },
+      true,
+      getUnprocessable('Você não pode liberar seu pokémon inicial'),
+    );
+    return data;
+  }
 };

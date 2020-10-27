@@ -11,7 +11,7 @@ const Game = require('../../../src/models/game');
 const { idRegex } = require('../../../src/helpers/utils');
 
 const runTests = () => {
-  describe('Create', () => {
+  describe('Set-up (Create)', () => {
     let authorization;
     let gameId;
     let userId;
@@ -65,7 +65,11 @@ const runTests = () => {
       expect(body.data._id).toMatch(idRegex);
       expect(body).toHaveProperty('data.starterPokemon', starterPokemon);
       expect(body).toHaveProperty('data.pokemons', [{
-        hasBase: true, isActive: true, fullyEvolved: false, number: starterPokemon,
+        hasBase: true,
+        isActive: true,
+        fullyEvolved: false,
+        number: starterPokemon,
+        merged: [starterPokemon],
       }]);
       expect(body).toHaveProperty('data.user', userId);
       expect(body).toHaveProperty('data.game', { _id: gameId, maker: makerData });

@@ -67,17 +67,38 @@ const runTests = () => {
 
       const gameRepo = new PlayerRepo(getModelMock(stash, toBeReturned));
 
-      const data = {
+      const inputData = {
         _id: new ObjectId().toString(),
         changes: { random: 'stuff here' },
       };
 
-      const response = await gameRepo.capture(data);
+      const response = await gameRepo.capture(inputData);
 
       expect(response).toEqual(toBeReturned);
       expect(stash).toEqual([
-        { _id: data._id },
-        data.changes,
+        { _id: inputData._id },
+        inputData.changes,
+        { new: true, useFindAndModify: false },
+      ]);
+    });
+
+    it('release', async () => {
+      const stash = [];
+      const toBeReturned = { this: 'should be reurned' };
+
+      const gameRepo = new PlayerRepo(getModelMock(stash, toBeReturned));
+
+      const inputData = {
+        _id: new ObjectId().toString(),
+        number: 4,
+      };
+
+      const response = await gameRepo.release(inputData);
+
+      expect(response).toEqual(toBeReturned);
+      expect(stash).toEqual([
+        { _id: inputData._id },
+        { $pull: { pokemons: { number: inputData.number } } },
         { new: true, useFindAndModify: false },
       ]);
     });

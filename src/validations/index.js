@@ -8,7 +8,7 @@ const {
   createOut, joinOut, joinBody,
 } = require('./game/game.joi');
 const {
-  setupBody, setupOut, captureBody, captureOut, captureParams,
+  setupBody, setupOut, captureBody, playerDetailsOut, captureParams, releaseParams,
 } = require('./player/player.joi');
 
 const { statusOut } = require('./utils/status.joi');
@@ -46,11 +46,17 @@ const validations = {
       out: setupOut,
     },
   },
-  '/player/{id}/capture': {
+  '/player/{id}/pokemon': {
     patch: {
       body: captureBody,
       params: captureParams,
-      out: captureOut,
+      out: playerDetailsOut,
+    },
+  },
+  '/player/{id}/pokemon/{number}': {
+    delete: {
+      params: releaseParams,
+      out: playerDetailsOut,
     },
   },
 };

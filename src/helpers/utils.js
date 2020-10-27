@@ -24,10 +24,12 @@ const tokenBaseRegex = new RegExp(tokenBaseString); // /[0-9a-fA-F]{4}(-[0-9a-fA
 
 const idRegex = new RegExp(`^${objectIdBaseString}$`); // /^[0-9a-fA-F]{24}$/;
 const tokenRegex = new RegExp(`^${tokenBaseString}$`); // /^[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}$/;
+const pokemonRegex = new RegExp('(1(5(0|1)|[0-4][0-9])|[1-9]?[0-9])');
 
 const getReplacedRouteString = (path) => path
   .replace(objectIdBaseRegex, '{id}')
-  .replace(tokenBaseRegex, '{token}');
+  .replace(tokenBaseRegex, '{token}')
+  .replace(pokemonRegex, '{number}');
 
 const doUserTransformation = (isPopulated, userData) => {
   if (isPopulated) {

@@ -41,4 +41,15 @@ module.exports = class PlayerController extends BaseController {
       .then((data) => this.finish(data, response, next))
       .catch(next);
   }
+
+  async release(request, response, next) {
+    return this.start(request, response)
+      .then(({ params }) => this.rules.exists.andOwnsPokemon(
+        { user: response.locals.user._id, ...params },
+      ))
+      .then((data) => this.rules.exists.isBase(data))
+      .then((data) => this.repo.release(data))
+      .then((data) => this.finish(data, response, next))
+      .catch(next);
+  }
 };

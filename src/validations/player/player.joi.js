@@ -25,14 +25,14 @@ const captureBody = Joi.object().required().keys({
   className: 'capture-patch-body',
 });
 
-const captureOut = Joi.object({
+const playerDetailsOut = Joi.object({
   _id: keys.id.required(),
   starterPokemon: keys.starterPokemon.required(),
   game: keys.game.required(),
   user: keys.user.required(),
   pokemons: keys.pokemons.required(),
 }).meta({
-  className: 'capture-patch-out',
+  className: 'player-details-out',
 });
 
 const captureParams = Joi.object().required().keys({
@@ -41,10 +41,18 @@ const captureParams = Joi.object().required().keys({
   className: 'capture-patch-params',
 });
 
+const releaseParams = Joi.object().required().keys({
+  _id: keys.id.required().meta({ className: 'release-delete-params-id' }),
+  number: keys.pokemon.required().meta({ className: 'release-delete-params-number' }),
+}).meta({
+  className: 'release-delete-params',
+});
+
 module.exports = {
   setupBody,
   setupOut,
   captureBody,
   captureParams,
-  captureOut,
+  playerDetailsOut,
+  releaseParams,
 };

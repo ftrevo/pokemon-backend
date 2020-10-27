@@ -28,4 +28,11 @@ module.exports = class UserRepo extends BaseRepo {
   async capture(data) {
     return super.findOneAndUpdate({ _id: data._id }, data.changes);
   }
+
+  async release(data) {
+    return super.findOneAndUpdate(
+      { _id: data._id },
+      { $pull: { pokemons: { number: data.number } } },
+    );
+  }
 };

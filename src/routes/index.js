@@ -2,7 +2,7 @@ const authRule = require('../middlewares/authorization');
 const { serverStatus } = require('./server-status');
 const { create: createUser, logIn } = require('./user');
 const { create: createGame, join } = require('./game');
-const { setUp, capture } = require('./player');
+const { setUp, capture, release } = require('./player');
 
 /**
  * TAG LIST
@@ -57,6 +57,9 @@ const { setUp, capture } = require('./player');
  *            type: object
  *            $ref: '#/definitions/message'
  */
+/**
+ * @param {import('express')} app app
+ */
 const routes = function (app) {
   app.route('/user/sign-up').post(createUser);
   app.route('/user/sign-in').post(logIn);
@@ -65,7 +68,8 @@ const routes = function (app) {
   app.route('/game').patch(authRule, join);
 
   app.route('/player').post(authRule, setUp);
-  app.route('/player/:_id/capture').patch(authRule, capture);
+  app.route('/player/:_id/pokemon').patch(authRule, capture);
+  app.route('/player/:_id/pokemon/:number').delete(authRule, release);
 
   app.route('/').get(serverStatus);
 };

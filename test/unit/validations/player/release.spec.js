@@ -7,12 +7,11 @@ const { options } = require('../../../../src/helpers/validator');
 const { validations: { '/player/{id}/pokemon': capture } } = require('../../../../src/validations');
 
 const runTests = () => {
-  describe('Capture', () => {
+  describe('Release', () => {
     it('method type, input and output', async () => {
-      expect(capture).toHaveProperty('patch');
-      expect(capture).toHaveProperty('patch.body');
-      expect(capture).toHaveProperty('patch.params');
-      expect(capture).toHaveProperty('patch.out');
+      expect(capture).toHaveProperty('delete');
+      expect(capture).toHaveProperty('delete.params');
+      expect(capture).toHaveProperty('delete.out');
     });
 
     describe('input', () => {
@@ -20,11 +19,13 @@ const runTests = () => {
         it('success', async () => {
           const baseInput = {
             _id: new ObjectId().toString(),
+            number: faker.random.number({ min: 1, max: 151 }),
             additional: 'field',
           };
           const { value, error } = await capture.patch.params.validate(baseInput, options);
 
           expect(value).toHaveProperty('_id', baseInput._id);
+          expect(value).toHaveProperty('number', baseInput.number);
 
           expect(value).not.toHaveProperty('additional');
 
@@ -36,17 +37,24 @@ const runTests = () => {
             const { error } = await capture.patch.params.validate({}, options);
 
             expect(error).toHaveProperty('message', '"id" é obrigatório');
+            expect(error).toHaveProperty('message', '"pokémon" é obrigatório');
             expect(error).toHaveProperty('details', [
               {
                 message: '"id" é obrigatório',
                 path: ['_id'],
                 type: 'any.required',
                 context: { label: 'id', key: '_id' },
+              },
+              {
+                message: '"pokémon" é obrigatório',
+                path: ['number'],
+                type: 'any.required',
+                context: { label: 'pokémon', key: 'number' },
               }]);
           });
 
           it('empty fields', async () => {
-            const { error } = await capture.patch.params.validate({ _id: '' }, options);
+            const { error } = await capture.patch.params.validate({ _id: '', number: 1 }, options);
 
             expect(error).toHaveProperty('message', '"id" não pode estar vazio');
             expect(error).toHaveProperty('details', [{
@@ -58,9 +66,10 @@ const runTests = () => {
           });
 
           it('invalid type', async () => {
-            const { error } = await capture.patch.params.validate({ _id: {} }, options);
+            const { error } = await capture.patch.params.validate({ _id: {}, number: [] }, options);
 
             expect(error).toHaveProperty('message', '"id" deve ser uma string');
+            expect(error).toHaveProperty('message', '"pokémon" deve ser um número');
             expect(error).toHaveProperty('details', [
               {
                 message: '"id" deve ser uma string',
@@ -68,77 +77,6 @@ const runTests = () => {
                 type: 'string.base',
                 context: { label: 'id', value: {}, key: '_id' },
               }]);
-          });
-        });
-      });
-
-      describe('body', () => {
-        it('success', async () => {
-          const baseInput = {
-            pokemon: faker.random.number({ min: 1, max: 151 }),
-            additional: 'field',
-          };
-          const { value, error } = await capture.patch.body.validate(baseInput, options);
-
-          expect(value).toHaveProperty('pokemon', baseInput.pokemon);
-
-          expect(value).not.toHaveProperty('additional');
-
-          expect(error).toBeUndefined();
-        });
-
-        describe('error', () => {
-          it('required fields', async () => {
-            const { error } = await capture.patch.body.validate({}, options);
-
-            expect(error).toHaveProperty('message', '"pokémon" é obrigatório');
-            expect(error).toHaveProperty('details', [{
-              message: '"pokémon" é obrigatório',
-              path: ['pokemon'],
-              type: 'any.required',
-              context: { label: 'pokémon', key: 'pokemon' },
-            }]);
-          });
-
-          it('invalid type', async () => {
-            const { error } = await capture.patch.body.validate({ pokemon: [] }, options);
-
-            expect(error).toHaveProperty('message', '"pokémon" deve ser um número');
-            expect(error).toHaveProperty('details', [{
-              message: '"pokémon" deve ser um número',
-              path: ['pokemon'],
-              type: 'number.base',
-              context: { label: 'pokémon', value: [], key: 'pokemon' },
-            }]);
-          });
-
-          it('min', async () => {
-            const { error } = await capture.patch.body.validate({ pokemon: -1 }, options);
-
-            expect(error).toHaveProperty('message', '"pokémon" deve ser maior ou igual a 1');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"pokémon" deve ser maior ou igual a 1',
-                path: ['pokemon'],
-                type: 'number.min',
-                context: {
-                  limit: 1, value: -1, label: 'pokémon', key: 'pokemon',
-                },
-              }]);
-          });
-
-          it('max', async () => {
-            const { error } = await capture.patch.body.validate({ pokemon: 999 }, options);
-
-            expect(error).toHaveProperty('message', '"pokémon" deve ser menor ou igual a 151');
-            expect(error).toHaveProperty('details', [{
-              message: '"pokémon" deve ser menor ou igual a 151',
-              path: ['pokemon'],
-              type: 'number.max',
-              context: {
-                limit: 151, value: 999, label: 'pokémon', key: 'pokemon',
-              },
-            }]);
           });
         });
       });

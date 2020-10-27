@@ -9,6 +9,7 @@ const pokemonList = Joi.object().keys({
   hasBase: Joi.boolean().label('contém pokémon base').required(),
   fullyEvolved: Joi.boolean().label('pokémon completamente evoluido').required(),
   isActive: Joi.boolean().label('pokémon ativo').required(),
+  merged: Joi.array().items(pokemonSchema).label('evoluídos'),
 });
 
 // TODO colocar tudo em um só arquivo

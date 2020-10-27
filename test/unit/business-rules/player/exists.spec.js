@@ -123,6 +123,69 @@ const runTests = () => {
         }
       });
     });
+
+    describe('AndOwnsPokemon', () => {
+      const inputData = {
+        _id: new ObjectId().toString(),
+        user: new ObjectId().toString(),
+        number: 4,
+      };
+
+      it('player exists and owns', async () => {
+        const stash = [];
+        const exists = new Exists(getMockedRepo(stash, false));
+
+        const existsAndOwnsResult = await exists.andOwnsPokemon(inputData);
+
+        expect(existsAndOwnsResult).toEqual(inputData);
+        expect(stash).toHaveProperty('0', { _id: { $ne: inputData._id }, user: { $ne: inputData.user }, 'pokemons.number': inputData.number });
+      });
+
+      it('player does not exists or do not own', async () => {
+        const stash = [];
+        const exists = new Exists(getMockedRepo(stash, true));
+
+        try {
+          await exists.andOwnsPokemon(inputData);
+          throw new Error('Fail');
+        } catch (err) {
+          expect(err).toBeInstanceOf(Unprocessable);
+          expect(err).toHaveProperty('message', 'O pokémon que você está removendo foi capturado por outro jogador');
+          expect(stash).toHaveProperty('0', { _id: { $ne: inputData._id }, user: { $ne: inputData.user }, 'pokemons.number': inputData.number });
+        }
+      });
+    });
+
+    describe('IsBase', () => {
+      const inputData = {
+        _id: new ObjectId().toString(),
+        number: 4,
+      };
+
+      it('false', async () => {
+        const stash = [];
+        const exists = new Exists(getMockedRepo(stash, false));
+
+        const existsAndOwnsResult = await exists.isBase(inputData);
+
+        expect(existsAndOwnsResult).toEqual(inputData);
+        expect(stash).toHaveProperty('0', { _id: inputData._id, starterPokemon: inputData.number });
+      });
+
+      it('true', async () => {
+        const stash = [];
+        const exists = new Exists(getMockedRepo(stash, true));
+
+        try {
+          await exists.isBase(inputData);
+          throw new Error('Fail');
+        } catch (err) {
+          expect(err).toBeInstanceOf(Unprocessable);
+          expect(err).toHaveProperty('message', 'Você não pode liberar seu pokémon inicial');
+          expect(stash).toHaveProperty('0', { _id: inputData._id, starterPokemon: inputData.number });
+        }
+      });
+    });
   });
 };
 
