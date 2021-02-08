@@ -16,7 +16,8 @@
       "outputCapture": "std",
       "args": [
         "--trace-warnings"
-      ]
+      ],
+      "postDebugTask": "Stop Containers"
     },
     {
       "name": "Unit Tests",

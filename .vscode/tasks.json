@@ -15,7 +15,7 @@
     {
       "label": "Stop Containers",
       "type": "shell",
-      "command": "make stop",
+      "command": "docker-compose stop",
       "presentation": {
         "focus": true,
         "panel": "shared",
