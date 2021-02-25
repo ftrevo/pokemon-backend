@@ -64,7 +64,10 @@ const runTests = () => {
           });
 
           it('invalid type', async () => {
-            const { error } = await release.delete.params.validate({ _id: {}, number: [] }, options);
+            const { error } = await release.delete.params.validate(
+              { _id: {}, number: [] },
+              options,
+            );
 
             expect(error).toHaveProperty('message', '"id" deve ser uma string. "pokémon" deve ser um número');
             expect(error).toHaveProperty('details', [{

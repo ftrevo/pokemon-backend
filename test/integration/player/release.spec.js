@@ -28,12 +28,18 @@ const runTests = () => {
 
       const otherUserId = new User()._id;
 
-      const createdGame = new Game({ maker: createdUser._id, players: [createdUser._id, otherUserId] });
+      const createdGame = new Game({
+        maker: createdUser._id,
+        players: [createdUser._id, otherUserId],
+      });
 
       const createdPlayer = new Player({
         user: createdUser._id,
         game: createdGame._id,
-        pokemons: [{ number: starterPokemon, merged: [starterPokemon] }, { number: toBeReleased, merged: [toBeReleased] }],
+        pokemons: [
+          { number: starterPokemon, merged: [starterPokemon] },
+          { number: toBeReleased, merged: [toBeReleased] },
+        ],
         starterPokemon,
       });
 
