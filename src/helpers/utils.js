@@ -19,8 +19,8 @@ const getToken = () => ([
 const objectIdBaseString = '[0-9a-fA-F]{24}';
 const tokenBaseString = '[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}';
 
-const objectIdBaseRegex = new RegExp(objectIdBaseString); // /[0-9a-fA-F]{24}/;
-const tokenBaseRegex = new RegExp(tokenBaseString); // /[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}/;
+const objectIdBaseRegex = new RegExp(objectIdBaseString, 'g'); // /[0-9a-fA-F]{24}/;
+const tokenBaseRegex = new RegExp(tokenBaseString, 'g'); // /[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}/;
 
 const idRegex = new RegExp(`^${objectIdBaseString}$`); // /^[0-9a-fA-F]{24}$/;
 const tokenRegex = new RegExp(`^${tokenBaseString}$`); // /^[0-9a-fA-F]{4}(-[0-9a-fA-F]{4}){2}$/;

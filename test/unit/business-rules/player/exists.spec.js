@@ -132,57 +132,53 @@ const runTests = () => {
       };
 
       it('player exists and owns', async () => {
+        const databaseUser = { starterPokemon: 4, pokemons: [{ number: 4 }] };
         const stash = [];
-        const exists = new Exists(getMockedRepo(stash, false));
+        const exists = new Exists(getMockedRepo(stash, databaseUser));
 
         const existsAndOwnsResult = await exists.andOwnsPokemon(inputData);
 
-        expect(existsAndOwnsResult).toEqual(inputData);
-        expect(stash).toHaveProperty('0', { _id: { $ne: inputData._id }, user: { $ne: inputData.user }, 'pokemons.number': inputData.number });
+        expect(existsAndOwnsResult).toEqual({ ...inputData, ...databaseUser });
+        expect(stash).toHaveProperty('0', { _id: inputData._id, user: inputData.user, 'pokemons.number': inputData.number });
       });
 
       it('player does not exists or do not own', async () => {
         const stash = [];
-        const exists = new Exists(getMockedRepo(stash, true));
+        const exists = new Exists(getMockedRepo(stash));
 
         try {
           await exists.andOwnsPokemon(inputData);
           throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
-          expect(err).toHaveProperty('message', 'O pokémon que você está removendo foi capturado por outro jogador');
-          expect(stash).toHaveProperty('0', { _id: { $ne: inputData._id }, user: { $ne: inputData.user }, 'pokemons.number': inputData.number });
+          expect(err).toHaveProperty('message', 'O pokémon que você está tentando soltar não foi capturado por você');
+          expect(stash).toHaveProperty('0', { _id: inputData._id, user: inputData.user, 'pokemons.number': inputData.number });
         }
       });
     });
 
     describe('IsBase', () => {
-      const inputData = {
-        _id: new ObjectId().toString(),
-        number: 4,
-      };
-
       it('false', async () => {
-        const stash = [];
-        const exists = new Exists(getMockedRepo(stash, false));
+        const inputData = {
+          starterPokemon: 4,
+          number: 1,
+        };
+        const exists = new Exists();
 
         const existsAndOwnsResult = await exists.isBase(inputData);
 
         expect(existsAndOwnsResult).toEqual(inputData);
-        expect(stash).toHaveProperty('0', { _id: inputData._id, starterPokemon: inputData.number });
       });
 
       it('true', async () => {
-        const stash = [];
-        const exists = new Exists(getMockedRepo(stash, true));
+        const exists = new Exists();
 
         try {
-          await exists.isBase(inputData);
+          await exists.isBase({ starterPokemon: 4, number: 4 });
           throw new Error('Fail');
         } catch (err) {
           expect(err).toBeInstanceOf(Unprocessable);
           expect(err).toHaveProperty('message', 'Você não pode liberar seu pokémon inicial');
-          expect(stash).toHaveProperty('0', { _id: inputData._id, starterPokemon: inputData.number });
         }
       });
     });

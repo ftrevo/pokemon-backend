@@ -4,14 +4,14 @@ const faker = require('faker');
 const { Types: { ObjectId } } = require('mongoose');
 
 const { options } = require('../../../../src/helpers/validator');
-const { validations: { '/player/{id}/pokemon': capture } } = require('../../../../src/validations');
+const { validations: { '/player/{id}/pokemon/{number}': release } } = require('../../../../src/validations');
 
 const runTests = () => {
   describe('Release', () => {
     it('method type, input and output', async () => {
-      expect(capture).toHaveProperty('delete');
-      expect(capture).toHaveProperty('delete.params');
-      expect(capture).toHaveProperty('delete.out');
+      expect(release).toHaveProperty('delete');
+      expect(release).toHaveProperty('delete.params');
+      expect(release).toHaveProperty('delete.out');
     });
 
     describe('input', () => {
@@ -22,7 +22,7 @@ const runTests = () => {
             number: faker.random.number({ min: 1, max: 151 }),
             additional: 'field',
           };
-          const { value, error } = await capture.patch.params.validate(baseInput, options);
+          const { value, error } = await release.delete.params.validate(baseInput, options);
 
           expect(value).toHaveProperty('_id', baseInput._id);
           expect(value).toHaveProperty('number', baseInput.number);
@@ -34,27 +34,25 @@ const runTests = () => {
 
         describe('error', () => {
           it('required fields', async () => {
-            const { error } = await capture.patch.params.validate({}, options);
+            const { error } = await release.delete.params.validate({}, options);
 
-            expect(error).toHaveProperty('message', '"id" é obrigatório');
-            expect(error).toHaveProperty('message', '"pokémon" é obrigatório');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"id" é obrigatório',
-                path: ['_id'],
-                type: 'any.required',
-                context: { label: 'id', key: '_id' },
-              },
-              {
-                message: '"pokémon" é obrigatório',
-                path: ['number'],
-                type: 'any.required',
-                context: { label: 'pokémon', key: 'number' },
-              }]);
+            expect(error).toHaveProperty('message', '"id" é obrigatório. "pokémon" é obrigatório');
+            expect(error).toHaveProperty('details', [{
+              message: '"id" é obrigatório',
+              path: ['_id'],
+              type: 'any.required',
+              context: { label: 'id', key: '_id' },
+            },
+            {
+              message: '"pokémon" é obrigatório',
+              path: ['number'],
+              type: 'any.required',
+              context: { label: 'pokémon', key: 'number' },
+            }]);
           });
 
           it('empty fields', async () => {
-            const { error } = await capture.patch.params.validate({ _id: '', number: 1 }, options);
+            const { error } = await release.delete.params.validate({ _id: '', number: 1 }, options);
 
             expect(error).toHaveProperty('message', '"id" não pode estar vazio');
             expect(error).toHaveProperty('details', [{
@@ -66,17 +64,21 @@ const runTests = () => {
           });
 
           it('invalid type', async () => {
-            const { error } = await capture.patch.params.validate({ _id: {}, number: [] }, options);
+            const { error } = await release.delete.params.validate({ _id: {}, number: [] }, options);
 
-            expect(error).toHaveProperty('message', '"id" deve ser uma string');
-            expect(error).toHaveProperty('message', '"pokémon" deve ser um número');
-            expect(error).toHaveProperty('details', [
-              {
-                message: '"id" deve ser uma string',
-                path: ['_id'],
-                type: 'string.base',
-                context: { label: 'id', value: {}, key: '_id' },
-              }]);
+            expect(error).toHaveProperty('message', '"id" deve ser uma string. "pokémon" deve ser um número');
+            expect(error).toHaveProperty('details', [{
+              message: '"id" deve ser uma string',
+              path: ['_id'],
+              type: 'string.base',
+              context: { label: 'id', value: {}, key: '_id' },
+            },
+            {
+              message: '"pokémon" deve ser um número',
+              path: ['number'],
+              type: 'number.base',
+              context: { label: 'pokémon', value: [], key: 'number' },
+            }]);
           });
         });
       });
@@ -104,7 +106,7 @@ const runTests = () => {
           }],
           additional: 'field',
         };
-        const { value, error } = await capture.patch.out.validate(baseInput, options);
+        const { value, error } = await release.delete.out.validate(baseInput, options);
 
         expect(value).toHaveProperty('_id', baseInput._id);
         expect(value).toHaveProperty('user', baseInput.user);
@@ -121,7 +123,7 @@ const runTests = () => {
       describe('error', () => {
         describe('required', () => {
           it('base fields', async () => {
-            const { error } = await capture.patch.out.validate({}, options);
+            const { error } = await release.delete.out.validate({}, options);
 
             expect(error).toHaveProperty('message', '"id" é obrigatório. "pokémon inicial" é obrigatório. "id do jogo" é obrigatório. "id do usuário" é obrigatório. "lista de pokémons" é obrigatório');
             expect(error).toHaveProperty('details', [{
@@ -151,7 +153,7 @@ const runTests = () => {
               starterPokemon,
               pokemons: [{}],
             };
-            const { error } = await capture.patch.out.validate(baseInput, options);
+            const { error } = await release.delete.out.validate(baseInput, options);
 
             expect(error).toHaveProperty('message', '"número do pokémon" é obrigatório. "contém pokémon base" é obrigatório. "pokémon completamente evoluido" é obrigatório. "pokémon ativo" é obrigatório');
             expect(error).toHaveProperty('details', [{
@@ -187,7 +189,7 @@ const runTests = () => {
             game: '',
           };
 
-          const { error } = await capture.patch.out.validate(baseInput, options);
+          const { error } = await release.delete.out.validate(baseInput, options);
 
           expect(error).toHaveProperty('message', '"id" não pode estar vazio. "id do jogo" não pode estar vazio. "id do usuário" não pode estar vazio');
           expect(error).toHaveProperty('details', [{
@@ -213,7 +215,7 @@ const runTests = () => {
               game: 0,
             };
 
-            const { error } = await capture.patch.out.validate(baseInput, options);
+            const { error } = await release.delete.out.validate(baseInput, options);
 
             expect(error).toHaveProperty('message', '"id" deve ser uma string. "pokémon inicial" deve ser um número. "id do jogo" deve ser uma string. "id do usuário" deve ser uma string. "lista de pokémons" deve ser uma lista');
             expect(error).toHaveProperty('details', [{
@@ -250,7 +252,7 @@ const runTests = () => {
                 fullyEvolved: now,
               }],
             };
-            const { error } = await capture.patch.out.validate(baseInput, options);
+            const { error } = await release.delete.out.validate(baseInput, options);
 
             expect(error).toHaveProperty('message', '"número do pokémon" deve ser um número. "contém pokémon base" deve ser um booleano. "pokémon completamente evoluido" deve ser um booleano. "pokémon ativo" deve ser um booleano');
             expect(error).toHaveProperty('details', [{
@@ -280,7 +282,7 @@ const runTests = () => {
               pokemons: [],
             };
 
-            const { error } = await capture.patch.out.validate(baseInput, options);
+            const { error } = await release.delete.out.validate(baseInput, options);
 
             expect(error).toHaveProperty('message', '"lista de pokémons" deve conter pelo menos 1 itens');
             expect(error).toHaveProperty('details', [{
@@ -315,7 +317,7 @@ const runTests = () => {
               ],
             };
 
-            const { error } = await capture.patch.out.validate(baseInput, options);
+            const { error } = await release.delete.out.validate(baseInput, options);
 
             expect(error).toHaveProperty('message', '"lista de pokémons" deve conter menos que ou igual a 10 itens');
             expect(error).toHaveProperty('details', [{

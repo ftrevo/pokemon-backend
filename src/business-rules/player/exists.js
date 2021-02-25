@@ -1,4 +1,4 @@
-/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] */
+/* eslint no-underscore-dangle: ["error", { "allow": ["_id"] }] class-methods-use-this: 0 */
 const BaseExists = require('../exists');
 const PlayerRepo = require('../../repository/player');
 
@@ -40,20 +40,20 @@ module.exports = class GameExists extends BaseExists {
   }
 
   async andOwnsPokemon(data) {
-    await super.exists(
-      { _id: { $ne: data._id }, user: { $ne: data.user }, 'pokemons.number': data.number },
+    const user = await super.findOne(
+      {
+        _id: data._id, user: data.user, 'pokemons.number': data.number,
+      },
       true,
-      getUnprocessable('O pokémon que você está removendo foi capturado por outro jogador'),
+      getUnprocessable('O pokémon que você está tentando soltar não foi capturado por você'),
     );
-    return data;
+    return { ...data, ...user.toJSON() };
   }
 
-  async isBase(data) {
-    await super.exists(
-      { _id: data._id, starterPokemon: data.number },
-      true,
-      getUnprocessable('Você não pode liberar seu pokémon inicial'),
-    );
+  async isBase(data) { // TODO ver uma maneira melhor de fazer este teste
+    if (data.number === data.starterPokemon) {
+      throw getUnprocessable('Você não pode liberar seu pokémon inicial');
+    }
     return data;
   }
 };
